@@ -1,0 +1,50 @@
+/**
+ * @stylish-id 109480
+ */
+
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document domain("mozilla.org"), domain("mozilla.net"), domain("mozilla.com"), domain("firefox.com") {
+    html {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+    }
+    img, iframe.video, .promo-face, iframe[src*="youtube.com"], .persona-preview {
+        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+    }
+    .persona-preview img {
+        filter: unset;
+    }
+    header {
+        background-color: lightblue !important;
+    }
+    .faces-grid-inner {
+        filter: invert(100%) hue-rotate(180deg) contrast(60%) saturate(50%) brightness(200%);
+    }
+}
+
+@-moz-document domain("bugzilla.mozilla.org"),  domain("hg.mozilla.org"),  domain("fhr.cdn.mozilla.net"),  domain("telemetry.mozilla.org"), domain("mozilla.com") {
+    html {
+        background-color: black;
+    }
+}
+
+@-moz-document domain("developer.mozilla.org") {
+    main {
+        background-color: white !important;
+    }
+    .zone-title a {
+        color: black !important;
+    }
+}
+
+@-moz-document domain("services.addons.mozilla.org"), domain("air.mozilla.org"), domain("hacks.mozilla.org"), domain("www.mozilla.org") {
+    html {
+        filter: unset;
+    }
+    img, iframe.video, .promo-face, iframe[src*="youtube.com"], .persona-preview {
+        filter: unset;
+    }
+    header {
+        background-color: unset !important;
+    }
+}

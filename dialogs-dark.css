@@ -1,0 +1,32 @@
+/**
+ * @stylish-id <none>
+ */
+
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+@-moz-document
+    url(chrome://global/content/commonDialog.xul),
+    url(chrome://browser/content/pageinfo/pageInfo.xul),
+    url(chrome://browser/content/places/places.xul)
+{
+
+    window, dialog, image, img, menupopup {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    menuitem hbox.menu-iconic-left {
+        filter: unset;
+    }
+    /* TODO: uninvert treechildren s icons */
+
+    #topBar, #placesToolbar {
+        background-color: #BDC5CE; /* inspector header color filtered */
+        background-image: unset;
+    }
+
+    #mainDeck, #placesView, treechildren {
+        background-color: #E6E9EC; /* inspector body color filtered */
+    }
+
+}

@@ -1,0 +1,44 @@
+/**
+ * @stylish-id 107171
+ */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#context-bookmarklink,
+#context-sendlink,
+#context-sendimage,
+#context-sep-copylink,
+#context-setWallpaper,
+#context-setDesktopBackground,
+#context-back,
+#context-forward,
+#context-reload,
+#context-stop,
+#context-sep-stop,
+#context-bookmarkpage,
+#context-savepage,
+#context-viewsource,
+#context-viewinfo,
+menuitem[label~="FoxySpider"],
+menu[label~="QuickFox"],
+menu[label~="Quickfox"],
+menuitem[label~="Report"],
+menuitem[label~="dTa"],
+menuitem[label="DownThemAll!..."]{
+    display: none;
+}
+
+#context-openlinkintab,
+#context-viewimage {
+    height: 35px;
+}
+
+menuseparator {
+    -moz-appearance: none;
+    height: 1px;
+    margin: 0px;
+    margin-top: -1px;
+    border: none;
+    border-top: 1px solid #777;
+    padding: 0px;
+}

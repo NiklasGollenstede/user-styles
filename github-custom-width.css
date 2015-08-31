@@ -1,0 +1,43 @@
+/**
+ * @stylish-id 113930
+ */
+
+@-moz-document regexp("^https://(\w+\.)?github\.com(\/.*?)*$"), url-prefix("https://chicago.everbase.net") {
+   .container {
+       width: calc(80%);
+       min-width: 980px;
+       max-width: 1380px;
+   }
+    .repository-with-sidebar .repository-content {
+        width: calc(100% - 60px);
+    }
+    .repository-with-sidebar.with-full-navigation .repository-content {
+        width: calc(100% - 210px);
+    }
+    .discussion-timeline {
+        width: calc(100% - 160px);
+    }
+    .org-main {
+        width: calc(100% - 280px);
+    }
+    .news {
+        width: calc(100% - 360px);
+    }
+    .timeline-new-comment {
+        max-width: unset;
+    }
+    .container .column.files {
+        width: calc(100% - 188px);
+    }
+    .container .settings-content {
+        width: calc(100% - 265px);
+    }
+
+    .message .css-truncate-target a:only-child:before {
+        content: attr(title);
+        padding-right: 9999px;
+    }
+    .message .css-truncate-target a:only-child {
+        display: block;
+    }
+}

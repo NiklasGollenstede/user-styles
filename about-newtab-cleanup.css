@@ -1,0 +1,55 @@
+/**
+ * @stylish-id 107196
+ */
+
+@-moz-document url(about:newtab) {
+
+    #newtab-grid{
+        max-width: unset !important;
+        max-height: unset !important;
+    }
+
+    #newtab-toggle,
+    #newtab-search-form,
+    #newtab-customize-button {
+        display: none;
+    }
+
+    .newtab-side-margin {
+        min-width: 0px;
+        max-width: 0px;
+    }
+    #newtab-margin-top {
+        min-height: 0px;
+        max-height: 0px;
+    }
+    #newtab-margin-bottom,
+    #newtab-margin-undo-container {
+        min-height: 0px;
+        max-height: 0px;
+    }
+
+    .newtab-cell {
+        width: calc( 33% - 22px );
+        height: calc( 33% - 22px );
+        margin: 10px;
+    }
+
+    .newtab-cell, .newtab-link {
+        border-radius: 0px;
+    }
+
+    .newtab-thumbnail {
+        border-radius: unset;
+        height: unset;
+    }
+
+    .newtab-cell>.newtab-site>.newtab-link>span.newtab-title {
+        background: rgba(255, 255, 255, 0.7);
+        line-height: 20px;
+        bottom: 0;
+    }
+    .newtab-title:before { /* remove pin sxmbol */
+        display: none;
+    }
+}

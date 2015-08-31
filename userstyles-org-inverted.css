@@ -1,0 +1,18 @@
+/**
+ * @stylish-id <none>
+ */
+
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document domain("userstyles.org") {
+    html {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+        background-color: black;
+    }
+    img, .Emoticon {
+        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+    }
+    .lightboxOverlay {
+        background-color: white;
+    }
+}
