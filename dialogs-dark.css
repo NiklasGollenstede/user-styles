@@ -2,16 +2,41 @@
  * @stylish-id <none>
  */
 
-
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 @-moz-document
+    /* settings */
+    url(chrome://browser/content/preferences/preferences.xul), url(chrome://messenger/content/preferences/preferences.xul),
+    url(chrome://browser/content/preferences/permissions.xul), url(chrome://messenger/content/preferences/permissions.xul),
+    url(chrome://browser/content/preferences/cookies.xul), url(chrome://messenger/content/preferences/cookies.xul),
+    url(chrome://browser/content/preferences/sanitize.xul), url(chrome://messenger/content/preferences/sanitize.xul),
+    url(chrome://browser/content/preferences/languages.xul), url(chrome://messenger/content/preferences/languages.xul),
+    url(chrome://browser/content/preferences/fonts.xul), url(chrome://messenger/content/preferences/fonts.xul),
+    url(chrome://mozapps/content/update/history.xul),
+    url(chrome://passwordmgr/content/passwordManager.xul),
+    url(chrome://pippki/content/certManager.xul),
+    url(chrome://pippki/content/device_manager.xul),
+
+    /* thunderbird */
+    url(chrome://messenger/content/addressbook/addressbook.xul),
+    url(chrome://messenger/content/AccountManager.xul),
+    url(chrome://messenger/content/subscribe.xul),
+    url(chrome://messenger/content/SearchDialog.xul),
+    url(chrome://messenger/content/newFolderDialog.xul),
+    url(chrome://editor/content/EdSpellCheck.xul),
+    url(chrome://messenger-smime/content/msgCompSecurityInfo.xul),
+    /* TODO: all popups from CreateMessage -> Insert menu */
+
+    /* common */
+    url(chrome://global/content/printPageSetup.xul),
     url(chrome://global/content/commonDialog.xul),
-    url(chrome://browser/content/pageinfo/pageInfo.xul),
-    url(chrome://browser/content/places/places.xul)
+
+    /* firefox */
+    url(chrome://browser/content/pageinfo/pageInfo.xul), url(chrome://messenger/content/pageinfo/pageInfo.xul),
+    url(chrome://browser/content/places/places.xul), url(chrome://messenger/content/places/places.xul)
 {
 
-    window, dialog, image, img, menupopup {
+    window, prefwindow, dialog, image, img, menupopup {
         filter: invert(100%) hue-rotate(180deg);
     }
 
@@ -20,12 +45,20 @@
     }
     /* TODO: uninvert treechildren s icons */
 
-    #topBar, #placesToolbar {
+    #topBar, /* pageInfo */
+    #placesToolbar,
+    prefwindow .chromeclass-toolbar
+    {
         background-color: #BDC5CE; /* inspector header color filtered */
         background-image: unset;
     }
 
-    #mainDeck, #placesView, treechildren {
+    #mainDeck, /* pageInfo */
+    #placesView,
+    treechildren,
+    #devicemanager,
+    #certmanager
+    {
         background-color: #E6E9EC; /* inspector body color filtered */
     }
 

@@ -5,7 +5,8 @@
 @-moz-document
     url(about:blank)
 {
-    body {
+    body
+    {
         background-color: black;
     }
 }
@@ -13,15 +14,15 @@
 @-moz-document
     url(about:config)
 {
-    #configDeck{
+    #configDeck
+    {
         background-color: black;
         color: white;
     }
-    #textbox {
-        filter: invert(100%) hue-rotate(180deg);
-    }
 
-    tree#configTree {
+    #textbox,
+    tree#configTree
+    {
         filter: invert(100%) hue-rotate(180deg);
     }
 }
@@ -40,11 +41,15 @@
     url(about:preferences#advanced),
     url(about:preferences*)
 {
-    .main-content {
+    .main-content,
+    #dialogBox
+    {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
         background-color: white;
     }
-    .main-content image {
+    .main-content image,
+    #dialogBox image
+    {
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
     }
 }
@@ -52,32 +57,40 @@
 @-moz-document
     url(about:newtab)
 {
-    #newtab-scrollbox>#newtab-vertical-margin, body {
+    #newtab-scrollbox>#newtab-vertical-margin,
+    body
+    {
         background-color: #333;
     }
-    #newtab-scrollbox>#newtab-vertical-margin>#newtab-margin-bottom {
+    #newtab-scrollbox>#newtab-vertical-margin>#newtab-margin-bottom
+    {
         background-color: inherit;
     }
 
-    .newtab-site {
+    .newtab-site
+    {
         box-shadow: none;
     }
 
     .newtab-site:hover,
-    .newtab-cell:not([ignorehover]) > .newtab-site:hover {
+    .newtab-cell:not([ignorehover])>.newtab-site:hover
+    {
         box-shadow: 0px 0px 10px rgb(20, 50, 130);
         box-shadow: 0px 0px 10px rgb(20, 50, 130);
         border-color: rgb(20, 50, 130);
     }
-    .newtab-cell:hover {
+    .newtab-cell:hover
+    {
         box-shadow: 0px 0px 10px rgb(20, 50, 130);
         box-shadow: 0px 0px 10px rgb(20, 50, 130);
     }
-    .newtab-cell .newtab-site .newtab-link:hover {
+    .newtab-cell .newtab-site .newtab-link:hover
+    {
         border-color: black;
     }
 
-    div.newtab-cell>div.newtab-site>a.newtab-link>span.newtab-title {
+    div.newtab-cell>div.newtab-site>a.newtab-link>span.newtab-title
+    {
         font-weight: bold;
         color: #fff;
         text-shadow: 0px 0px 5px #000;
@@ -85,7 +98,8 @@
         background-image: none;
     }
 
-    .newtab-thumbnail {
+    .newtab-thumbnail
+    {
         opacity: 1;
     }
 }
@@ -116,12 +130,15 @@
     url(about:telemetry),
     url(about:welcomeback)
 {
-    html, img {
+    html,
+    img
+    {
         filter: invert(100%) hue-rotate(180deg);
         background-color: black;
     }
 
-    body {
+    body
+    {
         filter: unset !important;
     }
 }
@@ -137,11 +154,13 @@
     url(about:welcomeback)
 {
     /* turn the outer margin black ... */
-    html {
-        background: black !important;
+    html
+    {
+        background-color: black !important;
     }
     /* then the invertation (see above) kicks in */
-    body {
+    body
+    {
         background-color: white !important;
     }
 }
@@ -149,27 +168,34 @@
 @-moz-document
     url(about:sessionrestore)
 {
-    html {
+    html
+    {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-        background: black;
+        background-color: black;
     }
 
-    #errorPageContainer {
+    #errorPageContainer
+    {
         background-color: #222;
         border-color: transparent;
         color: #ddd;
     }
 
     #errorTitle>#errorTitleText,
-    #errorShortDesc>#errorShortDescText {
+    #errorShortDesc>#errorShortDescText
+    {
         border-color: #555;
     }
 
-    button, #searchText, #searchSubmit {
+    button,
+    #searchText,
+    #searchSubmit
+    {
        filter: invert(100%) hue-rotate(180deg);
     }
 
-    tree#tabList {
+    tree#tabList
+    {
         min-height: 600px;
     }
 }
@@ -177,12 +203,17 @@
 @-moz-document
     url(about:home)
 {
-    html, body {
+    html,
+    body
+    {
         filter: invert(100%) hue-rotate(180deg);
         background: black;
     }
 
-    #searchText, #searchSubmit, #searchSuggestionTable {
+    #searchText,
+    #searchSubmit,
+    #searchSuggestionTable
+    {
        filter: invert(100%) hue-rotate(180deg);
     }
 }
@@ -190,7 +221,11 @@
 @-moz-document
     domain("services.addons.mozilla.org")
 {
-    img:not(.addon-title), iframe[src*="youtube.com"], .install-button, [data-browsertheme] {
+    img:not(.addon-title),
+    iframe[src*="youtube.com"],
+    .install-button,
+    [data-browsertheme]
+    {
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
     }
 }
@@ -201,7 +236,8 @@
 @-moz-document
     url(about:addons)
 {
-    #addons-page {
+    #addons-page
+    {
         background-color: #424f5a;
         background-image: none;
     }
