@@ -33,14 +33,32 @@
 
     /* firefox */
     url(chrome://browser/content/pageinfo/pageInfo.xul), url(chrome://messenger/content/pageinfo/pageInfo.xul),
-    url(chrome://browser/content/places/places.xul), url(chrome://messenger/content/places/places.xul)
+    url(chrome://browser/content/places/places.xul), url(chrome://messenger/content/places/places.xul),
+
+    /* addons */
+    url-prefix("chrome://dta/content/dta/"),
+    url(chrome://dta/content/preferences/prefs.xul),
+    url(chrome://bprivacy/content/bprivacyopt.xul),
+    url(chrome://cookiemonster/content/options.xul),
+    url(chrome://greasemonkey/content/options.xul),
+    url(chrome://greasemonkey/content/newscript.xul),
+    url(chrome://greasemonkey/content/scriptprefs.xul),
+    url-prefix("chrome://mozapps/content/extensions/about.xul"), /* doesn't apply (due to #) */
+    url()
 {
 
-    window, prefwindow, dialog, image, img, menupopup {
+    window,
+    prefwindow,
+    dialog,
+    image,
+    img,
+    menupopup
+    {
         filter: invert(100%) hue-rotate(180deg);
     }
 
-    menuitem hbox.menu-iconic-left {
+    menuitem hbox.menu-iconic-left /* places menu icons */
+    {
         filter: unset;
     }
     /* TODO: uninvert treechildren s icons */
@@ -55,11 +73,25 @@
 
     #mainDeck, /* pageInfo */
     #placesView,
+    #commonDialog,
     treechildren,
     #devicemanager,
-    #certmanager
+    #certmanager,
+    #bpPrefsWinID,
+    #cookiemonster-prefs,
+    #greasemonkey-options-dialog,
+    #greasemonkey-script-preferences,
+    #greasemonkey,
+    #clientBox, /* stylish */
+    #genericAbout>.dialog-button-box /* stylish */
     {
         background-color: #E6E9EC; /* inspector body color filtered */
     }
 
+}
+
+@-moz-document
+    url-prefix(about:)
+{
+    /* let stylish list this style for all about pages */
 }
