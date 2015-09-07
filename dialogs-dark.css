@@ -30,6 +30,7 @@
     /* common */
     url(chrome://global/content/printPageSetup.xul),
     url(chrome://global/content/commonDialog.xul),
+    url(chrome://mozapps/content/downloads/unknownContentType.xul),
 
     /* firefox */
     url(chrome://browser/content/pageinfo/pageInfo.xul), url(chrome://messenger/content/pageinfo/pageInfo.xul),
@@ -77,6 +78,7 @@
     treechildren,
     #devicemanager,
     #certmanager,
+    #unknownContentType, #normalBox caption, /* svae/open */
     #bpPrefsWinID,
     #cookiemonster-prefs,
     #greasemonkey-options-dialog,
