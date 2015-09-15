@@ -4,9 +4,14 @@
 
 @-moz-document url(about:newtab) {
 
-    #newtab-grid{
+    #newtab-grid {
         max-width: unset !important;
         max-height: unset !important;
+        width: unset !important;
+        height: unset !important;
+        position: fixed;
+        top: 0px; bottom: 0px;
+        left: 0px; right: 0px;
     }
 
     #newtab-toggle,

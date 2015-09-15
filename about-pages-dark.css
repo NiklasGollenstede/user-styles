@@ -5,7 +5,7 @@
 @-moz-document
     url(about:blank)
 {
-    body
+    body:not([_moz_dirty]) /* exclude thunderbird compose message iframe */
     {
         background-color: black;
     }
@@ -104,12 +104,6 @@
     }
 }
 
-/* many about pages */
-/* for some reason e.g. about:neterror and about:privatebrowsing pages cannot be addressed via their uri, therefore this hack */
-/*html[hasBrowserHandlers="true"]>body[dir="ltr"] {
-    filter: invert(100%) hue-rotate(180deg);
-    background-color: black;
-}*/
 @-moz-document
     url(about:),
     url(https://www.mozilla.org/credits/),
@@ -119,7 +113,7 @@
     url(about:crashes),
     url(about:license),
     url(about:memory),
-    url(about:neterror),
+    url-prefix(about:neterror),
     url(about:plugins),
     url(about:privatebrowsing),
     url(about:robots),
@@ -130,11 +124,16 @@
     url(about:telemetry),
     url(about:welcomeback)
 {
-    html,
-    img
+    html
     {
-        filter: invert(100%) hue-rotate(180deg);
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
         background-color: black;
+    }
+
+    img,
+    .showPrivate
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
     }
 
     body

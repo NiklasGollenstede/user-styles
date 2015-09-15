@@ -24,8 +24,12 @@ tabmodalprompt .mainContainer {
 }
 /* main text */
 tabmodalprompt .topContainer>*>*>:nth-child(2) {
-    background-color: rgba(255, 255, 255, .65);
+    background-color: rgba(230, 233, 236, .93);
     padding: 5px 10px 5px 10px;
+}
+tabmodalprompt {
+    filter: invert(100%) hue-rotate(180deg);
+    background-color: rgba(198, 197, 206, .85);
 }
 
 /* plugin notification */

@@ -1,0 +1,197 @@
+/**
+ * @stylish-id <none>
+ */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* GLOBAL */
+
+    /*
+    * context menu
+    */
+
+    menupopup
+    {
+        filter: invert(100%) hue-rotate(180deg);
+        padding: 1px;
+    }
+    menuitem .menu-iconic-left
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+/* end GLOBAL */
+
+/* alert, confirm, prompt */
+@-moz-document
+    url(chrome://browser/content/browser.xul)
+{
+
+    /*
+    * tab modal dialogs
+    */
+
+    tabmodalprompt>*
+    {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        top: 80px;
+        bottom: 10px;
+    }
+    tabmodalprompt .mainContainer
+    {
+        background-color: transparent;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        color: black;
+        border: none;
+        z-index: 100;
+    }
+    /* main text */
+    tabmodalprompt .topContainer>*>*>:nth-child(2)
+    {
+        background-color: rgba(230, 233, 236, .93);
+        padding: 5px 10px 5px 10px;
+    }
+    tabmodalprompt
+    {
+        filter: invert(100%) hue-rotate(180deg);
+        background-color: rgba(198, 197, 206, .85);
+    }
+
+    /*
+    * tabs
+    */
+
+    #main-window[sizemode="maximized"] #tab-view-deck>#browser-panel>#navigator-toolbox>#TabsToolbar{
+        margin-top: -2px;
+    }
+    #main-window[sizemode="normal"] #tab-view-deck>#browser-panel>#navigator-toolbox>#TabsToolbar{
+        margin-top: 5px;
+    }
+
+    #TabsToolbar
+    {
+        background-color: black;
+    }
+
+    tab[selected] .tab-content
+    {
+        border-style: solid;
+        border-width: 0 1px;
+        border-image: linear-gradient(180deg, #C75600 5px, #777 5px) 1 100%;
+        background-image: linear-gradient(180deg, #C75600 4px, #39424D 4px);
+    }
+    #main-window[sizemode="normal"] tab[selected] .tab-content
+    {
+        border-image: linear-gradient(180deg, #C75600 3px, #777 3px) 1 100%;
+        background-image: linear-gradient(180deg, #C75600 2px, #39424D 2px);
+    }
+
+    tab[selected]:not([pinned])
+    {
+        min-width: 200px;
+    }
+
+    .tab-icon-image
+    {
+        padding: 5px;
+        margin-right: 2px;
+        margin-left: -5px;
+        width: 26px;
+        height: 26px;
+        background: radial-gradient(white 20%, transparent 75%);
+    }
+
+    .tab-close-button:hover
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    tab:not([selected]) .tab-close-button
+    {
+        display: none;
+    }
+
+    .tab-close-button
+    {
+        height: 24px;
+        width: 28px;
+        margin-right: -8px;
+    }
+
+    /*
+    * navbar
+    */
+
+    #nav-bar
+    {
+        border-top: 1px solid #777 !important;
+        margin-top: -1px !important;
+    }
+    #main-window[sizemode="normal"] #nav-bar
+    {
+        margin-bottom: -1px !important;
+    }
+
+    .searchbar-textbox,
+    #urlbar
+    {
+        border: 1px solid #1D2328 !important;
+    }
+    .searchbar-textbox[focused],
+    #urlbar[focused]
+    {
+        border: 1px solid #995555 !important;
+    }
+
+    #urlbar #notification-popup-box,
+    #urlbar #identity-box
+    {
+        background: #171B1F !important;
+    }
+
+    #PopupAutoCompleteRichResult
+    {
+        filter: invert(100%) hue-rotate(180deg);
+        background-color: white;
+    }
+    #PopupAutoCompleteRichResult .ac-site-icon
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    #back-button,
+    #forward-button {
+        filter: hue-rotate(90deg) saturate(50%);
+    }
+
+    /*
+    * panels
+    */
+
+    #PanelUI-popup,
+    #downloadsPanel,
+    #identity-popup
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    #PanelUI-popup .toolbarbutton-icon,
+    #downloadsPanel .downloadTypeIcon
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+
+    /*
+    * plugin notification
+    */
+
+    notification[value="plugin-hidden"]
+    {
+        display: none;
+    }
+}

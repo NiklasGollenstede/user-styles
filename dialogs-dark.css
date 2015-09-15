@@ -12,6 +12,7 @@
     url(chrome://browser/content/preferences/sanitize.xul), url(chrome://messenger/content/preferences/sanitize.xul),
     url(chrome://browser/content/preferences/languages.xul), url(chrome://messenger/content/preferences/languages.xul),
     url(chrome://browser/content/preferences/fonts.xul), url(chrome://messenger/content/preferences/fonts.xul),
+    url(chrome://browser/content/preferences/connection.xul), url(chrome://messenger/content/preferences/connection.xul),
     url(chrome://mozapps/content/update/history.xul),
     url(chrome://passwordmgr/content/passwordManager.xul),
     url(chrome://pippki/content/certManager.xul),
@@ -31,6 +32,7 @@
     url(chrome://global/content/printPageSetup.xul),
     url(chrome://global/content/commonDialog.xul),
     url(chrome://mozapps/content/downloads/unknownContentType.xul),
+    url(chrome://passwordmgr/content/passwordManagerExceptions.xul),
 
     /* firefox */
     url(chrome://browser/content/pageinfo/pageInfo.xul), url(chrome://messenger/content/pageinfo/pageInfo.xul),
@@ -44,6 +46,7 @@
     url(chrome://greasemonkey/content/options.xul),
     url(chrome://greasemonkey/content/newscript.xul),
     url(chrome://greasemonkey/content/scriptprefs.xul),
+    url(chrome://treestyletab/content/config.xul),
     url-prefix("chrome://mozapps/content/extensions/about.xul"), /* doesn't apply (due to #) */
     url()
 {
@@ -66,7 +69,7 @@
 
     #topBar, /* pageInfo */
     #placesToolbar,
-    prefwindow .chromeclass-toolbar
+    .chromeclass-toolbar
     {
         background-color: #BDC5CE; /* inspector header color filtered */
         background-image: unset;
@@ -76,20 +79,34 @@
     #placesView,
     #commonDialog,
     treechildren,
+    groupbox caption,
     #devicemanager,
     #certmanager,
-    #unknownContentType, #normalBox caption, /* svae/open */
+    #ConnectionsDialog,
+    #unknownContentType, /* save/open */
     #bpPrefsWinID,
     #cookiemonster-prefs,
     #greasemonkey-options-dialog,
     #greasemonkey-script-preferences,
     #greasemonkey,
+    #treestyletab-config,
     #clientBox, /* stylish */
     #genericAbout>.dialog-button-box /* stylish */
     {
         background-color: #E6E9EC; /* inspector body color filtered */
     }
 
+
+    #CookiesDialog>*,
+    #PermissionsDialog>*,
+    #SanitizeDialog>*,
+    #SignonViewerDialog>*,
+    #SignonViewerExceptionDialog>*
+    {
+        background-color: #E6E9EC;
+    }
+
+    /*#14171A*/ /* inspector body color unfiltered */
 }
 
 @-moz-document
