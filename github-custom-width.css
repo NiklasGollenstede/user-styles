@@ -3,11 +3,11 @@
  */
 
 @-moz-document regexp("^https://(\w+\.)?github\.com(\/.*?)*$"), url-prefix("https://chicago.everbase.net") {
-   .container {
-       width: calc(80%);
-       min-width: 980px;
-       max-width: 1380px;
-   }
+    .container {
+        width: calc(80%);
+        min-width: 980px;
+        max-width: 1380px;
+    }
     .repository-with-sidebar .repository-content {
         width: calc(100% - 60px);
     }

@@ -57,4 +57,9 @@
     .newtab-title:before { /* remove pin sxmbol */
         display: none;
     }
+
+    .newtab-cell>.newtab-site>.newtab-link>.newtab-title {
+        border-style: none;
+        border-radius: 0;
+    }
 }

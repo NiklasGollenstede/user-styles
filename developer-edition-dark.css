@@ -15,6 +15,7 @@
         filter: invert(100%) hue-rotate(180deg);
         padding: 1px;
     }
+    menu .menu-iconic-left,
     menuitem .menu-iconic-left
     {
         filter: invert(100%) hue-rotate(180deg);
@@ -24,6 +25,7 @@
 
 /* alert, confirm, prompt */
 @-moz-document
+    url(chrome://messenger/content/messenger.xul),
     url(chrome://browser/content/browser.xul)
 {
 
@@ -72,9 +74,20 @@
         margin-top: 5px;
     }
 
-    #TabsToolbar
+    #TabsToolbar,
+    #tabs-toolbar>*
     {
         background-color: black;
+    }
+
+    tab
+    {
+        color: white !important;
+    }
+
+    tab .tab-content
+    {
+        background-color: #1C2126;
     }
 
     tab[selected] .tab-content
@@ -88,6 +101,11 @@
     {
         border-image: linear-gradient(180deg, #C75600 3px, #777 3px) 1 100%;
         background-image: linear-gradient(180deg, #C75600 2px, #39424D 2px);
+    }
+
+    tab:not([selected]):hover .tab-content
+    {
+        background-color: #111518;
     }
 
     tab[selected]:not([pinned])
@@ -122,14 +140,25 @@
         margin-right: -8px;
     }
 
+    .tab-background
+    {
+        opacity: 0; /* disable rounded tab corners */
+    }
+    #tabbrowser-tabs>.tabbrowser-tab .tab-background
+    {
+        background: none;
+    }
+
     /*
     * navbar
     */
 
-    #nav-bar
+    #nav-bar,
+    .mail-toolbox
     {
         border-top: 1px solid #777 !important;
         margin-top: -1px !important;
+        background: #39424D !important;
     }
     #main-window[sizemode="normal"] #nav-bar
     {
@@ -137,9 +166,12 @@
     }
 
     .searchbar-textbox,
-    #urlbar
+    #urlbar,
+    #searchInput
     {
         border: 1px solid #1D2328 !important;
+        background-color: #1D2328 !important;
+        color: white;
     }
     .searchbar-textbox[focused],
     #urlbar[focused]
@@ -153,12 +185,24 @@
         background: #171B1F !important;
     }
 
-    #PopupAutoCompleteRichResult
+    #navigator-toolbox:after
+    { /* ~bottom-border */
+        display: none;
+    }
+
+    #PopupAutoComplete,
+    #PopupSearchAutoComplete,
+    #PopupAutoCompleteRichResult,
+    #PopupGlodaAutocomplete
     {
         filter: invert(100%) hue-rotate(180deg);
         background-color: white;
     }
-    #PopupAutoCompleteRichResult .ac-site-icon
+
+    #PopupAutoComplete image,
+    #PopupSearchAutoComplete image,
+    #PopupAutoCompleteRichResult image,
+    #PopupGlodaAutocomplete image
     {
         filter: invert(100%) hue-rotate(180deg);
     }
@@ -166,6 +210,14 @@
     #back-button,
     #forward-button {
         filter: hue-rotate(90deg) saturate(50%);
+    }
+
+    :root
+    {
+        --toolbarbutton-vertical-outer-padding: 0;
+        --toolbarbutton-hover-background: #1E262D;
+        --toolbarbutton-hover-bordercolor: #262E36;
+        --toolbarbutton-active-background: #192126;
     }
 
     /*
@@ -194,4 +246,87 @@
     {
         display: none;
     }
+
+    /*
+    * toolbarbuttons: hide dropmarker and open menu by default
+    */
+
+    #nav-bar #greasemonkey-tbb toolbarbutton toolbarbutton,
+    #nav-bar #cookieControllerPermMenubutton toolbarbutton toolbarbutton
+    {
+        padding-right: 2px !important;
+    }
+
+    #nav-bar #greasemonkey-tbb dropmarker,
+    #nav-bar #cookieControllerPermMenubutton dropmarker
+    {
+        opacity: 1;
+        margin-left: -35px;
+        width: 35px;
+        opacity: 0;
+    }
+}
+
+@-moz-document
+    url(chrome://messenger/content/messenger.xul)
+{
+
+    .mail-toolbox toolbarbutton {
+        color: white !important;
+    }
+    .mail-toolbox toolbarbutton image {
+        filter: brightness(200%) saturate(200%) hue-rotate(0deg);
+    }
+
+    tab:not([selected]) {
+        margin-bottom: 2px;
+    }
+    tab[selected] {
+        margin-bottom: 1px;
+    }
+    tab[selected] .tab-content {
+        padding-bottom: 1px;
+        margin-left: -1px;
+    }
+
+    #tabbar-toolbar {
+    padding-right: 5px;
+    margin-right: -10px;
+    }
+
+    .mail-toolbox {
+    border-top-width: 0px !important;
+    }
+
+
+    #folderTree,
+    #threadContentArea,
+    #quick-filter-bar,
+    #singlemessage>:not(#messagepanewrapper),
+    #status-bar
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+    }
+    #quick-filter-bar image,
+    #singlemessage>:not(#messagepanewrapper) image,
+    #status-bar image
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(110%) brightness(100%);
+    }
+    #calendar-show-todaypane-panel image
+    {
+        filter: unset;
+    }
+
+    #quick-filter-bar
+    {
+        background: #F0F0F0 !important;
+    }
+
+}
+
+@-moz-document
+    url-prefix(about:)
+{
+    /* let stylish list this style for all about pages */
 }

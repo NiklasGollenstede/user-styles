@@ -116,6 +116,7 @@
     url-prefix(about:neterror),
     url(about:plugins),
     url(about:privatebrowsing),
+    url(about:permissions),
     url(about:robots),
     url(about:rights),
     url(about:support),
@@ -124,13 +125,15 @@
     url(about:telemetry),
     url(about:welcomeback)
 {
-    html
+    html,
+    page
     {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
         background-color: black;
     }
 
     img,
+    image,
     .showPrivate
     {
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);

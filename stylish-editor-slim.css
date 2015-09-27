@@ -1,0 +1,42 @@
+/**
+ * @stylish-id <none>
+ */
+
+@-moz-document
+    url-prefix('about:stylish-edit')
+{
+
+    #editor-tools + separator
+    {
+        display: none;
+    }
+
+    #editor-tools
+    {
+        margin-left: 400px;
+    }
+
+    #editor-tools + separator + grid
+    {
+        position: fixed;
+        top: 5px;
+        left: 0px;
+        width: 400px;
+    }
+    grid rows
+    {
+        width: 100%
+    }
+
+}
+
+@-moz-document
+    url-prefix(data:text/html;charset=utf8)
+{
+
+    body.devtools-monospace>.CodeMirror
+    {
+        font-size: 16px;
+    }
+
+}
