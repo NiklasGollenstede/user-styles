@@ -1,5 +1,17 @@
 /**
+ * @name about:pages Dark
  * @stylish-id 107168
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Color theme, turns the major about:-Pages dark:
+ *     about:blank
+ *     about:config
+ *     about:addons
+ *     about:newtab
+ *     about:privatebrowsing
+ *     about:sessionrestore
+ *     about:neterror
  */
 
 @-moz-document

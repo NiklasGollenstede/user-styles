@@ -1,5 +1,21 @@
 /**
+ * @name UI Dark
  * @stylish-id 107129
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @deprecated I personally don't use this theme anymore and won't continue its maintainance.
+ * @description
+ *     Dark UI with rectangular tabs.
+ *
+ *     Features:
+ *         - inverted (dark) main menu
+ *         - black navigation- and tabs-bar
+ *         - icons clearly visible
+ *         - rectangular tabs
+ *         - tab-close button only on active tab
+ *         - inverted (dark) context menu
+ *         - "Plug-in disabled"-notification disabled
+ *         - larger textarea in Alert-Notifications
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");

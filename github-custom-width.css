@@ -1,12 +1,23 @@
 /**
+ * @name GitHub custom width
  * @stylish-id 113930
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Makes GitHubs main column wider, to use more of large screens.
+ *     This uses css 'calc' rules, so that is works at any width. Especially on smaller screens, it defaults to the standard width.
+ *     You can also choose the max-width.
  */
 
-@-moz-document regexp("^https://(\w+\.)?github\.com(\/.*?)*$"), url-prefix("https://chicago.everbase.net") {
+@-moz-document
+    regexp("^https://(\w+\.)?github\.com(\/.*?)*$"),
+    url-prefix("/*[[additionalUrl]]*/")
+{
     .container {
         width: calc(80%);
         min-width: 980px;
         max-width: 1380px;
+        max-width: /*[[columnMaxWidth]]*/;
     }
     .repository-with-sidebar .repository-content {
         width: calc(100% - 60px);

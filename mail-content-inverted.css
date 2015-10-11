@@ -1,0 +1,40 @@
+/**
+ * @name Mail Content Inverted
+ * @stylish-id <none>
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *    Invertes the colors of all mails in Thunderbird. Contained Images are uneffected.
+ *    Ment as optional addition to "Developer Edition Dark" and "Thunderbird Dark".
+ */
+
+@-moz-document
+    url-prefix(imap://),
+    url(chrome://messenger/content/multimessageview.xhtml)
+{
+
+    html
+    {
+        background-color: black;
+    }
+
+    #heading_wrapper,
+    #content
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+    }
+
+    img
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+    }
+}
+
+@-moz-document
+    url-prefix(imap://)
+{
+    body
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+    }
+}

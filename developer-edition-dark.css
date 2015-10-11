@@ -1,5 +1,11 @@
 /**
+ * @name Developer Edition Dark
  * @stylish-id <none>
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Slight rework of the dark Developer Edition theme of Firefox.
+ *     Also works in normal Firefox and even Thunderbird.
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
@@ -173,10 +179,9 @@
         background-color: #1D2328 !important;
         color: white;
     }
-    .searchbar-textbox[focused],
-    #urlbar[focused]
-    {
-        border: 1px solid #995555 !important;
+    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target .searchbar-textbox[focused],
+    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target #urlbar[focused]{
+        border: 1px solid #955 !important;
     }
 
     #urlbar #notification-popup-box,
@@ -226,7 +231,8 @@
 
     #PanelUI-popup,
     #downloadsPanel,
-    #identity-popup
+    #identity-popup,
+    #notification-popup
     {
         filter: invert(100%) hue-rotate(180deg);
     }
@@ -237,12 +243,18 @@
         filter: invert(100%) hue-rotate(180deg);
     }
 
+    #PopupSearchAutoComplete .search-panel-current-engine
+    {
+        display: none;
+    }
+
 
     /*
     * plugin notification
     */
 
-    notification[value="plugin-hidden"]
+    notification[value="plugin-hidden"],
+    #fullscreen-warning
     {
         display: none;
     }

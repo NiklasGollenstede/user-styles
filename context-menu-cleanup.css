@@ -1,5 +1,10 @@
 /**
+ * @name Context Menu Cleanup
  * @stylish-id 107171
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Removes context menu entries rarely used (by me) and makes those used often larger.
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");

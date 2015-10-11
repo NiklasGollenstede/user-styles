@@ -1,5 +1,12 @@
 /**
+ * @name Scrollbars Hovering Dark
  * @stylish-id 107170
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Small, grey transparent, hovering scrollbars for dark themes.
+ *     Based on https://userstyles.org/styles/83431/minimal-floating-scrollbars-for-firefox-windows.
+ *     You may have to reload some pages after applying this style.
  */
 
 /* AGENT_SHEET */ /* needed for scrollbars */

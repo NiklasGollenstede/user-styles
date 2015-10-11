@@ -1,0 +1,87 @@
+/**
+ * @name Thunderbird Dark
+ * @stylish-id <none>
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Dark theme for Thunderbirds main UI.
+ */
+
+@-moz-document
+    url(chrome://messenger/content/messenger.xul)
+{
+
+    #folderTree,
+    #threadContentArea,
+    #quick-filter-bar,
+    #singlemessage>:not(#messagepanewrapper),
+    #status-bar
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+    }
+    #quick-filter-bar image,
+    #singlemessage>:not(#messagepanewrapper) image,
+    #status-bar image
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(110%) brightness(100%);
+    }
+    #calendar-show-todaypane-panel image
+    {
+        filter: unset;
+    }
+
+    #quick-filter-bar
+    {
+        background: #F0F0F0 !important;
+    }
+
+}
+
+@-moz-document
+    url(chrome://messenger/content/msgAccountCentral.xul)
+{
+
+    page
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+    }
+
+    label
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+        color: white !important;
+    }
+}
+
+@-moz-document
+    url(chrome://messenger/content/messengercompose/messengercompose.xul)
+{
+
+    #attachmentNotificationBox,
+    #compose-toolbox,
+    #FindToolbar,
+    #headers-box,
+    #status-bar
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+        background-color: #E6E9EC; /* inspector body color filtered */
+    }
+
+    #attachmentNotificationBox image,
+    #compose-toolbox image,
+    #FindToolbar image,
+    #headers-box image,
+    #status-bar image
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+    #smilyPopup image
+    {
+        filter: unset;
+    }
+
+    #content-frame /* #headers-box .color-button */
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+}

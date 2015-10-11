@@ -1,0 +1,23 @@
+/**
+ * @name Raw Text Dark
+ * @stylish-id <none>
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *    Turns the backround of raw text opened in Firefox black, and the text itself white.
+ */
+
+@namespace url(http://www.w3.org/1999/xhtml);
+
+body>pre:only-child {
+    filter: invert(100%) hue-rotate(180deg) brightness(300%);
+    background: white;
+    padding: 15px;
+    font-size: 16px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+}

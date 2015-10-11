@@ -1,36 +1,45 @@
 /**
+ * @name Dialogs Dark
  * @stylish-id <none>
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Turns all build-in and some add-on Firefox dialog windows dark.
+ *     Background colours are inspired by the Developer Edition theme.
+ *     The style uses inversion filters, so some icons (those in theechildren).
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 @-moz-document
     /* settings */
+    url(chrome://browser/content/preferences/connection.xul), url(chrome://messenger/content/preferences/connection.xul),
+    url(chrome://browser/content/preferences/cookies.xul), url(chrome://messenger/content/preferences/cookies.xul),
+    url(chrome://browser/content/preferences/fonts.xul), url(chrome://messenger/content/preferences/fonts.xul),
+    url(chrome://browser/content/preferences/languages.xul), url(chrome://messenger/content/preferences/languages.xul),
     url(chrome://browser/content/preferences/preferences.xul), url(chrome://messenger/content/preferences/preferences.xul),
     url(chrome://browser/content/preferences/permissions.xul), url(chrome://messenger/content/preferences/permissions.xul),
-    url(chrome://browser/content/preferences/cookies.xul), url(chrome://messenger/content/preferences/cookies.xul),
     url(chrome://browser/content/preferences/sanitize.xul), url(chrome://messenger/content/preferences/sanitize.xul),
-    url(chrome://browser/content/preferences/languages.xul), url(chrome://messenger/content/preferences/languages.xul),
-    url(chrome://browser/content/preferences/fonts.xul), url(chrome://messenger/content/preferences/fonts.xul),
-    url(chrome://browser/content/preferences/connection.xul), url(chrome://messenger/content/preferences/connection.xul),
     url(chrome://mozapps/content/update/history.xul),
     url(chrome://passwordmgr/content/passwordManager.xul),
     url(chrome://pippki/content/certManager.xul),
     url(chrome://pippki/content/device_manager.xul),
 
     /* thunderbird */
-    url(chrome://messenger/content/addressbook/addressbook.xul),
-    url(chrome://messenger/content/AccountManager.xul),
-    url(chrome://messenger/content/subscribe.xul),
-    url(chrome://messenger/content/SearchDialog.xul),
-    url(chrome://messenger/content/newFolderDialog.xul),
     url(chrome://editor/content/EdSpellCheck.xul),
+    url(chrome://messenger/content/accountcreation/emailWizard.xul),
+    url(chrome://messenger/content/AccountManager.xul),
+    url(chrome://messenger/content/addressbook/addressbook.xul),
+    url(chrome://messenger/content/newFolderDialog.xul),
+    url(chrome://messenger/content/messengercompose/sendProgress.xul),
+    url(chrome://messenger/content/SearchDialog.xul),
+    url(chrome://messenger/content/subscribe.xul),
     url(chrome://messenger-smime/content/msgCompSecurityInfo.xul),
     /* TODO: all popups from CreateMessage -> Insert menu */
 
     /* common */
-    url(chrome://global/content/printPageSetup.xul),
     url(chrome://global/content/commonDialog.xul),
+    url(chrome://global/content/printPageSetup.xul),
     url(chrome://mozapps/content/downloads/unknownContentType.xul),
     url(chrome://passwordmgr/content/passwordManagerExceptions.xul),
 
@@ -40,36 +49,35 @@
     url(chrome://browser/content/preferences/aboutPermissions.xul), url(chrome://messenger/content/preferences/aboutPermissions.xul),
 
     /* addons */
-    url-prefix("chrome://dta/content/dta/"),
-    url(chrome://dta/content/preferences/prefs.xul),
     url(chrome://bprivacy/content/bprivacyopt.xul),
     url(chrome://cookiemonster/content/options.xul),
+    url-prefix("chrome://dta/content/dta/"),
+    url(chrome://dta/content/preferences/prefs.xul),
     url(chrome://greasemonkey/content/options.xul),
     url(chrome://greasemonkey/content/newscript.xul),
     url(chrome://greasemonkey/content/scriptprefs.xul),
     url(chrome://lastpass/content/siteinfo.xul),
     url(chrome://lastpass/content/creategrp.xul),
     url(chrome://treestyletab/content/config.xul),
-    url-prefix("chrome://mozapps/content/extensions/about.xul"), /* doesn't apply (due to #) */
     url()
 {
 
-    window,
-    prefwindow,
     dialog,
-    page,
     image,
     img,
-    menupopup
+    menupopup,
+    page,
+    prefwindow,
+    window
     {
         filter: invert(100%) hue-rotate(180deg);
     }
+    /* TODO: uninvert treechildren s icons */
 
     menuitem hbox.menu-iconic-left /* places menu icons */
     {
         filter: unset;
     }
-    /* TODO: uninvert treechildren s icons */
 
     #topBar, /* pageInfo */
     #placesToolbar,
@@ -96,7 +104,8 @@
     #treestyletab-config,
     #clientBox, /* stylish */
     #genericAbout>.dialog-button-box, /* stylish */
-    #LPEditSite4, #LPCreateGrp /* LastPass */
+    #LPEditSite4, #LPCreateGrp, /* LastPass */
+    #sendProgress
     {
         background-color: #E6E9EC; /* inspector body color filtered */
     }
