@@ -16,6 +16,8 @@
  *         - inverted (dark) context menu
  *         - "Plug-in disabled"-notification disabled
  *         - larger textarea in Alert-Notifications
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");

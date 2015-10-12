@@ -1,12 +1,14 @@
 /**
  * @name Dialogs Dark
- * @stylish-id <none>
+ * @stylish-id 119665
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Turns all build-in and some add-on Firefox dialog windows dark.
+ *     Turns all build-in and some add-on Firefox and Thunderbird dialog windows dark.
  *     Background colours are inspired by the Developer Edition theme.
  *     The style uses inversion filters, so some icons (those in theechildren).
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
@@ -58,8 +60,7 @@
     url(chrome://greasemonkey/content/scriptprefs.xul),
     url(chrome://lastpass/content/siteinfo.xul),
     url(chrome://lastpass/content/creategrp.xul),
-    url(chrome://treestyletab/content/config.xul),
-    url()
+    url(chrome://treestyletab/content/config.xul)
 {
 
     dialog,

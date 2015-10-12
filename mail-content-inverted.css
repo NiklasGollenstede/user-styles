@@ -4,8 +4,10 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *    Invertes the colors of all mails in Thunderbird. Contained Images are uneffected.
- *    Ment as optional addition to "Developer Edition Dark" and "Thunderbird Dark".
+ *     Invertes the colors of all mails in Thunderbird. Contained Images are uneffected.
+ *     Ment as optional addition to "Developer Edition Dark" and "Thunderbird Dark".
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @-moz-document

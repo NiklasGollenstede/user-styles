@@ -1,10 +1,12 @@
 /**
  * @name Raw Text Dark
- * @stylish-id <none>
+ * @stylish-id 119667
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *    Turns the backround of raw text opened in Firefox black, and the text itself white.
+ *     Turns the backround of raw text opened in Firefox black, and the text itself white.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url(http://www.w3.org/1999/xhtml);

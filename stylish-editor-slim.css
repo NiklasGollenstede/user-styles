@@ -1,10 +1,12 @@
 /**
  * @name Stylish Editor Slim
- * @stylish-id <none>
+ * @stylish-id 119669
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     Makes the Firefox Stylish editor Ui-bar smaller.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @-moz-document

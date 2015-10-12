@@ -4,15 +4,17 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *    Simple dark 'skin' for Mozilla pages.
+ *     Simple dark 'skin' for Mozilla pages.
  *
- *    Makes mozilla.org, mozilla.net and firefox.com dark by applying a simple yet very effective css filter.
+ *     Makes mozilla.org, mozilla.net and firefox.com dark by applying a simple yet very effective css filter.
  *
- *    I've browsed through the top ten of google "site:mozilla.org" (including add-ons and developers) and the result on all pages was somewhere between decent and very good.
+ *     I've browsed through the top ten of google "site:mozilla.org" (including add-ons and developers) and the result on all pages was somewhere between decent and very good.
  *
- *    The only drawbacks are some inverted background images and increased cpu-usage and possibly slight unresponsiveness on pages with many :hover-effects.
+ *     The only drawbacks are some inverted background images and increased cpu-usage and possibly slight unresponsiveness on pages with many :hover-effects.
  *
- *    If you want to un-invert any elements, try the filter that un-inverts the img's.
+ *     If you want to un-invert any elements, try the filter that un-inverts the img's.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url(http://www.w3.org/1999/xhtml);

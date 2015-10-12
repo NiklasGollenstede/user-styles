@@ -2,11 +2,13 @@
 
 /**
  * @name Image View Transparent Background
- * @stylish-id <none>
+ * @stylish-id 119666
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     Adds a chessboard background to the full-tab preview of transparent images in Firefox.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 /* gif/png fullscreen backgroung */

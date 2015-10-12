@@ -5,6 +5,8 @@
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     9 large tiles completely fill out the about:newtab page, no searchbar (you can use the address bar) and no "Options"-buttons (which doesn't provide any options anyway)
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @-moz-document url(about:newtab) {

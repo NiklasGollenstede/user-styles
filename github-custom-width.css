@@ -7,6 +7,8 @@
  *     Makes GitHubs main column wider, to use more of large screens.
  *     This uses css 'calc' rules, so that is works at any width. Especially on smaller screens, it defaults to the standard width.
  *     You can also choose the max-width.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @-moz-document

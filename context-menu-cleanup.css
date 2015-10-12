@@ -5,6 +5,8 @@
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     Removes context menu entries rarely used (by me) and makes those used often larger.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
