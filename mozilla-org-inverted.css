@@ -56,6 +56,7 @@
 @-moz-document
     domain("bugzilla.mozilla.org"),
     domain("hg.mozilla.org"),
+    domain("dxr.mozilla.org"),
     domain("fhr.cdn.mozilla.net"),
     domain("telemetry.mozilla.org"),
     domain("mozilla.com"),
