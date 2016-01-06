@@ -231,6 +231,7 @@
     * panels
     */
 
+    #widget-overflow,
     #PanelUI-popup,
     #downloadsPanel,
     #identity-popup,
@@ -239,6 +240,16 @@
         filter: invert(100%) hue-rotate(180deg);
     }
 
+    #PanelUI-multiView,
+    #PanelUI-multiView panelview,
+    #identity-popup-multiView,
+    #BMB_bookmarksPopup .panel-arrowcontent,
+    #downloadsPanel .panel-arrowcontent
+    {
+        background-color: #E6E9EC; /* inspector body color filtered */
+    }
+
+    #widget-overflow image,
     #PanelUI-popup .toolbarbutton-icon,
     #downloadsPanel .downloadTypeIcon
     {
@@ -251,6 +262,13 @@
     }
 
 
+    tooltip, statuspanel[type="overLink"],
+    menupopup
+    {
+        filter: invert(100%) hue-rotate(180deg);
+        padding: 1px;
+    }
+
     /*
     * plugin notification
     */
@@ -259,6 +277,11 @@
     #fullscreen-warning
     {
         display: none;
+    }
+
+    .notificationbox-stack
+    {
+        position: fixed;
     }
 
     /*
@@ -270,7 +293,6 @@
     {
         padding-right: 2px !important;
     }
-
     #nav-bar #greasemonkey-tbb dropmarker,
     #nav-bar #cookieControllerPermMenubutton dropmarker
     {

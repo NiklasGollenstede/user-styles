@@ -15,6 +15,7 @@
 
 @-moz-document
     /* settings */
+    url(chrome://browser/content/aboutDialog.xul), url(chrome://messenger/content/aboutDialog.xul),
     url(chrome://browser/content/preferences/connection.xul), url(chrome://messenger/content/preferences/connection.xul),
     url(chrome://browser/content/preferences/cookies.xul), url(chrome://messenger/content/preferences/cookies.xul),
     url(chrome://browser/content/preferences/fonts.xul), url(chrome://messenger/content/preferences/fonts.xul),
@@ -58,9 +59,14 @@
     url(chrome://greasemonkey/content/options.xul),
     url(chrome://greasemonkey/content/newscript.xul),
     url(chrome://greasemonkey/content/scriptprefs.xul),
-    url(chrome://lastpass/content/siteinfo.xul),
+    url(chrome://lastpass/content/changepw.xul),
     url(chrome://lastpass/content/creategrp.xul),
-    url(chrome://treestyletab/content/config.xul)
+    url(chrome://lastpass/content/home2.xul),
+    url(chrome://lastpass/content/login.xul),
+    url-prefix("chrome://lastpass/content/popupfilltab.xul"),
+    url(chrome://lastpass/content/siteinfo.xul),
+    url(chrome://treestyletab/content/config.xul),
+    url(chrome://stylish/content/install.xul)
 {
 
     dialog,
@@ -69,7 +75,8 @@
     menupopup,
     page,
     prefwindow,
-    window
+    window,
+    #aboutDialog #leftBox
     {
         filter: invert(100%) hue-rotate(180deg);
     }

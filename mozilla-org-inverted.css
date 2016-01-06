@@ -54,6 +54,7 @@
 }
 
 @-moz-document
+    domain("accounts.firefox.com"),
     domain("bugzilla.mozilla.org"),
     domain("hg.mozilla.org"),
     domain("dxr.mozilla.org"),
