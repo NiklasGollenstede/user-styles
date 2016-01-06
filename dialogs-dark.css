@@ -49,6 +49,7 @@
     /* firefox */
     url(chrome://browser/content/pageinfo/pageInfo.xul), url(chrome://messenger/content/pageinfo/pageInfo.xul),
     url(chrome://browser/content/places/places.xul), url(chrome://messenger/content/places/places.xul),
+    url(chrome://browser/content/places/updates.xul), url(chrome://messenger/content/places/updates.xul),
     url(chrome://browser/content/preferences/aboutPermissions.xul), url(chrome://messenger/content/preferences/aboutPermissions.xul),
 
     /* addons */
