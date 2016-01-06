@@ -9,10 +9,8 @@
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
-@namespace url(http://www.w3.org/1999/xhtml);
+@namespace url(http://www.w3.org/1999/xhtml); /* i really want this to be global */
 
-body>pre:first-child {
-}
 body:not(.highlight)>pre:first-child {
     filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
     background-color: #E6E9EC; /* inspector body color filtered */

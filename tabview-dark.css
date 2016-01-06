@@ -5,12 +5,14 @@
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     Dark and a bit more modern look for the "Group Tabs"-overview.
+ *     Works with this add-on: https://addons.mozilla.org/en-US/firefox/addon/tab-groups-panorama/
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @-moz-document
-    url("chrome://browser/content/tabview.html")
+    url(chrome://tabgroups/content/tabview.xhtml),
+    url(chrome://browser/content/tabview.html)
 {
 
     #content
@@ -21,19 +23,38 @@
     .groupItem
     {
         background-color: #14171A;
+        cursor: move;
     }
-
     .groupItem:not(.activeGroupItem)
     {
         opacity: 0.5;
     }
-
+    .groupItem:not(.activeGroupItem) .appTabTrayContainer
+    {
+        display: none;
+    }
+    .groupItem .appTabTrayContainer
+    {
+        padding-right: 10px;
+    }
+    .groupItem .appTabTrayContainer .appTabIcon
+    {
+        background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.7) 30%, transparent 80%);
+        padding: 3px;
+    }
     .groupItem .titlebar .name
     {
         border-radius: 2px;
         box-shadow: inset 0 0 2px lightgrey;
         background-color: #193347;
         padding: 0 0 1px 3px;
+    }
+    .groupItem .close,
+    .groupItem .iq-resizable-handle
+    {
+        background-position: 50% 50%;
+        width: 30px;
+        height: 30px;
     }
 
     .tab
@@ -42,10 +63,14 @@
         background-color: #414B56;
         padding-bottom: 20px;
     }
-
+    .tab.focus
+    {
+        box-shadow: unset;
+        box-shadow: 0px 0px 7px rgb(0, 126, 206), 0px 0px 7px rgb(0, 126, 206);
+    }
     .tab .tab-title
     {
-        background-color: #414B56;
+        background-color: inherit;
         position: absolute;
         left: 0px;
         right: 0px;
@@ -55,22 +80,19 @@
         color: white;
         text-shadow: none;
     }
-
     .tab .favicon
     {
         background-color: transparent;
         background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.7) 30%, transparent 70%);
         border: none;
-        left: 3px !important;
+        left: 2px !important;
         top: 3px !important;
     }
-
     .tab .thumb .cached-thumb,
     .tab .thumb canvas
     {
         background-color: #414B56;
     }
-
     .tab .close
     {
         display: none;
@@ -80,12 +102,10 @@
         display: block;
     }
 
-    /*
-    .groupItem .resizer { }
-    .groupItem.activeGroupItem { }
-    .groupItem .close { }
-    .tab.focus { }
-    */
+    #actions
+    {
+        filter: invert(100%) hue-rotate(180deg);
+    }
 }
 
 @-moz-document

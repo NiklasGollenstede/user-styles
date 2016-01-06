@@ -43,19 +43,12 @@
 
 @-moz-document
     url(about:addons),
-    url(about:preferences), /* hash-changes would invalidate the style, so all possible hashes have to be included */
-    url(about:preferences#),
-    url(about:preferences#general),
-    url(about:preferences#search),
-    url(about:preferences#content),
-    url(about:preferences#applications),
-    url(about:preferences#privacy),
-    url(about:preferences#security),
-    url(about:preferences#sync),
-    url(about:preferences#advanced),
-    url(about:preferences*)
+    url-prefix(about:findbartweak),
+    url-prefix(about:preferences),
+    url-prefix(about:tabgroups)
 {
     .main-content,
+    #main-footer,
     #dialogBox
     {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
@@ -126,6 +119,7 @@
     url(about:cache),
     url(about:crashes),
     url(about:license),
+    url(about:me),
     url(about:memory),
     url-prefix(about:neterror),
     url(about:plugins),
@@ -133,6 +127,7 @@
     url(about:permissions),
     url(about:robots),
     url(about:rights),
+    url(about:sessionstore),
     url(about:support),
     url(about:sync-log),
     url(about:sync-progress),
@@ -246,6 +241,17 @@
     }
 }
 
+@-moz-document
+    url(about:me)
+{
+    .favicon
+    {
+        max-width: 16px;
+        vertical-align: middle;
+        background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.7) 30%, transparent 80%);
+        padding: 3px;
+    }
+}
 
 
 /* temporary compatibility fix between normal and developer edition of firefox */
