@@ -231,6 +231,8 @@
     * panels
     */
 
+    #customization-lwtheme-menu,
+    #customization-container,
     #widget-overflow,
     #PanelUI-popup,
     #downloadsPanel,
@@ -249,6 +251,7 @@
         background-color: #E6E9EC; /* inspector body color filtered */
     }
 
+    #customization-container image,
     #widget-overflow image,
     #PanelUI-popup .toolbarbutton-icon,
     #downloadsPanel .downloadTypeIcon

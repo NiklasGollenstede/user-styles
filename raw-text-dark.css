@@ -11,21 +11,23 @@
 
 @namespace url(http://www.w3.org/1999/xhtml); /* i really want this to be global */
 
-body:not(.highlight)>pre:first-child {
+body>pre:first-child,
+body#viewsource.highlight>pre
+{
     filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
     background-color: #E6E9EC; /* inspector body color filtered */
-    padding: 10px;
-    margin: -8px;
-}
-body#viewsource.highlight>pre {
-    filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-    background-color: #E6E9EC; /* inspector body color filtered */
+    font-size: 16px;
     position: fixed;
+    overflow: scroll;
     top: 0px;
     left: 0px;
-    bottom: 0px;
     right: 0px;
-    overflow: scroll;
+    bottom: -16px;
+    padding: 15px;
+}
+body#viewsource.highlight>pre
+{
+    bottom: 0px;
     margin: 0px;
     padding: 10px 50px;
 }

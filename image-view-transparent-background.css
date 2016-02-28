@@ -1,5 +1,3 @@
-/* i really want this to be global */
-
 /**
  * @name Image View Transparent Background
  * @stylish-id 119666
@@ -11,7 +9,7 @@
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
-/* gif/png fullscreen backgroung */
+/* i really want this to be global */
 
 html>body>img.transparent {
     background-image: url(

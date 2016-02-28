@@ -19,7 +19,7 @@
 }
 
 @-moz-document
-    url(about:config)
+    url-prefix(about:config)
 {
     #configDeck
     {
@@ -36,6 +36,7 @@
 
 @-moz-document
     url(about:addons),
+    url-prefix(about:confmania),
     url-prefix(about:findbartweak),
     url-prefix(about:preferences),
     url-prefix(about:tabgroups)
@@ -124,6 +125,7 @@
     url(about:support),
     url(about:sync-log),
     url(about:sync-progress),
+    url-prefix(about:tabcrashed),
     url(about:telemetry),
     url(about:welcomeback)
 {
@@ -198,9 +200,15 @@
        filter: invert(100%) hue-rotate(180deg);
     }
 
+    .container.restore-chosen
+    {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+    }
+
     tree#tabList
     {
-        min-height: 600px;
+        min-height: calc(94vh - 300px);
     }
 }
 
@@ -244,74 +252,4 @@
         background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.7) 30%, transparent 80%);
         padding: 3px;
     }
-}
-
-
-/* temporary compatibility fix between normal and developer edition of firefox */
-@-moz-document
-    url(about:addons)
-{
-    #addons-page
-    {
-        background-color: #424f5a;
-        background-image: none;
-    }
-
-    /* as a temporary fix, this is copied from chrome://global/skin/in-content/common.css */
-
-    /* - This Source Code Form is subject to the terms of the Mozilla Public
-   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-    /* Category List */
-
-    #categories {
-      -moz-appearance: none;
-      background-color: #424f5a;
-      padding-top: 39px;
-      margin: 0;
-      border-width: 0;
-    }
-
-    .category {
-      -moz-appearance: none;
-      color: #c1c1c1;
-      -moz-border-end-width: 0;
-      -moz-padding-start: 15px;
-      -moz-padding-end: 21px;
-      min-height: 40px;
-      transition: background-color 150ms;
-    }
-
-    .category:hover {
-      background-color: #5e6972;
-    }
-
-    .category[selected] {
-      background-color: #343f48;
-      color: #f2f2f2;
-      -moz-padding-start: 11px; /* compensate the 4px border */
-      -moz-border-start: solid 4px #ff9500;
-    }
-
-    #categories[keyboard-navigation="true"]:-moz-focusring>.category[current] {
-      border-top: 1px #ffffff dotted;
-      border-bottom: 1px #ffffff dotted;
-    }
-
-    .category-name {
-      line-height: 22px;
-      font-size: 1.25rem;
-      padding-bottom: 2px;
-      -moz-padding-start: 9px;
-      margin: 0;
-      -moz-user-select: none;
-    }
-
-    .category-icon {
-      width: 24px;
-      height: 24px;
-    }
-
-    /* end copyed section */
 }
