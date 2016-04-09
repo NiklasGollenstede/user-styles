@@ -34,18 +34,18 @@
     iframe.video,
     .promo-face,
     iframe[src*="youtube.com"],
-    .persona-preview
+    .persona-preview,
+    .header-bg,
+    #lightbox
     {
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
     }
+    img[src$=".png"],
     .persona-preview img,
-    img[src$=".png"]
+    .header-bg img,
+    #lightbox img
     {
         filter: unset;
-    }
-    header
-    {
-        background-color: lightblue !important;
     }
     .faces-grid-inner
     {
@@ -101,9 +101,5 @@
     .persona-preview
     {
         filter: unset;
-    }
-    header
-    {
-        background-color: unset !important;
     }
 }

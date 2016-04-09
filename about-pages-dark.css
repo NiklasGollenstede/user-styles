@@ -10,6 +10,94 @@
  */
 
 @-moz-document
+    url(about:),
+    url(https://www.mozilla.org/credits/),
+    url(about:about),
+    url(about:buildconfig),
+    url(about:cache),
+    url(about:crashes),
+    url(about:downloads),
+    url(about:license),
+    url(about:memory),
+    url-prefix(about:neterror),
+    url(about:plugins),
+    url(about:privatebrowsing),
+    url(about:permissions),
+    url(about:robots),
+    url(about:rights),
+    url(about:sessionstore),
+    url(about:support),
+    url(about:sync-log),
+    url(about:sync-progress),
+    url-prefix(about:tabcrashed),
+    url(about:telemetry),
+    url(about:welcomeback)
+{
+    window,
+    html,
+    page
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+        background-color: black;
+    }
+
+    img,
+    image,
+    .showPrivate
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+    }
+
+    body
+    {
+        filter: unset !important;
+    }
+}
+
+@-moz-document
+    url(about:about),
+    url(about:crashes),
+    url(about:rights),
+    url(about:support),
+    url(about:sync-log),
+    url(about:sync-progress),
+    url(about:telemetry),
+    url(about:welcomeback)
+{
+    /* turn the outer margin black ... */
+    html
+    {
+        background-color: black !important;
+    }
+    /* then the invertation (see above) kicks in */
+    body
+    {
+        background-color: white !important;
+    }
+}
+
+@-moz-document
+    url(about:addons),
+    url-prefix(about:confmania),
+    url-prefix(about:findbartweak),
+    url-prefix(about:preferences),
+    url-prefix(about:tabgroups)
+{
+    .main-content,
+    #main-footer,
+    #dialogBox
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+        background-color: white;
+    }
+    .main-content image,
+    #dialogBox image
+    {
+        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+    }
+}
+
+@-moz-document
     url(about:blank)
 {
     body:not([_moz_dirty]) /* exclude thunderbird compose message iframe */
@@ -35,23 +123,20 @@
 }
 
 @-moz-document
-    url(about:addons),
-    url-prefix(about:confmania),
-    url-prefix(about:findbartweak),
-    url-prefix(about:preferences),
-    url-prefix(about:tabgroups)
+    url(about:home)
 {
-    .main-content,
-    #main-footer,
-    #dialogBox
+    html,
+    body
     {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-        background-color: white;
+        filter: invert(100%) hue-rotate(180deg);
+        background: black;
     }
-    .main-content image,
-    #dialogBox image
+
+    #searchText,
+    #searchSubmit,
+    #searchSuggestionTable
     {
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+       filter: invert(100%) hue-rotate(180deg);
     }
 }
 
@@ -106,68 +191,16 @@
 }
 
 @-moz-document
-    url(about:),
-    url(https://www.mozilla.org/credits/),
-    url(about:about),
-    url(about:buildconfig),
-    url(about:cache),
-    url(about:crashes),
-    url(about:license),
-    url(about:me),
-    url(about:memory),
-    url-prefix(about:neterror),
-    url(about:plugins),
-    url(about:privatebrowsing),
-    url(about:permissions),
-    url(about:robots),
-    url(about:rights),
-    url(about:sessionstore),
-    url(about:support),
-    url(about:sync-log),
-    url(about:sync-progress),
-    url-prefix(about:tabcrashed),
-    url(about:telemetry),
-    url(about:welcomeback)
+    url(about:openwith)
 {
-    html,
     page
     {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-        background-color: black;
+        background-color: white;
     }
-
-    img,
-    image,
-    .showPrivate
+    image
     {
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
-    }
-
-    body
-    {
-        filter: unset !important;
-    }
-}
-
-@-moz-document
-    url(about:about),
-    url(about:crashes),
-    url(about:rights),
-    url(about:support),
-    url(about:sync-log),
-    url(about:sync-progress),
-    url(about:telemetry),
-    url(about:welcomeback)
-{
-    /* turn the outer margin black ... */
-    html
-    {
-        background-color: black !important;
-    }
-    /* then the invertation (see above) kicks in */
-    body
-    {
-        background-color: white !important;
     }
 }
 
@@ -213,24 +246,6 @@
 }
 
 @-moz-document
-    url(about:home)
-{
-    html,
-    body
-    {
-        filter: invert(100%) hue-rotate(180deg);
-        background: black;
-    }
-
-    #searchText,
-    #searchSubmit,
-    #searchSuggestionTable
-    {
-       filter: invert(100%) hue-rotate(180deg);
-    }
-}
-
-@-moz-document
     domain("services.addons.mozilla.org")
 {
     img:not(.addon-title),
@@ -239,17 +254,5 @@
     [data-browsertheme]
     {
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
-    }
-}
-
-@-moz-document
-    url(about:me)
-{
-    .favicon
-    {
-        max-width: 16px;
-        vertical-align: middle;
-        background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.7) 30%, transparent 80%);
-        padding: 3px;
     }
 }
