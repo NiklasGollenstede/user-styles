@@ -57,6 +57,7 @@
 @-moz-document
     url(about:about),
     url(about:crashes),
+    url(about:privatebrowsing),
     url(about:rights),
     url(about:support),
     url(about:sync-log),
