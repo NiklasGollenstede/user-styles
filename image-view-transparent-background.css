@@ -4,16 +4,34 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Adds a chessboard background to the full-tab preview of transparent images in Firefox.
+ *     Adds a chessboard background to the full-tab preview of images with transparency and centres svg images in Firefox.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
-/* i really want this to be global */
+@-moz-document
+    url-prefix(file://),
+    url-prefix(http://),
+    url-prefix(https://),
+    url-prefix(ftp://)
+{
 
-html>body>img.transparent {
-    background-image: url(
-        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAAAtSURBVDhPY3RwcPjPgAc0NDRAWdgBE5QmG4waMBgMYDxw4MBoOqAQDHkDGBgApEIIHS3zGFEAAAAASUVORK5CYII='
-    ) !important;
-    background-repeat: repeat !important;
+    html>body>img.transparent
+    {
+        background-image: url(
+            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAzSURBVDhPY7xy5QoDNrB69WooCxUwQWmiwagGYgBjfX09lIkKQkNDoSxUMCJDidYaGBgAakUHGE5cs6wAAAAASUVORK5CYII='
+        ) !important;
+        background-repeat: repeat !important;
+    }
+
+    svg:root
+    {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
 }
