@@ -4,143 +4,159 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Color theme, turns pretty much all the standard and some add-on about:-pages dark.
+ *     Color theme, turns all the standard and some add-on about:-pages dark.
+ *     This works mostly with inversion filters, so it should not be affected by changes of those pages that much,
+ *     but it also means that it will un-darken any about:-pages that are already dark (due to other user styles, add-ons, system themes, ...).
+ *     Requests to add additional add-on about:-pages are generally welcome.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
+/**
+ *
+ * about:-pages, most of these are linked on 'about:about':
+ *
+ * about:                    : generic,
+ * about:about               : generic,
+ * about:accounts            : generic,
+ * about:addons              : vertical-tabs,
+ * about:blank               : generic,
+ * about:buildconfig         : generic,
+ * about:cache               : generic,
+ * about:checkerboard        : generic,
+ * about:config?...          : generic,
+ * about:configmania#...     : vertical-tabs, // from add-on
+ * about:crashes             : generic,
+ * about:credits             : // redirects to "https://www.mozilla.org/credits/" (see below)
+ * about:debugging           : vertical-tabs,
+ * about:devtools-toolbox    : // not useful (probably embedded somewhere ?)
+ * about:downloads           : generic,
+ * about:findbartweak        : vertical-tabs, // form add-on
+ * about:healthreport        : // only contains an iframe from "https://fhr.cdn.mozilla.net/en-US/v4/"
+ * about:home                : specific,
+ * about:lastpassvault       : generic,
+ * about:license             : generic,
+ * about:logo                : // just an image
+ * about:memory              : generic,
+ * about:mozilla             : // is deep red anyway
+ * about:neterror?...        : generic,
+ * about:networking          : vertical-tabs,
+ * about:newtab              : specific,
+ * about:performance         : generic,
+ * about:plugins             : generic,
+ * about:preferences#...     : vertical-tabs,
+ * about:privatebrowsing     : generic,
+ * about:profiles            : generic,
+ * about:rights              : generic,
+ * about:robots              : generic,
+ * about:serviceworkers      : generic,
+ * about:sessionrestore      : generic, specific,
+ * about:sessionstore        : generic, // from add-on
+ * about:stylish-edit?...    : // already dark (with dark dev-tools theme)
+ * about:support             : generic,
+ * about:sync-log            : generic,
+ * about:sync-progress       : // has been removed
+ * about:sync-tabs           : generic, specific,
+ * about:tabcrashed?...      : generic,
+ * about:tabgroups#...       : vertical-tabs, // from add-on
+ * about:telemetry           : generic,
+ * about:webrtc              : generic,
+ * about:welcomeback         : generic,
+ *
+ * Related pages:
+ *
+ * https://www.mozilla.org/credits/         : generic, // this is where about:credits redirects
+ */
+
+/* generic: invert :root, un-invert images */
 @-moz-document
-    url(about:),
-    url(https://www.mozilla.org/credits/),
-    url(about:about),
-    url(about:buildconfig),
-    url(about:cache),
-    url(about:crashes),
-    url(about:downloads),
-    url(about:license),
-    url(about:memory),
+           url(about:),
+           url(https://www.mozilla.org/credits/),
+           url(about:about),
+           url(about:accounts),
+           url(about:blank),
+           url(about:buildconfig),
+           url(about:cache),
+           url(about:checkerboard),
+    url-prefix(about:config),
+           url(about:crashes),
+           url(about:downloads),
+           url(about:lastpassvault),
+           url(about:license),
+           url(about:memory),
     url-prefix(about:neterror),
-    url(about:plugins),
-    url(about:privatebrowsing),
-    url(about:permissions),
-    url(about:robots),
-    url(about:rights),
-    url(about:sessionstore),
-    url(about:support),
-    url(about:sync-log),
-    url(about:sync-progress),
+           url(about:performance),
+           url(about:plugins),
+           url(about:privatebrowsing),
+           url(about:profiles),
+           url(about:permissions),
+           url(about:rights),
+           url(about:robots),
+           url(about:serviceworkers),
+           url(about:sessionrestore),
+           url(about:sessionstore),
+           url(about:support),
+           url(about:sync-log),
+           url(about:sync-tabs),
     url-prefix(about:tabcrashed),
-    url(about:telemetry),
-    url(about:welcomeback)
+           url(about:telemetry),
+           url(about:webrtc),
+           url(about:welcomeback)
 {
-    window,
-    html,
-    page
-    {
+    :root
+    { /* invert */
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
         background-color: black;
     }
 
-    img,
-    image,
-    .showPrivate
-    {
+    img, image, /* image in html and xul */
+    .showPrivate /* what is this? */
+    { /* un-invert */
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
     }
-
-    body
-    {
-        filter: unset !important;
-    }
 }
 
+/* vertical-tabs: invert the content area, leave tab-bar as is */
 @-moz-document
-    url(about:about),
-    url(about:crashes),
-    url(about:privatebrowsing),
-    url(about:rights),
-    url(about:support),
-    url(about:sync-log),
-    url(about:sync-progress),
-    url(about:telemetry),
-    url(about:welcomeback)
-{
-    /* turn the outer margin black ... */
-    html
-    {
-        background-color: black !important;
-    }
-    /* then the invertation (see above) kicks in */
-    body
-    {
-        background-color: white !important;
-    }
-}
-
-@-moz-document
-    url(about:addons),
+    url-prefix(about:addons),
     url-prefix(about:confmania),
+    url-prefix(about:debugging),
     url-prefix(about:findbartweak),
+    url-prefix(about:networking),
     url-prefix(about:preferences),
     url-prefix(about:tabgroups)
 {
-    .main-content,
-    #main-footer,
-    #dialogBox
-    {
+    .main-content, /* content area */
+    #main-footer, /* ??? */
+    #dialogBox /* modal dialogs, they (usually) contain another xul document */
+    { /* invert */
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
         background-color: white;
     }
-    .main-content image,
-    #dialogBox image
-    {
+    .main-content image, #dialogBox image, /* images in inverted areas */
+    #discover-browser /* the browser on the "Get Add-ons" tab of about:addons, currently contains a page from discovery.addons.mozilla.org, so an amo style should take care of it */
+    { /* un-invert */
         filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
     }
 }
 
-@-moz-document
-    url(about:blank)
-{
-    body:not([_moz_dirty]) /* exclude thunderbird compose message iframe */
-    {
-        background-color: black;
-    }
-}
-
-@-moz-document
-    url-prefix(about:config)
-{
-    #configDeck
-    {
-        background-color: black;
-        color: white;
-    }
-
-    #textbox,
-    tree#configTree
-    {
-        filter: invert(100%) hue-rotate(180deg);
-    }
-}
-
+/* specific: invert a lot for items. Use simple invert filter to un-invert without changes */
 @-moz-document
     url(about:home)
 {
-    html,
-    body
-    {
-        filter: invert(100%) hue-rotate(180deg);
-        background: black;
-    }
+    :root { background-color: black; } /* enforce bg-color */
 
+    html, body,
     #searchText,
     #searchSubmit,
-    #searchSuggestionTable
-    {
-       filter: invert(100%) hue-rotate(180deg);
+    #searchSuggestionTable,
+    #searchSuggestionTable img
+    { /* simple invert */
+        filter: invert(100%) hue-rotate(180deg);
     }
 }
 
+/* specific: custom styles, no inversion */
 @-moz-document
     url(about:newtab)
 {
@@ -191,69 +207,25 @@
     }
 }
 
-@-moz-document
-    url(about:openwith)
-{
-    page
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-        background-color: white;
-    }
-    image
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
-    }
-}
-
+/* specific: make tab list larger */
 @-moz-document
     url(about:sessionrestore)
 {
-    html
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-        background-color: black;
-    }
-
-    #errorPageContainer
-    {
-        background-color: #222;
-        border-color: transparent;
-        color: #ddd;
-    }
-
-    #errorTitle>#errorTitleText,
-    #errorShortDesc>#errorShortDescText
-    {
-        border-color: #555;
-    }
-
-    button,
-    #searchText,
-    #searchSubmit
-    {
-       filter: invert(100%) hue-rotate(180deg);
-    }
-
-    .container.restore-chosen
-    {
+    .container.restore-chosen /* main container */
+    { /* reduce margin */
         margin-top: 3vh;
         margin-bottom: 3vh;
     }
 
-    tree#tabList
+    #tabList
     {
-        min-height: calc(94vh - 300px);
+        min-height: calc(94vh - 300px); /* everything except 2 * 3hv margin and 300px for the text */
     }
 }
 
+/* specific: add black gackground */
 @-moz-document
-    domain("services.addons.mozilla.org")
+    url(about:sync-tabs)
 {
-    img:not(.addon-title),
-    iframe[src*="youtube.com"],
-    .install-button,
-    [data-browsertheme]
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
-    }
+    window>richlistbox#tabsList { background-color: white; }
 }
