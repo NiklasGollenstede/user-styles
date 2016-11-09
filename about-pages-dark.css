@@ -103,7 +103,7 @@
            url(about:webrtc),
            url(about:welcomeback)
 {
-    :root
+    :root:not(html#SandboxRoot)
     { /* invert */
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
         background-color: black;
