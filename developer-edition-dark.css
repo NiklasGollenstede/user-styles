@@ -31,7 +31,7 @@
 
 /* end GLOBAL */
 
-/* alert, confirm, prompt */
+
 @-moz-document
     url(chrome://messenger/content/messenger.xul),
     url(chrome://browser/content/browser.xul)
@@ -91,11 +91,12 @@
     tab
     {
         color: white !important;
+        background-size: auto !important;
     }
 
     tab .tab-content
     {
-        background-color: #1C2126;
+        background-image: linear-gradient(180deg, #293A4380, #29333d);
     }
 
     tab[selected] .tab-content
@@ -103,17 +104,17 @@
         border-style: solid;
         border-width: 0 1px;
         border-image: linear-gradient(180deg, #C75600 5px, #777 5px) 1 100%;
-        background-image: linear-gradient(180deg, #C75600 4px, #39424D 4px);
+        background-image: linear-gradient(180deg, #C75600 4px, #302F0080 4px, #39424D);
     }
     #main-window[sizemode="normal"] tab[selected] .tab-content
     {
         border-image: linear-gradient(180deg, #C75600 3px, #777 3px) 1 100%;
-        background-image: linear-gradient(180deg, #C75600 2px, #39424D 2px);
+        background-image: linear-gradient(180deg, #C75600 2px, #302F0080 2px, #39424D);
     }
 
     tab:not([selected]):hover .tab-content
     {
-        background-color: #111518;
+        background-color: #242C3380;
     }
 
     tab[selected]:not([pinned])
@@ -157,6 +158,11 @@
         background: none;
     }
 
+    #content tabpanels
+    {
+        background: black;
+    }
+
     /*
     * navbar
     */
@@ -192,7 +198,7 @@
         background: #171B1F !important;
     }
 
-    #navigator-toolbox:after
+    #navigator-toolbox::after
     { /* ~bottom-border */
         display: none;
     }
@@ -225,6 +231,7 @@
         --toolbarbutton-hover-background: #1E262D;
         --toolbarbutton-hover-bordercolor: #262E36;
         --toolbarbutton-active-background: #192126;
+        --chrome-secondary-background-color: #39424D !important;
     }
 
     /*
@@ -317,6 +324,19 @@
         filter: brightness(200%) saturate(200%) hue-rotate(0deg);
     }
 
+    tab .tab-content {
+        background-color: #1C2126;
+    }
+    tab[selected] .tab-content {
+        background-image: linear-gradient(180deg, #C75600 4px, #39424D 4px);
+    }
+    #main-window[sizemode="normal"] tab[selected] .tab-content {
+        background-image: linear-gradient(180deg, #C75600 2px, #39424D 2px);
+    }
+    tab:not([selected]):hover .tab-content {
+        background-color: #111518;
+    }
+
     tab:not([selected]) {
         margin-bottom: 2px;
     }
@@ -329,12 +349,12 @@
     }
 
     #tabbar-toolbar {
-    padding-right: 5px;
-    margin-right: -10px;
+        padding-right: 5px;
+        margin-right: -10px;
     }
 
     .mail-toolbox {
-    border-top-width: 0px !important;
+        border-top-width: 0px !important;
     }
 
 

@@ -4,7 +4,7 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Dark theme for Thunderbirds main UI.
+ *     Dark theme for Thunderbird's main UI. To get the result on the screenshot, also install my styles "Developer Edition Dark" and "about:pages Dark"!
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
@@ -84,6 +84,6 @@
 
     #content-frame /* #headers-box .color-button */
     {
-        filter: invert(100%) hue-rotate(180deg);
+        /* filter: invert(100%) hue-rotate(180deg); */
     }
 }

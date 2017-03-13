@@ -4,15 +4,11 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Simple dark 'skin' for Mozilla pages.
+ *     Simple dark 'skin' for Mozilla pages: makes mozilla.org, mozilla.net and firefox.com dark by applying a simple yet very effective CSS filter.
  *
- *     Makes mozilla.org, mozilla.net and firefox.com dark by applying a simple yet very effective css filter.
+ *     I've browsed through the top ten of Google "site:mozilla.org" (including add-ons and developers) and the result on all pages was somewhere between decent and very good.
  *
- *     I've browsed through the top ten of google "site:mozilla.org" (including add-ons and developers) and the result on all pages was somewhere between decent and very good.
- *
- *     The only drawbacks are some inverted background images and increased cpu-usage and possibly slight unresponsiveness on pages with many :hover-effects.
- *
- *     If you want to un-invert any elements, try the filter that un-inverts the img's.
+ *     The only drawbacks are some inverted background images. If you want to un-invert any elements, try apply `filter: var(--filter-revert)` to them.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
@@ -20,86 +16,72 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 
 @-moz-document
-    domain("mozilla.org"),
+    domain("firefox.com"),
+    regexp("^https?://(?!metrics)[^/]*\\.mozilla\\.com(\\/.*)?"),
     domain("mozilla.net"),
-    domain("mozilla.com"),
-    domain("firefox.com")
+    regexp("^https?://(?!www|air|hacks|services\\.addons)[^/]*\\.mozilla\\.org(\\/.*)?")
 {
+    :root {
+        /* the filter value that is used to turn the pages or their main element dark */
+        --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5);
+        /* reversed filter to revert individual elements like imaged back to their original */
+        --filter-revert: brightness(0.666) saturate(.6) hue-rotate(180deg) invert(1); /* revert each filter in reverse order */
+    }
+
     html
     {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+        background: black;
+        filter: var(--filter-invert);
     }
+
     img,
     video,
-    iframe.video,
-    .promo-face,
-    iframe[src*="youtube.com"],
-    .persona-preview,
-    .header-bg,
-    #lightbox
+    canvas,
+    iframe,
+    [style*="background-image"],
+    [style*="background:url"],
+    [style*="background: url"]
     {
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+        filter: var(--filter-revert);
     }
-    img[src$=".png"],
-    .persona-preview img,
-    .header-bg img,
-    #lightbox img
-    {
-        filter: unset;
+
+    img[src$=".png"]
+    {   /* this doesn't work -.- */
+        transition: background-color 1.5s;
+        background-color: #fff0;
     }
-    .faces-grid-inner
+
+    img[src$=".png"]:not(:hover), img[src$=".svg"]
     {
-        filter: invert(100%) hue-rotate(180deg) contrast(60%) saturate(50%) brightness(200%);
+        filter: unset !important;
+    }
+
+    img[src$=".png"]:hover
+    {
+        background-color: #fff8 !important;
     }
 }
 
 @-moz-document
-    domain("accounts.firefox.com"),
-    domain("bugzilla.mozilla.org"),
-    domain("hg.mozilla.org"),
-    domain("dxr.mozilla.org"),
-    domain("fhr.cdn.mozilla.net"),
-    domain("telemetry.mozilla.org"),
-    domain("mozilla.com"),
-    domain("wiki.mozilla.org"),
-    domain("people.mozilla.org")
+    domain("addons.mozilla.org")
 {
-    html
+    .header-bg, #lightbox
     {
-        background-color: black;
+        z-index: 1; /* setting a filter messes with the z-index (in Firefox) */
+        filter: var(--filter-revert);
     }
+    .header-bg *, #lightbox *
+    { filter: unset !important; }
 }
-
 @-moz-document
     domain("developer.mozilla.org")
 {
-    main
-    {
-        background-color: white !important;
-    }
-    .zone-title a
-    {
-        color: black !important;
-    }
+    body
+    { background-color: #abd9ff !important; }
 }
-
 @-moz-document
-    domain("services.addons.mozilla.org"),
-    domain("air.mozilla.org"),
-    domain("hacks.mozilla.org"),
-    domain("www.mozilla.org")
+    domain("accounts.firefox.com")
 {
-    html
-    {
-        filter: unset;
-    }
-    img,
-    video,
-    iframe.video,
-    .promo-face,
-    iframe[src*="youtube.com"],
-    .persona-preview
-    {
-        filter: unset;
-    }
+    #fox-logo
+    { filter: var(--filter-revert); }
 }

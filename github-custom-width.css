@@ -46,11 +46,14 @@
         width: calc(100% - 265px);
     }
 
-    .message .css-truncate-target a:only-child:before {
+    .message .css-truncate-target>a:first-child::before {
         content: attr(title);
         padding-right: 9999px;
     }
-    .message .css-truncate-target a:only-child {
+    .message .css-truncate-target>* {
+        display: none;
+    }
+    .message .css-truncate-target>a:first-child {
         display: block;
     }
 }

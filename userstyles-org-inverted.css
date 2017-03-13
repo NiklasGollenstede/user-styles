@@ -2,23 +2,28 @@
  * @name userstyles.org Inverted
  * @stylish-id 117351
  * @author Niklas Gollenstede
- * @licence CC-BY-SA-4.0 or MIT
- * @deprecated I personally don't use this theme anymore and won't continue its maintainance.
+ * @license CC-BY-SA-4.0 or MIT
  * @description
- *     Very simple colour inversion. Looks a bit old fashioned, but everything is perfectly dark and readable.
+ *     Very simple color inversion. Looks a bit old fashioned, but everything is perfectly dark and readable.
+ *     Images should stay as they were.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url(http://www.w3.org/1999/xhtml);
 
+@-moz-document domain("userstyles.org") { :root {
+    --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5); /* the filter value that is used to turn the pages or their main element dark */
+    --filter-revert: brightness(0.666) saturate(.6) hue-rotate(180deg) invert(1); /* reversed filter to revert individual elements like imaged back to their original, revert each filter in reverse order */
+} }
+
 @-moz-document domain("userstyles.org") {
     html {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+        filter: var(--filter-invert);
         background-color: black;
     }
     img, .Emoticon {
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+        filter: var(--filter-revert);
     }
     .lightboxOverlay {
         background-color: white;

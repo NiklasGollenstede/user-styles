@@ -2,7 +2,7 @@
  * @name about:pages Dark
  * @stylish-id 107168
  * @author Niklas Gollenstede
- * @licence CC-BY-SA-4.0 or MIT
+ * @license CC-BY-SA-4.0 or MIT
  * @description
  *     Color theme, turns all the standard and some add-on about:-pages dark.
  *     This works mostly with inversion filters, so it should not be affected by changes of those pages that much,
@@ -10,7 +10,16 @@
  *     Requests to add additional add-on about:-pages are generally welcome.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *
+ *     It should affect every build-in about:-page that isn't already dark.
+ *     The CSS is clearly structured and documented, read that for details on what happens to which page.
  */
+
+/* set vars */
+@-moz-document url-prefix(about:) { :root {
+    --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5); /* the filter value that is used to turn the pages or their main element dark */
+    --filter-revert: brightness(0.666) saturate(.6) hue-rotate(180deg) invert(1); /* reversed filter to revert individual elements like imaged back to their original, revert each filter in reverse order */
+} }
 
 /**
  *
@@ -20,9 +29,10 @@
  * about:about               : generic,
  * about:accounts            : generic,
  * about:addons              : vertical-tabs,
- * about:blank               : generic,
+ * about:blank               : specific,
  * about:buildconfig         : generic,
  * about:cache               : generic,
+ * about:certerror?...       : generic,
  * about:checkerboard        : generic,
  * about:config?...          : generic,
  * about:configmania#...     : vertical-tabs, // from add-on
@@ -45,7 +55,7 @@
  * about:performance         : generic,
  * about:plugins             : generic,
  * about:preferences#...     : vertical-tabs,
- * about:privatebrowsing     : generic,
+ * about:privatebrowsing     : // already dark
  * about:profiles            : generic,
  * about:rights              : generic,
  * about:robots              : generic,
@@ -74,9 +84,9 @@
            url(https://www.mozilla.org/credits/),
            url(about:about),
            url(about:accounts),
-           url(about:blank),
            url(about:buildconfig),
            url(about:cache),
+    url-prefix(about:certerror),
            url(about:checkerboard),
     url-prefix(about:config),
            url(about:crashes),
@@ -87,7 +97,6 @@
     url-prefix(about:neterror),
            url(about:performance),
            url(about:plugins),
-           url(about:privatebrowsing),
            url(about:profiles),
            url(about:permissions),
            url(about:rights),
@@ -103,17 +112,11 @@
            url(about:webrtc),
            url(about:welcomeback)
 {
-    :root:not(html#SandboxRoot)
-    { /* invert */
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-        background-color: black;
-    }
+    :root
+    { filter: var(--filter-invert); background-color: black; }
 
-    img, image, /* image in html and xul */
-    .showPrivate /* what is this? */
-    { /* un-invert */
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
-    }
+    img, image /* image in html and xul */
+    { filter: var(--filter-revert); }
 }
 
 /* vertical-tabs: invert the content area, leave tab-bar as is */
@@ -128,16 +131,24 @@
 {
     .main-content, /* content area */
     #main-footer, /* ??? */
-    #dialogBox /* modal dialogs, they (usually) contain another xul document */
-    { /* invert */
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-        background-color: white;
-    }
-    .main-content image, #dialogBox image, /* images in inverted areas */
-    #discover-browser /* the browser on the "Get Add-ons" tab of about:addons, currently contains a page from discovery.addons.mozilla.org, so an amo style should take care of it */
-    { /* un-invert */
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
-    }
+    #dialogBox /* modal dialogs frame */
+    { filter: var(--filter-invert); background-color: white; }
+
+    .main-content image, #dialogBox image, .main-content img, #dialogBox img, /* images in inverted areas */
+    #discover-browser, /* the browser on the "Get Add-ons" tab of about:addons, currently contains a page from discovery.addons.mozilla.org, so an amo style should take care of it */
+    #dialogFrame /* modal dialog contents, contains another document */
+    { filter: var(--filter-revert); }
+}
+
+/* specific: same as generic, only that it excludes the embedded twitter iframes which use about:blank */
+@-moz-document
+    url(about:blank)
+{
+    :root:not(.SandboxRoot) /* excludes twitter iframes */
+    { filter: var(--filter-invert); background-color: black; }
+
+    :root:not(.SandboxRoot) img
+    { filter: var(--filter-revert); }
 }
 
 /* specific: invert a lot for items. Use simple invert filter to un-invert without changes */
@@ -146,14 +157,17 @@
 {
     :root { background-color: black; } /* enforce bg-color */
 
-    html, body,
+    html,
     #searchText,
     #searchSubmit,
-    #searchSuggestionTable,
+    #searchSuggestionTable
+    { filter: var(--filter-invert); }
+
+    body,
+    #searchText,
+    #searchSubmit,
     #searchSuggestionTable img
-    { /* simple invert */
-        filter: invert(100%) hue-rotate(180deg);
-    }
+    { filter: var(--filter-revert); }
 }
 
 /* specific: custom styles, no inversion */

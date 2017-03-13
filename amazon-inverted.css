@@ -1,0 +1,82 @@
+/**
+ * @name Amazon Inverted
+ * @stylish-id 140084
+ * @author Niklas Gollenstede
+ * @license CC-BY-SA-4.0 or MIT
+ * @description
+ *     Simple dark, high-contrast 'skin' for Amazon.
+ *     Amazons HTML/CSS is frustratingly inconsistent across pages,
+ *     so the focus of this style is to invert the most important/prominent parts of the UI.
+ *     That means that black text on black background is unacceptable, but not-so-important pages may stay unchanged.
+ *     I only test this on the German version of Amazon.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ */
+
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document url("https://www.amazon.com/")
+{ /* use for screenshot */ }
+
+@-moz-document
+    regexp("^https?:\\/\\/www\\.amazon\\.\\w{2,3}(\\.\\w{2})?(\\/.*)?")
+{
+    /* black background */
+    #a-page,
+    body>#content
+    { background: black !important; }
+
+    /* invert content */
+    #nav-subnav, #nav-flyout-anchor, /* children of the header */
+    #a-page>div:not( /* everything except for the <header> and: */
+        .dv-dp-top-wrapper
+    )
+    { filter: invert(100%) hue-rotate(180deg) saturate(200%); }
+
+    /* un-invert images and stuff */
+    #a-page>div>header, /* sometimes (-.-) the <header> is placed inside a div */
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) .image-thumbnails,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) .iv_thumb_image,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) .acs-category-tile,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) .a-meter-bar, /* ratings bars */
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) img,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) video,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) canvas,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) iframe,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) [style*="background-image"],
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) [style*="background:url"],
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) [style*="background: url"]
+    {  filter: invert(100%) hue-rotate(180deg) saturate(50%); }
+
+    /* exclude some things from the un-inversion, because their parents arn't actually inverted */
+    .dv-dp-top-wrapper img,
+    .dv-dp-top-wrapper video,
+    .dv-dp-top-wrapper [style*=background-image],
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) img[src$=".gif"]
+    { filter: unset; }
+
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) .image-thumbnails,
+    :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) img
+    { border-radius: 2px; }
+}
+
+
+@-moz-document
+    regexp("^https?:\\/\\/music\\.amazon\\.\\w{2,3}(\\.\\w{2})?(\\/.*)?")
+{
+
+    /* invert content */
+    #main-content-wrapper
+    { filter: invert(100%) hue-rotate(180deg) saturate(200%); }
+
+    /* un-invert images and stuff */
+    :-moz-any(#main-content-wrapper) img,
+    :-moz-any(#main-content-wrapper) video,
+    :-moz-any(#main-content-wrapper) canvas,
+    :-moz-any(#main-content-wrapper) iframe,
+    :-moz-any(#main-content-wrapper) [style*="background-image"],
+    :-moz-any(#main-content-wrapper) [style*="background:url"],
+    :-moz-any(#main-content-wrapper) [style*="background: url"]
+    {  filter: invert(100%) hue-rotate(180deg) saturate(50%); }
+
+}
