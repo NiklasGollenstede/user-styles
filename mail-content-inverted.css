@@ -4,39 +4,47 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Invertes the colors of all mails in Thunderbird. Contained Images are uneffected.
- *     Ment as optional addition to "Developer Edition Dark" and "Thunderbird Dark".
+ *     Inverts the colors of all mails in Thunderbird. Contained Images are uneffected.
+ *     Meant as optional addition to "Developer Edition Dark" and "Thunderbird Dark".
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @-moz-document
-    url-prefix(imap://),
+    url(chrome://messenger/content/multimessageview.xhtml),
+    url-prefix(imap://)
+{
+    :root {
+        /* the filter value that is used to turn the pages or their main element dark */
+        --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5);
+        /* reversed filter to revert individual elements like imaged back to their original */
+        --filter-revert: brightness(0.666) saturate(.6) hue-rotate(180deg) invert(1); /* revert each filter in reverse order */
+    }
+}
+
+@-moz-document
     url(chrome://messenger/content/multimessageview.xhtml)
 {
-
-    html
-    {
-        background-color: black;
-    }
+    :root
+    { background-color: black; }
 
     #heading_wrapper,
     #content
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-    }
+    { filter: var(--filter-invert); }
 
     img
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
-    }
+    { filter: var(--filter-revert); }
 }
 
 @-moz-document
     url-prefix(imap://)
 {
+    :root
+    { background-color: black; }
+
     body
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-    }
+    { filter: var(--filter-invert); }
+
+    img
+    { filter: var(--filter-revert); }
 }

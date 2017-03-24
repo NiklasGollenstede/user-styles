@@ -4,11 +4,8 @@
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Simple dark 'skin' for Mozilla pages: makes mozilla.org, mozilla.net and firefox.com dark by applying a simple yet very effective CSS filter.
- *
- *     I've browsed through the top ten of Google "site:mozilla.org" (including add-ons and developers) and the result on all pages was somewhere between decent and very good.
- *
- *     The only drawbacks are some inverted background images. If you want to un-invert any elements, try apply `filter: var(--filter-revert)` to them.
+ *     Simple dark 'skin' for Mozilla pages.
+ *     Mainly focuses on addond.mozilla.org and developer.mozilla.org, but handles other Mozilla pages as well.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
@@ -17,9 +14,9 @@
 
 @-moz-document
     domain("firefox.com"),
-    regexp("^https?://(?!metrics)[^/]*\\.mozilla\\.com(\\/.*)?"),
+    regexp("^https?://(?!metrics)[^/]*\\.mozilla\\.com(/.*)?$"),
     domain("mozilla.net"),
-    regexp("^https?://(?!www|air|hacks|services\\.addons)[^/]*\\.mozilla\\.org(\\/.*)?")
+    regexp("^https?://(?!www|air|hacks|services\\.addons)[^/]*\\.mozilla\\.org(/.*)?$")
 {
     :root {
         /* the filter value that is used to turn the pages or their main element dark */

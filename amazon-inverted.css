@@ -19,7 +19,7 @@
 { /* use for screenshot */ }
 
 @-moz-document
-    regexp("^https?:\\/\\/www\\.amazon\\.\\w{2,3}(\\.\\w{2})?(\\/.*)?")
+    regexp("^https?://www\\.amazon\\.[a-z]{2,3}(\\.[a-z]{2})?(/.*)?")
 {
     /* black background */
     #a-page,
@@ -62,7 +62,7 @@
 
 
 @-moz-document
-    regexp("^https?:\\/\\/music\\.amazon\\.\\w{2,3}(\\.\\w{2})?(\\/.*)?")
+    regexp("^https?:\\/\\/music\\.amazon\\.[a-z]{2,3}(\\.[a-z]{2})?(\\/.*)?")
 {
 
     /* invert content */

@@ -36,7 +36,6 @@
     url(chrome://messenger/content/messenger.xul),
     url(chrome://browser/content/browser.xul)
 {
-
     /*
     * tab modal dialogs
     */
@@ -316,7 +315,6 @@
 @-moz-document
     url(chrome://messenger/content/messenger.xul)
 {
-
     .mail-toolbox toolbarbutton {
         color: white !important;
     }
@@ -356,32 +354,6 @@
     .mail-toolbox {
         border-top-width: 0px !important;
     }
-
-
-    #folderTree,
-    #threadContentArea,
-    #quick-filter-bar,
-    #singlemessage>:not(#messagepanewrapper),
-    #status-bar
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
-    }
-    #quick-filter-bar image,
-    #singlemessage>:not(#messagepanewrapper) image,
-    #status-bar image
-    {
-        filter: invert(100%) hue-rotate(180deg) contrast(110%) brightness(100%);
-    }
-    #calendar-show-todaypane-panel image
-    {
-        filter: unset;
-    }
-
-    #quick-filter-bar
-    {
-        background: #F0F0F0 !important;
-    }
-
 }
 
 @-moz-document
