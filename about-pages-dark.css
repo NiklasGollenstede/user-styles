@@ -1,5 +1,5 @@
 /**
- * @name about:pages Dark
+ * @name about:-pages Dark
  * @stylish-id 107168
  * @author Niklas Gollenstede
  * @license CC-BY-SA-4.0 or MIT
@@ -66,7 +66,7 @@
  * about:support             : generic,
  * about:sync-log            : generic,
  * about:sync-progress       : // has been removed
- * about:sync-tabs           : generic, specific,
+ * about:sync-tabs           : // has been removed
  * about:tabcrashed?...      : generic,
  * about:tabgroups#...       : vertical-tabs, // from add-on
  * about:telemetry           : generic,
@@ -81,7 +81,6 @@
 /* generic: invert :root, un-invert images */
 @-moz-document
            url(about:),
-           url(https://www.mozilla.org/credits/),
            url(about:about),
            url(about:accounts),
            url(about:buildconfig),
@@ -110,7 +109,8 @@
     url-prefix(about:tabcrashed),
            url(about:telemetry),
            url(about:webrtc),
-           url(about:welcomeback)
+           url(about:welcomeback),
+           url(https://www.mozilla.org/credits/)
 {
     :root
     { filter: var(--filter-invert); background-color: black; }
@@ -140,15 +140,12 @@
     { filter: var(--filter-revert); }
 }
 
-/* specific: same as generic, only that it excludes the embedded twitter iframes which use about:blank */
+/* specific: only apply to empty about:blank documents */
 @-moz-document
     url(about:blank)
 {
-    :root:not(.SandboxRoot) /* excludes twitter iframes */
+    html:root>head:empty ~ body:nth-child(2):last-child:empty
     { filter: var(--filter-invert); background-color: black; }
-
-    :root:not(.SandboxRoot) img
-    { filter: var(--filter-revert); }
 }
 
 /* specific: invert a lot for items. Use simple invert filter to un-invert without changes */
@@ -225,6 +222,7 @@
 @-moz-document
     url(about:sessionrestore)
 {
+    body { padding: 0; }
     .container.restore-chosen /* main container */
     { /* reduce margin */
         margin-top: 3vh;
@@ -235,11 +233,4 @@
     {
         min-height: calc(94vh - 300px); /* everything except 2 * 3hv margin and 300px for the text */
     }
-}
-
-/* specific: add black gackground */
-@-moz-document
-    url(about:sync-tabs)
-{
-    window>richlistbox#tabsList { background-color: white; }
 }

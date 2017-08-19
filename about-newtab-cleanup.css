@@ -61,7 +61,7 @@
         line-height: 20px;
         bottom: 0;
     }
-    .newtab-title:before { /* remove pin sxmbol */
+    .newtab-title::before { /* remove pin sxmbol */
         display: none;
     }
 

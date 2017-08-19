@@ -1,0 +1,61 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+/**
+ * @name JavaDoc Inverted
+ * @stylish-id <none>
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT
+ * @description
+ *     Simple dark, high-contrast 'skin' for Oracle Java pages.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ */
+
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document
+	domain(blogs.oracle.com),
+	domain(docs.oracle.com)
+{
+	html
+	{
+		background-color: black;
+	}
+
+	body
+	{
+		filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
+	}
+
+	img,
+	video,
+	iframe.video,
+	iframe[src*="youtube.com"],
+	#jumbotron,
+	.section-title
+	{
+		filter: invert(100%) hue-rotate(180deg) contrast(70%) saturate(50%) brightness(125%);
+	}
+	img[src$=".png"],
+	img[src$=".gif"]
+	{
+		filter: unset;
+	}
+
+	img
+	{
+		border-radius: 2px;
+	}
+
+	.api_stability_1,
+	.api_stability_2,
+	.api_stability_3
+	{
+		filter: hue-rotate(270deg);
+	}
+	.api_stability_0
+	{
+		filter: hue-rotate(200deg);
+		background-color: #D69000;
+	}
+}

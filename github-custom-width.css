@@ -12,14 +12,12 @@
  */
 
 @-moz-document
-    regexp("^https://(\w+\.)?github\.com(\/.*?)*$"),
-    url-prefix("/*[[additionalUrl]]*/")
+    regexp("^https://(\w+\.)?github\.com(\/.*?)*$")
 {
     .container {
         width: calc(80%);
         min-width: 980px;
         max-width: 1380px;
-        max-width: /*[[columnMaxWidth]]*/;
     }
     .repository-with-sidebar .repository-content {
         width: calc(100% - 60px);

@@ -1,0 +1,45 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document
+	domain("duckduckgo.com")
+{
+	/* invert content */
+	html
+	{ filter: invert(100%) hue-rotate(180deg) saturate(200%); }
+
+	/* un-invert inages and stuff */
+	.header__logo, .flag-xs,
+	img,
+	video,
+	iframe
+	{ filter: saturate(50%) hue-rotate(180deg) invert(100%); }
+
+	/* increase text contrast of search results */
+	.result__snippet
+	{ filter: contrast(250%); }
+
+	/* highlight favicons */
+	.result__icon__img
+	{
+		background: radial-gradient(white 20%, transparent 75%); /* put spotlight behind favicons */
+	}
+	.result__icon a
+	{
+		border-bottom: 2px solid transparent;
+		transition-property: background-color, border-color;
+		transition-duration: 2.25s;
+	}
+	.result:hover .result__icon a
+	{
+		background-color: #444;
+		border-color: #444;
+	}
+
+	.result__a
+	{ color: #06365d; }
+	.result__a:visited
+	{ color: #2a1365; }
+
+	.result__url
+	{ color: #134222; }
+}

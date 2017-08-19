@@ -16,8 +16,11 @@
     domain("firefox.com"),
     regexp("^https?://(?!metrics)[^/]*\\.mozilla\\.com(/.*)?$"),
     domain("mozilla.net"),
-    regexp("^https?://(?!www|air|hacks|services\\.addons)[^/]*\\.mozilla\\.org(/.*)?$")
+    regexp("^https?://(?!www|air|services\\.addons)[^/]*\\.mozilla\\.org(/.*)?$"), /* keep |hacks ? */
+    domain("addons.mozilla.org"), /* explicitly list this to include this block privileged chrome style */
+    domain("kb.mozillazine.org")
 {
+
     :root {
         /* the filter value that is used to turn the pages or their main element dark */
         --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5);
@@ -34,7 +37,7 @@
     img,
     video,
     canvas,
-    iframe,
+    iframe:not(.live-sample-frame),
     [style*="background-image"],
     [style*="background:url"],
     [style*="background: url"]
@@ -48,14 +51,14 @@
         background-color: #fff0;
     }
 
-    img[src$=".png"]:not(:hover), img[src$=".svg"]
+    img[src$=".png"]:not(:hover), img[src$=".svg"]:not(foo)
     {
-        filter: unset !important;
+        filter: unset;
     }
 
     img[src$=".png"]:hover
     {
-        background-color: #fff8 !important;
+        background-color: #fff8;
     }
 }
 
@@ -80,5 +83,12 @@
     domain("accounts.firefox.com")
 {
     #fox-logo
+    { filter: var(--filter-revert); }
+}
+
+@-moz-document
+    domain("discourse.mozilla.org")
+{
+    img.avatar:not(foo):not(bar):not(baz)
     { filter: var(--filter-revert); }
 }

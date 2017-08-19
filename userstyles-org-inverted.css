@@ -17,14 +17,24 @@
     --filter-revert: brightness(0.666) saturate(.6) hue-rotate(180deg) invert(1); /* reversed filter to revert individual elements like imaged back to their original, revert each filter in reverse order */
 } }
 
-@-moz-document domain("userstyles.org") {
+@-moz-document
+    regexp("^https?://(?:[^/]*[.])?userstyles[.]org(?:/(?!.*[.]css$).*$|$)") /* same as domain(userstyles.org) but must not end with '.css'. Unfortunately, this regexp is rather expensive */
+{
     html {
         filter: var(--filter-invert);
         background-color: black;
     }
-    img, .Emoticon {
-        filter: var(--filter-revert);
-    }
+
+    #header,
+    iframe,
+    img,
+    .Emoticon,
+    #preview_image_div
+    { filter: var(--filter-revert); }
+
+    #header img
+    { filter: unset; }
+
     .lightboxOverlay {
         background-color: white;
     }

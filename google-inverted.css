@@ -1,0 +1,50 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document
+	regexp("^https?://(?:www|translate|scholar|developers)\\.google\\.(com|([a-z]{2}))(\\.[a-z]{2})?(\\/(?!maps).*)?$"),
+	domain(developer.chrome.com)
+{
+	:root {
+		/* the filter value that is used to turn the pages or their main element dark */
+		--filter-invert: invert(1) hue-rotate(180deg) saturate(1.66667) brightness(1.125);
+		/* reversed filter to revert individual elements like imaged back to their original */
+		--filter-revert: brightness(0.88889) saturate(.6) hue-rotate(180deg) invert(1); /* revert each filter in reverse order */
+	}
+
+	body { background: black !important; } /* prevent flashes */
+	:root a:link { color: #07199c; } /* make normal links a bit bluer */
+
+	#main>*, #searchform, /* main search */
+	#maia-main, /* google.com/contact */
+	#root, /* flights */
+	.main-header,
+	#gs_top, /* scholar */
+	main, /* developer.chrome.com */
+	#top_of_page, /* developer.google.com */
+	#google-container, /* google.com/recaptcha/admin */
+	#volume-main /* www.google.com/patents */
+	{
+		background: white;
+		filter: var(--filter-invert);
+	}
+
+	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, #top_of_page, #volume-main) img,
+	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, #top_of_page, #volume-main) video,
+	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, #top_of_page, #volume-main) canvas,
+	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, #top_of_page, #volume-main) iframe,
+	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, #top_of_page, #volume-main) [style*="background-image"],
+	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, #top_of_page, #volume-main) [style*="background:url"],
+	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, #top_of_page, #volume-main) [style*="background: url"],
+	.irc_bg /* image search preview background */,
+	.gb_3, /* Google-Apps icons */
+	#gs_gb /* old top banner */
+	{
+		filter: var(--filter-revert);
+	}
+
+	.irc_bg img
+	{
+		filter: unset;
+	}
+
+}
