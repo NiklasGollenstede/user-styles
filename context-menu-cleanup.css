@@ -46,44 +46,30 @@
     #context-openlinkintab,
     #context-viewimage
     {
-        height: 2.3em;
+        min-height: 2.3em;
         font-weight: bold;
     }
 
 }
-@-moz-document
-    url(chrome://lastpass/content/home2.xul)
-{
 
-    #rightclickmenu menuitem:nth-child(4),
-    #rightclickmenu menuitem:nth-child(5),
-    #rightclickmenu menuitem:nth-child(6),
-    #rightclickmenu menuitem:nth-child(7)
+@-moz-document
+    url-prefix(chrome://),
+    url-prefix(about:),
+    url-prefix(resource://)
+{
+    menuitem[disabled="true"]
     {
         display: none;
     }
 
-    #rightclickmenu menuitem:nth-child(8)
+    menuseparator
     {
-        height: 2.3em;
-        font-weight: bold;
+        -moz-appearance: none;
+        height: 1px;
+        margin: 0px;
+        margin-top: -1px;
+        border: none;
+        border-top: 1px solid #777;
+        padding: 0px;
     }
-
-}
-
-
-menuitem[disabled="true"]
-{
-    display: none;
-}
-
-menuseparator
-{
-    -moz-appearance: none;
-    height: 1px;
-    margin: 0px;
-    margin-top: -1px;
-    border: none;
-    border-top: 1px solid #777;
-    padding: 0px;
 }

@@ -12,12 +12,14 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/* GLOBAL */
-
-    /*
-    * context menu
-    */
-
+/*
+* context menu
+*/
+@-moz-document
+    url-prefix(chrome://),
+    url-prefix(about:),
+    url-prefix(resource://)
+{
     menupopup
     {
         filter: invert(100%) hue-rotate(180deg);
@@ -28,8 +30,7 @@
     {
         filter: invert(100%) hue-rotate(180deg);
     }
-
-/* end GLOBAL */
+}
 
 
 @-moz-document
@@ -234,6 +235,20 @@
     }
 
     /*
+    * sidebar
+    */
+
+    #sidebar-splitter {
+        border-color: #39424D; /* inspector body color filtered */
+    }
+    #sidebar-header {
+        color: white;
+        background-color: #39424D; /* inspector body color filtered */
+        margin-top: -1px;
+        padding: 0 8px
+    }
+
+    /*
     * panels
     */
 
@@ -243,7 +258,8 @@
     #PanelUI-popup,
     #downloadsPanel,
     #identity-popup,
-    #notification-popup
+    #notification-popup,
+    #sidebarMenu-popup
     {
         filter: invert(100%) hue-rotate(180deg);
     }
@@ -252,14 +268,14 @@
     #PanelUI-multiView panelview,
     #identity-popup-multiView,
     #BMB_bookmarksPopup .panel-arrowcontent,
-    #downloadsPanel .panel-arrowcontent
+    #downloadsPanel .panel-arrowcontent,
+    #sidebarMenu-popup .panel-arrowcontent
     {
         background-color: #E6E9EC; /* inspector body color filtered */
     }
 
     #customization-container image,
     #widget-overflow image,
-    #PanelUI-popup .toolbarbutton-icon,
     #downloadsPanel .downloadTypeIcon
     {
         filter: invert(100%) hue-rotate(180deg);

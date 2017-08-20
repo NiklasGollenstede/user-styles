@@ -10,28 +10,24 @@
  */
 
 @-moz-document
-    url-prefix(file://),
-    url-prefix(http://),
-    url-prefix(https://),
-    url-prefix(ftp://)
+	url-prefix(file://),
+	url-prefix(http://),
+	url-prefix(https://),
+	url-prefix(ftp://)
 {
+	:root:not([class])>body:not([class])>img.transparent:only-child, /* e.g. PNG */
+	svg:root:only-child /* SVG */
+	{
+		background-image: url(
+			'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAzSURBVDhPY7xy5QoDNrB69WooCxUwQWmiwagGYgBjfX09lIkKQkNDoSxUMCJDidYaGBgAakUHGE5cs6wAAAAASUVORK5CYII='
+		);
+		background-repeat: repeat;
+	}
 
-    html>body>img.transparent
-    {
-        background-image: url(
-            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAzSURBVDhPY7xy5QoDNrB69WooCxUwQWmiwagGYgBjfX09lIkKQkNDoSxUMCJDidYaGBgAakUHGE5cs6wAAAAASUVORK5CYII='
-        ) !important;
-        background-repeat: repeat !important;
-    }
-
-    svg:root
-    {
-        position: absolute;
-        margin: auto;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-
+	/* center SVGs */
+	svg:root:only-child
+	{
+		position: absolute; margin: auto;
+		top: 0; right: 0; bottom: 0; left: 0;
+	}
 }
