@@ -51,7 +51,7 @@
         background-color: #fff0;
     }
 
-    img[src$=".png"]:not(:hover), img[src$=".svg"]:not(foo)
+    img[src$=".png"]:not(:hover):not(.avatar), img[src$=".svg"]:not(foo)
     {
         filter: unset;
     }

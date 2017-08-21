@@ -13,7 +13,8 @@
 
 @-moz-document
     regexp("^moz-extension://(?!.*[.]html?(:?$|[?#])).*$"),
-    regexp("^https?://(?!(?:tools|www)[.]ietf[.]org).*[.](?:css|js|txt)$")
+    regexp("^https?://(?!(?:tools|www)[.]ietf[.]org).*[.](?:css|js|txt)$"),
+    regexp("^file://.*[.](?:css|js|txt)$")
 {
     :root:not([class])>body:not([class])>pre:only-child /* .txt files */
     {
