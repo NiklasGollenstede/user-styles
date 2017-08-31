@@ -276,7 +276,8 @@
 
     #customization-container image,
     #widget-overflow image,
-    #downloadsPanel .downloadTypeIcon
+    #downloadsPanel .downloadTypeIcon,
+    #PanelUI-popup toolbarbutton[id$="-browser-action"] .toolbarbutton-icon
     {
         filter: invert(100%) hue-rotate(180deg);
     }

@@ -14,7 +14,8 @@
 @-moz-document
     regexp("^moz-extension://(?!.*[.]html?(:?$|[?#])).*$"),
     regexp("^https?://(?!(?:tools|www)[.]ietf[.]org).*[.](?:css|js|txt)$"),
-    regexp("^file://.*[.](?:css|js|txt)$")
+    regexp("^file://.*[.](?:css|js|txt)$"),
+    regexp("^data:(?!text/x?html)[\\w-/]+[;,].*$")
 {
     :root:not([class])>body:not([class])>pre:only-child /* .txt files */
     {
@@ -28,6 +29,8 @@
         right: 0px;
         bottom: -16px;
         padding: 15px;
+        tab-size: 4;
+        -moz-tab-size: 4;
     }
 }
 
@@ -47,5 +50,7 @@
         bottom: 0px;
         margin: 0px;
         padding: 10px 50px;
+        tab-size: 4;
+        -moz-tab-size: 4;
     }
 }

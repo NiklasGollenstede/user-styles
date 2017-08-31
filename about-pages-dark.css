@@ -1,4 +1,4 @@
-/**
+/** ==UserStyle==
  * @name about:-pages Dark
  * @stylish-id 107168
  * @author Niklas Gollenstede
@@ -16,7 +16,10 @@
  */
 
 /* set vars */
-@-moz-document url-prefix(about:) { :root {
+@-moz-document
+    url-prefix(about:),
+    url(https://www.mozilla.org/credits/) /* about:credits */
+{ :root {
     --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5); /* the filter value that is used to turn the pages or their main element dark */
     --filter-revert: brightness(0.666) saturate(.6) hue-rotate(180deg) invert(1); /* reversed filter to revert individual elements like imaged back to their original, revert each filter in reverse order */
 } }
@@ -28,7 +31,7 @@
  * about:                    : generic,
  * about:about               : generic,
  * about:accounts            : generic,
- * about:addons              : vertical-tabs,
+ * about:addons              : specific,
  * about:blank               : specific,
  * about:buildconfig         : generic,
  * about:cache               : generic,
@@ -121,7 +124,6 @@
 
 /* vertical-tabs: invert the content area, leave tab-bar as is */
 @-moz-document
-    url-prefix(about:addons),
     url-prefix(about:confmania),
     url-prefix(about:debugging),
     url-prefix(about:findbartweak),
@@ -135,8 +137,26 @@
     { filter: var(--filter-invert); background-color: white; }
 
     .main-content image, #dialogBox image, .main-content img, #dialogBox img, /* images in inverted areas */
-    #discover-browser, /* the browser on the "Get Add-ons" tab of about:addons, currently contains a page from discovery.addons.mozilla.org, so an amo style should take care of it */
     #dialogFrame /* modal dialog contents, contains another document */
+    { filter: var(--filter-revert); }
+}
+
+/* specific: mostly the same as vertical-tabs, but excludes the inline add-on options frames */
+@-moz-document
+    url-prefix(about:addons)
+{
+    .main-content /* content area */
+    { background-color: black; }
+
+    #header,
+    #search-view, #list-view, legacy-view, #updates-view, /* all view types except #detail-view */
+    #detail-view .detail-view-container>*>*>:not(#detail-grid), #detail-grid #detail-rows>:not(#addon-options) /* bascically everything except #addon-options (the inversion of that <browser> makes it entirely black) */
+    { filter: var(--filter-invert); }
+
+    #detail-view .detail-view-container>*>*>image:not(#detail-grid)
+    { filter: unset; }
+
+    .main-content image, .main-content img /* images in inverted areas */
     { filter: var(--filter-revert); }
 }
 
@@ -148,7 +168,7 @@
     { filter: var(--filter-invert); background-color: black; }
 }
 
-/* specific: invert a lot for items. Use simple invert filter to un-invert without changes */
+/* specific: invert a lot for items */
 @-moz-document
     url(about:home)
 {

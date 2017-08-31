@@ -19,7 +19,7 @@
 { /* use for screenshot */ }
 
 @-moz-document
-    regexp("^https?://www\\.amazon\\.[a-z]{2,3}(\\.[a-z]{2})?(/.*)?")
+    regexp("^https?://www[.]amazon[.][a-z]{2,3}([.][a-z]{2})?(/.*)?")
 {
     /* black background */
     #a-page,
@@ -62,7 +62,7 @@
 
 
 @-moz-document
-    regexp("^https?:\\/\\/music\\.amazon\\.[a-z]{2,3}(\\.[a-z]{2})?(\\/.*)?")
+    regexp("^https?:\\/\\/music[.]amazon[.][a-z]{2,3}([.][a-z]{2})?(\\/.*)?")
 {
 
     /* invert content */
@@ -70,13 +70,36 @@
     { filter: invert(100%) hue-rotate(180deg) saturate(200%); }
 
     /* un-invert images and stuff */
-    :-moz-any(#main-content-wrapper) img,
-    :-moz-any(#main-content-wrapper) video,
-    :-moz-any(#main-content-wrapper) canvas,
-    :-moz-any(#main-content-wrapper) iframe,
-    :-moz-any(#main-content-wrapper) [style*="background-image"],
-    :-moz-any(#main-content-wrapper) [style*="background:url"],
-    :-moz-any(#main-content-wrapper) [style*="background: url"]
+    #main-content-wrapper img,
+    #main-content-wrapper video,
+    #main-content-wrapper canvas,
+    #main-content-wrapper iframe,
+    #main-content-wrapper [style*="background-image"],
+    #main-content-wrapper [style*="background:url"],
+    #main-content-wrapper [style*="background: url"]
+    {  filter: invert(100%) hue-rotate(180deg) saturate(50%); }
+
+}
+
+
+@-moz-document
+    regexp("^https?:\\/\\/www[.]audible[.][a-z]{2,3}([.][a-z]{2})?(\\/.*)?")
+{
+
+    /* invert content */
+    html {
+        filter: invert(100%) hue-rotate(180deg) saturate(200%);
+        background: black;
+    }
+
+    /* un-invert images and stuff */
+    img:not(#logo),
+    video,
+    canvas,
+    iframe,
+    [style*="background-image"],
+    [style*="background:url"],
+    [style*="background: url"]
     {  filter: invert(100%) hue-rotate(180deg) saturate(50%); }
 
 }
