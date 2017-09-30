@@ -12,10 +12,11 @@
 @namespace url(http://www.w3.org/1999/xhtml); /* i really want this to be global */
 
 @-moz-document
-    regexp("^moz-extension://(?!.*[.]html?(:?$|[?#])).*$"),
+    regexp("^moz-extension://(?!.*[.](html?|gif|jpe?g|a?png|svg)(:?$|[?#])).*$"),
     regexp("^https?://(?!(?:tools|www)[.]ietf[.]org).*[.](?:css|js|txt)$"),
     regexp("^file://.*[.](?:css|js|txt)$"),
-    regexp("^data:(?!text/x?html)[\\w-/]+[;,].*$")
+    regexp( "^ftp://.*[.](?:css|js|txt|json)$"), /* Firefox doesn't recognize JSON over FTP */
+    regexp("^data:(?!text/x?html)[\\w/-]+[;,].*$")
 {
     :root:not([class])>body:not([class])>pre:only-child /* .txt files */
     {

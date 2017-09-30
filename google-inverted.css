@@ -1,7 +1,8 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 
 @-moz-document
-	regexp("^https?://(?:www|translate|scholar|developers)\\.google\\.(com|([a-z]{2}))(\\.[a-z]{2})?(\\/(?!maps).*)?$"),
+	regexp("^https?://(?:www|translate|scholar)\\.google\\.(com|([a-z]{2}))(\\.[a-z]{2})?(\\/(?!maps).*)?$"),
+	domain(developers.google.com),
 	domain(developer.chrome.com)
 {
 	:root {

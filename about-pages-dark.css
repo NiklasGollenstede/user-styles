@@ -18,6 +18,7 @@
 /* set vars */
 @-moz-document
     url-prefix(about:),
+    regexp("^ftp://.*/"),
     url(https://www.mozilla.org/credits/) /* about:credits */
 { :root {
     --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5); /* the filter value that is used to turn the pages or their main element dark */
@@ -28,6 +29,7 @@
  *
  * about:-pages, most of these are linked on 'about:about':
  *
+ * ftp://                    : generic,
  * about:                    : generic,
  * about:about               : generic,
  * about:accounts            : generic,
@@ -83,6 +85,7 @@
 
 /* generic: invert :root, un-invert images */
 @-moz-document
+           regexp("^ftp://.*/"),
            url(about:),
            url(about:about),
            url(about:accounts),

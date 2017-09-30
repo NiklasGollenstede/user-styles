@@ -10,10 +10,9 @@
  */
 
 @-moz-document
-	url-prefix(file://),
-	url-prefix(http://),
-	url-prefix(https://),
-	url-prefix(ftp://)
+    regexp(      "^moz-extension://.*[.](?:gif|jpe?g|a?png|svg)(?:$|[?#])"),
+    regexp("^(?:https?|file|ftp)://.*[.](?:gif|jpe?g|a?png|svg)(?:$|[?#])"),
+    regexp("^data:image/.*$")
 {
 	:root:not([class])>body:not([class])>img.transparent:only-child, /* e.g. PNG */
 	svg:root:only-child /* SVG */
