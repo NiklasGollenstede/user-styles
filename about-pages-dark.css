@@ -33,7 +33,7 @@
  * about:                    : generic,
  * about:about               : generic,
  * about:accounts            : generic,
- * about:addons              : specific,
+ * about:addons              : vertical-tabs, specific,
  * about:blank               : specific,
  * about:buildconfig         : generic,
  * about:cache               : generic,
@@ -67,8 +67,8 @@
  * about:serviceworkers      : generic,
  * about:sessionrestore      : generic, specific,
  * about:sessionstore        : generic, // from add-on
- * about:stylish-edit?...    : // already dark (with dark dev-tools theme)
  * about:support             : generic,
+ * about:studies             : generic,
  * about:sync-log            : generic,
  * about:sync-progress       : // has been removed
  * about:sync-tabs           : // has been removed
@@ -109,6 +109,7 @@
            url(about:serviceworkers),
            url(about:sessionrestore),
            url(about:sessionstore),
+    url-prefix(about:studies),
            url(about:support),
            url(about:sync-log),
            url(about:sync-tabs),
@@ -132,8 +133,40 @@
     url-prefix(about:findbartweak),
     url-prefix(about:networking),
     url-prefix(about:preferences),
-    url-prefix(about:tabgroups)
+    url-prefix(about:tabgroups),
+    url-prefix(about:addons)
 {
+    #nav-header,
+    #categories
+    {
+        background-color: #424f5a;
+        border-radius: 0;
+    }
+    #categories .category
+    {
+        transition: background .5s;
+        color: #eee;
+        padding-inline-start: 15px; /* compensate the 4px border */
+        border-radius: 0;
+        margin: 0;
+        background: inherit;
+    }
+    #categories .category:hover
+    {
+        background: #9994;
+    }
+    #categories .category[selected], /*xul*/
+    #categories .category.selected /*html*/
+    {
+        background-color: rgb(52, 63, 72);
+        color: var(--in-content-category-text-selected);
+        padding-inline-start: 11px; /* compensate the 4px border */
+        border-inline-start: solid 4px var(--in-content-border-highlight);
+    }
+    #categories .category[selected]:hover,
+    #categories .category.selected:hover
+    { background-color: #1A2533; }
+
     .main-content, /* content area */
     #main-footer, /* ??? */
     #dialogBox /* modal dialogs frame */
@@ -149,7 +182,7 @@
     url-prefix(about:addons)
 {
     .main-content /* content area */
-    { background-color: black; }
+    { filter: unset; background-color: black; }
 
     #header,
     #search-view, #list-view, legacy-view, #updates-view, /* all view types except #detail-view */
@@ -161,14 +194,17 @@
 
     .main-content image, .main-content img /* images in inverted areas */
     { filter: var(--filter-revert); }
+
+    #addon-options
+    { background: white; }
 }
 
 /* specific: only apply to empty about:blank documents */
 @-moz-document
     url(about:blank)
 {
-    html:root>head:empty ~ body:nth-child(2):last-child:empty
-    { filter: var(--filter-invert); background-color: black; }
+    html:root>head:first-child:empty + body:last-child:empty
+    { background-color: black; }
 }
 
 /* specific: invert a lot for items */

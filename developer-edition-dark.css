@@ -13,44 +13,283 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 /*
-* context menu
-*/
+ * context menu
+ */
 @-moz-document
     url-prefix(chrome://),
     url-prefix(about:),
     url-prefix(resource://)
 {
-    menupopup
-    {
+    menupopup {
         filter: invert(100%) hue-rotate(180deg);
         padding: 1px;
     }
     menu .menu-iconic-left,
-    menuitem .menu-iconic-left
-    {
+    menuitem .menu-iconic-left {
         filter: invert(100%) hue-rotate(180deg);
     }
 }
 
 
+/**
+ * desktop notifications (windows)
+ */
+@-moz-document
+    url(chrome://global/content/alerts/alert.xul)
+{
+    #alertBox>:not(image), image
+    { filter: invert(100%) hue-rotate(180deg); }
+    toolbarbutton image
+    { filter: unset; }
+
+    #alertBox {
+        background-color: #121518; /* inspector body color */
+    }
+}
+
+
+/**
+ * main windows
+ */
 @-moz-document
     url(chrome://messenger/content/messenger.xul),
     url(chrome://browser/content/browser.xul)
 {
-    /*
-    * tab modal dialogs
-    */
 
-    tabmodalprompt>*
-    {
+    /*
+     * vars
+     */
+
+    :root {
+        --tab-line-color: #C75600;
+        --chrome-secondary-background-color: #39424D;
+        --chrome-color: white;
+    }
+
+
+    /*
+     * tabs
+     */
+
+    window[sizemode=maximized] #navigator-toolbox
+    { margin-top: 0px; }
+    window #navigator-toolbox
+    { margin-top: 1px; }
+    window[uidensity=compact]
+    { --tab-min-height: 31px; }
+
+    tab[pending] {
+        opacity: 0.6;
+    }
+    tab:not([pending]):not([selected]) .tab-background {
+        background: #7773;
+    }
+
+    tab[selected] .tab-background {
+        border-style: solid;
+        border-width: 0 1px;
+        border-image: linear-gradient(to bottom, #C75600 3px, #777 3px, #777 90%, transparent 90%) 1 100%;
+    }
+
+    tab[selected]:not([pinned]) {
+        min-width: 200px;
+    }
+
+    tab[pinned] .tab-content {
+        padding: 0 2px 0 10px;
+    }
+    tab[pinned]:not([selected]) .tab-background {
+        border-image: linear-gradient(to bottom, #7777 90%, transparent 90%) 1 100%;
+        border-right: 1px solid;
+        border-left: 1px solid;
+    }
+    tab[pinned]::before { /*left border */
+        display: none;
+    }
+
+    .tab-line
+    { height: 1.7px; }
+
+    .tab-bottom-line
+    { transform: translateY(-2px); }
+    tab[selected] .tab-bottom-line
+    { transform: translateY(-1px); }
+
+    .tab-icon-image {
+        padding: 5px;
+        margin-right: 2px;
+        margin-left: -5px;
+        width: 26px;
+        height: 26px;
+        background: radial-gradient(white 20%, transparent 75%);
+    }
+
+    .tab-close-button {
+        height: 24px;
+        width: 28px;
+        margin: -2px -10px 0 0;
+    }
+
+    #TabsToolbar[movingtab] {
+        margin-bottom: -16px;
+    }
+
+
+    /*
+     * navbar
+     */
+
+    #nav-bar-customization-target {
+        margin-top: -1px;
+    }
+    #nav-bar,
+    .mail-toolbox {
+        border-top: 1px solid #777;
+        margin-top: -1px;
+    }
+
+    .searchbar-textbox,
+    #urlbar,
+    #searchInput {
+        border: 1px solid #1D2328 !important;
+        background-color: #1D2328 !important;
+        color: white;
+    }
+    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target .searchbar-textbox[focused],
+    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target #urlbar[focused]
+    { border: 1px solid #955 !important; }
+
+    /* move reload button into url-bar (must be placed just right of the url-bar) */
+	#urlbar-container {
+        margin-right: -30px;
+    }
+	#urlbar-container .urlbar-textbox-container {
+        margin-right: 27px;
+    }
+	#urlbar-container + toolbaritem {
+        transform: translateX(-6px);
+    }
+    #urlbar-container + toolbaritem image {
+        border-radius: 0;
+    }
+
+    /* pretty sure this is gone */
+    /* #urlbar #notification-popup-box  {
+        background: #171B1F !important;
+    } */
+
+    #PopupAutoComplete,
+    #PopupSearchAutoComplete,
+    #PopupAutoCompleteRichResult,
+    #PopupGlodaAutocomplete {
+        filter: invert(100%) hue-rotate(180deg);
+        background-color: white;
+    }
+
+    #PopupAutoComplete image,
+    #PopupSearchAutoComplete image,
+    #PopupAutoCompleteRichResult image,
+    #PopupGlodaAutocomplete image {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    #navigator-toolbox::after { display: none; } /* bottom border */
+
+
+    /*
+     * sidebar
+     */
+
+    #sidebar-splitter {
+        border-color: #39424D; /* inspector body color filtered */
+    }
+    #sidebar-header {
+        color: white;
+        background-color: #39424D; /* inspector body color filtered */
+        margin: -1px 0;
+        padding: 2px 8px 1px 8px;
+    }
+    #sidebar-switcher-target {
+        padding: 0 4px;
+    }
+
+
+    /*
+     * panels
+     */
+
+    #customization-lwtheme-menu,
+    #widget-overflow,
+    #PanelUI-popup,
+    #downloadsPanel,
+    #identity-popup,
+    #notification-popup,
+    #sidebarMenu-popup,
+    #customization-panelWrapper
+    { filter: invert(100%) hue-rotate(180deg); }
+
+    #PanelUI-multiView,
+    #PanelUI-multiView panelview,
+    #identity-popup-multiView,
+    #BMB_bookmarksPopup .panel-arrowcontent,
+    #downloadsPanel .panel-arrowcontent,
+    #sidebarMenu-popup .panel-arrowcontent,
+    #customization-panelWrapper .panel-arrowcontent
+    {background-color: #E6E9EC; /* inspector body color filtered */ }
+
+    #customization-content-container
+    { background: black; }
+
+    #widget-overflow image,
+    #downloadsPanel .downloadTypeIcon,
+    #PanelUI-popup toolbarbutton[id$="-browser-action"] .toolbarbutton-icon
+    { filter: invert(100%) hue-rotate(180deg); }
+
+    #PopupSearchAutoComplete .search-panel-current-engine
+    { display: none; }
+
+
+    tooltip,
+    statuspanel[type="overLink"],
+    menupopup {
+        filter: invert(100%) hue-rotate(180deg);
+        padding: 1px;
+    }
+
+
+    /*
+     * plugin notification
+     */
+
+    notification[value="plugin-hidden"],
+    #fullscreen-warning
+    { display: none; }
+
+    .notificationbox-stack
+    { position: fixed; }
+
+
+    /**
+     * content
+     */
+
+    tabbrowser#content,
+    browser[type="content"]
+    { background: black; }
+
+
+    /*
+     * tab modal dialogs
+     */
+
+    tabmodalprompt>*  {
         position: fixed;
         left: 10px;
         right: 10px;
         top: 80px;
         bottom: 10px;
     }
-    tabmodalprompt .mainContainer
-    {
+    tabmodalprompt .mainContainer {
         background-color: transparent;
         position: relative;
         width: 100%;
@@ -60,278 +299,21 @@
         z-index: 100;
     }
     /* main text */
-    tabmodalprompt .topContainer>*>*>:nth-child(2)
-    {
+    tabmodalprompt .topContainer>*>*>:nth-child(2) {
         background-color: rgba(230, 233, 236, .93);
         padding: 5px 10px 5px 10px;
     }
-    tabmodalprompt
-    {
+    tabmodalprompt {
         filter: invert(100%) hue-rotate(180deg);
         background-color: rgba(198, 197, 206, .85);
     }
 
-    /*
-    * tabs
-    */
-
-    #main-window[sizemode="maximized"] #tab-view-deck>#browser-panel>#navigator-toolbox>#TabsToolbar{
-        margin-top: -2px;
-    }
-    #main-window[sizemode="normal"] #tab-view-deck>#browser-panel>#navigator-toolbox>#TabsToolbar{
-        margin-top: 5px;
-    }
-
-    #TabsToolbar,
-    #tabs-toolbar>*
-    {
-        background-color: black;
-    }
-
-    tab
-    {
-        color: white !important;
-        background-size: auto !important;
-    }
-
-    tab .tab-content
-    {
-        background-image: linear-gradient(180deg, #293A4380, #29333d);
-    }
-
-    tab[selected] .tab-content
-    {
-        border-style: solid;
-        border-width: 0 1px;
-        border-image: linear-gradient(180deg, #C75600 5px, #777 5px) 1 100%;
-        background-image: linear-gradient(180deg, #C75600 4px, #302F0080 4px, #39424D);
-    }
-    #main-window[sizemode="normal"] tab[selected] .tab-content
-    {
-        border-image: linear-gradient(180deg, #C75600 3px, #777 3px) 1 100%;
-        background-image: linear-gradient(180deg, #C75600 2px, #302F0080 2px, #39424D);
-    }
-
-    tab:not([selected]):hover .tab-content
-    {
-        background-color: #242C3380;
-    }
-
-    tab[selected]:not([pinned])
-    {
-        min-width: 200px;
-    }
-
-    .tab-icon-image
-    {
-        padding: 5px;
-        margin-right: 2px;
-        margin-left: -5px;
-        width: 26px;
-        height: 26px;
-        background: radial-gradient(white 20%, transparent 75%);
-    }
-
-    .tab-close-button:hover
-    {
-        filter: invert(100%) hue-rotate(180deg);
-    }
-
-    tab:not([selected]) .tab-close-button
-    {
-        display: none;
-    }
-
-    .tab-close-button
-    {
-        height: 24px;
-        width: 28px;
-        margin-right: -8px;
-    }
-
-    .tab-background
-    {
-        opacity: 0; /* disable rounded tab corners */
-    }
-    #tabbrowser-tabs>.tabbrowser-tab .tab-background
-    {
-        background: none;
-    }
-
-    #content tabpanels
-    {
-        background: black;
-    }
-
-    /*
-    * navbar
-    */
-
-    #nav-bar,
-    .mail-toolbox
-    {
-        border-top: 1px solid #777 !important;
-        margin-top: -1px !important;
-        background: #39424D !important;
-    }
-    #main-window[sizemode="normal"] #nav-bar
-    {
-        margin-bottom: -1px !important;
-    }
-
-    .searchbar-textbox,
-    #urlbar,
-    #searchInput
-    {
-        border: 1px solid #1D2328 !important;
-        background-color: #1D2328 !important;
-        color: white;
-    }
-    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target .searchbar-textbox[focused],
-    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target #urlbar[focused]{
-        border: 1px solid #955 !important;
-    }
-
-    #urlbar #notification-popup-box,
-    #urlbar #identity-box
-    {
-        background: #171B1F !important;
-    }
-
-    #navigator-toolbox::after
-    { /* ~bottom-border */
-        display: none;
-    }
-
-    #PopupAutoComplete,
-    #PopupSearchAutoComplete,
-    #PopupAutoCompleteRichResult,
-    #PopupGlodaAutocomplete
-    {
-        filter: invert(100%) hue-rotate(180deg);
-        background-color: white;
-    }
-
-    #PopupAutoComplete image,
-    #PopupSearchAutoComplete image,
-    #PopupAutoCompleteRichResult image,
-    #PopupGlodaAutocomplete image
-    {
-        filter: invert(100%) hue-rotate(180deg);
-    }
-
-    #back-button,
-    #forward-button {
-        filter: hue-rotate(90deg) saturate(50%);
-    }
-
-    :root
-    {
-        --toolbarbutton-vertical-outer-padding: 0;
-        --toolbarbutton-hover-background: #1E262D;
-        --toolbarbutton-hover-bordercolor: #262E36;
-        --toolbarbutton-active-background: #192126;
-        --chrome-secondary-background-color: #39424D !important;
-    }
-
-    /*
-    * sidebar
-    */
-
-    #sidebar-splitter {
-        border-color: #39424D; /* inspector body color filtered */
-    }
-    #sidebar-header {
-        color: white;
-        background-color: #39424D; /* inspector body color filtered */
-        margin-top: -1px;
-        padding: 0 8px
-    }
-
-    /*
-    * panels
-    */
-
-    #customization-lwtheme-menu,
-    #customization-container,
-    #widget-overflow,
-    #PanelUI-popup,
-    #downloadsPanel,
-    #identity-popup,
-    #notification-popup,
-    #sidebarMenu-popup
-    {
-        filter: invert(100%) hue-rotate(180deg);
-    }
-
-    #PanelUI-multiView,
-    #PanelUI-multiView panelview,
-    #identity-popup-multiView,
-    #BMB_bookmarksPopup .panel-arrowcontent,
-    #downloadsPanel .panel-arrowcontent,
-    #sidebarMenu-popup .panel-arrowcontent
-    {
-        background-color: #E6E9EC; /* inspector body color filtered */
-    }
-
-    #customization-container image,
-    #widget-overflow image,
-    #downloadsPanel .downloadTypeIcon,
-    #PanelUI-popup toolbarbutton[id$="-browser-action"] .toolbarbutton-icon
-    {
-        filter: invert(100%) hue-rotate(180deg);
-    }
-
-    #PopupSearchAutoComplete .search-panel-current-engine
-    {
-        display: none;
-    }
-
-
-    tooltip, statuspanel[type="overLink"],
-    menupopup
-    {
-        filter: invert(100%) hue-rotate(180deg);
-        padding: 1px;
-    }
-
-    /*
-    * plugin notification
-    */
-
-    notification[value="plugin-hidden"],
-    #fullscreen-warning
-    {
-        display: none;
-    }
-
-    .notificationbox-stack
-    {
-        position: fixed;
-    }
-
-    /*
-    * toolbarbuttons: hide dropmarker and open menu by default
-    */
-
-    #nav-bar #greasemonkey-tbb toolbarbutton toolbarbutton,
-    #nav-bar #cookieControllerPermMenubutton toolbarbutton toolbarbutton
-    {
-        padding-right: 2px !important;
-    }
-    #nav-bar #greasemonkey-tbb dropmarker,
-    #nav-bar #cookieControllerPermMenubutton dropmarker
-    {
-        opacity: 1;
-        margin-left: -35px;
-        width: 35px;
-        opacity: 0;
-    }
 }
 
 @-moz-document
     url(chrome://messenger/content/messenger.xul)
 {
+
     .mail-toolbox toolbarbutton {
         color: white !important;
     }
@@ -371,10 +353,11 @@
     .mail-toolbox {
         border-top-width: 0px !important;
     }
+
 }
 
 @-moz-document
     url-prefix(about:)
 {
-    /* let stylish list this style for all about pages */
+    /* let the style manager list this style for all about pages */
 }
