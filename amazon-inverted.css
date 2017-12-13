@@ -28,9 +28,7 @@
 
     /* invert content */
     #nav-subnav, #nav-flyout-anchor, /* children of the header */
-    #a-page>div:not( /* everything except for the <header> and: */
-        .dv-dp-top-wrapper
-    )
+    #a-page>div
     { filter: invert(100%) hue-rotate(180deg) saturate(200%); }
 
     /* un-invert images and stuff */
@@ -46,12 +44,9 @@
     :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) [style*="background-image"],
     :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) [style*="background:url"],
     :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) [style*="background: url"]
-    {  filter: invert(100%) hue-rotate(180deg) saturate(50%); }
+    {  filter: saturate(50%) hue-rotate(180deg) invert(100%); }
 
     /* exclude some things from the un-inversion, because their parents arn't actually inverted */
-    .dv-dp-top-wrapper img,
-    .dv-dp-top-wrapper video,
-    .dv-dp-top-wrapper [style*=background-image],
     :-moz-any(#nav-subnav, #nav-flyout-anchor, #a-page) img[src$=".gif"]
     { filter: unset; }
 

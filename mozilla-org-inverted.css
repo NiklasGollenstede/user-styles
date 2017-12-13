@@ -37,7 +37,7 @@
     img,
     video,
     canvas,
-    iframe:not(.live-sample-frame),
+    iframe/* :not(.live-sample-frame) */,
     [style*="background-image"],
     [style*="background:url"],
     [style*="background: url"]

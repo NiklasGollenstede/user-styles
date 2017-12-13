@@ -1,4 +1,4 @@
-/**
+/** ==UserStyle==
  * @name Developer Edition Dark
  * @stylish-id 119664
  * @author Niklas Gollenstede
@@ -129,6 +129,9 @@
         width: 28px;
         margin: -2px -10px 0 0;
     }
+    tab:not([selected]) .tab-close-button {
+        display: none;
+    }
 
     #TabsToolbar[movingtab] {
         margin-bottom: -16px;
@@ -218,12 +221,14 @@
      * panels
      */
 
+    /* .popup-notification-panel, */
     #customization-lwtheme-menu,
     #widget-overflow,
     #PanelUI-popup,
     #downloadsPanel,
     #identity-popup,
     #notification-popup,
+    #appMenu-notification-popup,
     #sidebarMenu-popup,
     #customization-panelWrapper
     { filter: invert(100%) hue-rotate(180deg); }
@@ -233,9 +238,10 @@
     #identity-popup-multiView,
     #BMB_bookmarksPopup .panel-arrowcontent,
     #downloadsPanel .panel-arrowcontent,
+    #appMenu-notification-popup .panel-arrowcontent,
     #sidebarMenu-popup .panel-arrowcontent,
     #customization-panelWrapper .panel-arrowcontent
-    {background-color: #E6E9EC; /* inspector body color filtered */ }
+    { background-color: #E6E9EC; /* inspector body color filtered */ }
 
     #customization-content-container
     { background: black; }
@@ -274,7 +280,7 @@
      */
 
     tabbrowser#content,
-    browser[type="content"]
+    browser[type="content"]:not([transparent])
     { background: black; }
 
 
@@ -352,6 +358,15 @@
 
     .mail-toolbox {
         border-top-width: 0px !important;
+    }
+
+    #msgNotificationBar {
+        position: fixed;
+        bottom: 20px;
+    }
+
+    #msgNotificationBar .notificationbox-stack {
+        position: relative;
     }
 
 }

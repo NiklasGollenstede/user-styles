@@ -137,13 +137,13 @@
     url-prefix(about:addons)
 {
     #nav-header,
-    #categories
-    {
+    .navigation, #categories {
         background-color: #424f5a;
         border-radius: 0;
     }
-    #categories .category
-    {
+
+    #categories .category,
+    .navigation .help-button {
         transition: background .5s;
         color: #eee;
         padding-inline-start: 15px; /* compensate the 4px border */
@@ -151,18 +151,22 @@
         margin: 0;
         background: inherit;
     }
-    #categories .category:hover
-    {
-        background: #9994;
-    }
+
+    .navigation .help-button>*
+    { margin: 0; }
+
+    #categories .category:hover,
+    #categories .help-button:hover
+    { background: #9994; }
+
     #categories .category[selected], /*xul*/
-    #categories .category.selected /*html*/
-    {
+    #categories .category.selected { /*html*/
         background-color: rgb(52, 63, 72);
         color: var(--in-content-category-text-selected);
         padding-inline-start: 11px; /* compensate the 4px border */
         border-inline-start: solid 4px var(--in-content-border-highlight);
     }
+
     #categories .category[selected]:hover,
     #categories .category.selected:hover
     { background-color: #1A2533; }
@@ -186,7 +190,7 @@
 
     #header,
     #search-view, #list-view, legacy-view, #updates-view, /* all view types except #detail-view */
-    #detail-view .detail-view-container>*>*>:not(#detail-grid), #detail-grid #detail-rows>:not(#addon-options) /* bascically everything except #addon-options (the inversion of that <browser> makes it entirely black) */
+    #detail-view .detail-view-container>*>*>:not(#detail-grid), #detail-grid #detail-rows>:not(#addon-options-prompts-stack) /* bascically everything except #addon-options (the inversion of that <browser> makes it entirely black) */
     { filter: var(--filter-invert); }
 
     #detail-view .detail-view-container>*>*>image:not(#detail-grid)

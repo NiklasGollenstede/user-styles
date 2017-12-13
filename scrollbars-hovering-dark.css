@@ -32,7 +32,6 @@ scrollbar[orient="vertical"] {
     z-index: 1999999999;
     -moz-box-align: start;
     -moz-appearance: none!important;
-
 }
 scrollbar[orient="vertical"] {
     -moz-margin-start: -10px;
@@ -59,7 +58,6 @@ scrollbar[orient="horizontal"] thumb {
     min-width: 20px!important;
     min-height: 15px!important;
     max-height: 15px!important;
-
 }
 scrollbar thumb:hover, scrollbar thumb:active {
     background-color: rgba(0,0,0,0.5);
