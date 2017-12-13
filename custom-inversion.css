@@ -1,0 +1,130 @@
+/** ==UserStyle==
+ * @name Custom Inversion
+ * @author Niklas Gollenstede
+ * @license CC-BY-SA-4.0 or MIT
+ * @description
+ *     With the reStyle Firefox extension, this style can be used to easily turn all web pages dark.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *
+ * @include   name          level1
+ *            default       owasp.org
+ *            title         Invert `html´
+ *            description   Invert the &lt;html&gt; element.
+ *
+ * @include   name          level2
+ *            default       letsencrypt.org w3.org
+ *            title         Invert `body>*´
+ *            description   Invert all children of the &lt;body&gt; element.
+ *
+ * @include   name          level3
+ *            title         Invert `body>*>*´
+ *            description   Invert all grandchildren of the &lt;body&gt; element.
+ *
+ * @include   name          level4
+ *            title         Invert `body>*>*>*´
+ *            description   Invert all grandgrandchildren of the &lt;body&gt; element.
+ */
+
+
+@-moz-document
+	regexp(level1), regexp(level2), regexp(level3), regexp(level4)
+{
+
+	:root {
+		/* the filter value that is used to turn the pages or their main element dark */
+		--filter-invert: invert(1) hue-rotate(180deg) saturate(1.666667) brightness(1.5);
+		/* reversed filter to revert individual elements like imaged back to their original */
+		--filter-revert: brightness(0.666667) saturate(0.6) hue-rotate(180deg) invert(1); /* revert each filter in reverse order */
+	}
+
+	/* content elements that should be displayed uninverted */
+	/* since the inversion should cover the entire content, these can be applied across all levels */
+	img:not(:-moz-full-screen),
+	video:not(:-moz-full-screen),
+	iframe:not(:-moz-full-screen),
+	.gm-style, /* Google Maps */
+	.emoji, .img,
+	pre.language-css,
+	a.mw-wiki-logo /* media wiki */
+	{ filter: var(--filter-revert); }
+
+}
+
+
+@-moz-document
+	regexp(level1)
+{
+	/**
+	 * invert level 1 (html)
+	 */
+
+	html:not([mozdisallowselectionprint=""]) /* exclude PDF.js */
+	{ background: black; }
+
+	html:not([mozdisallowselectionprint=""])
+	{ filter: var(--filter-invert); }
+
+	html:only-child>body:last-child>img:only-child:not(#foo) /* image view */
+	{ top: 50vh; }
+
+}
+
+
+@-moz-document
+	regexp(level2)
+{
+	/**
+	 * invert level 2 (body>*)
+	 */
+
+	html:not([mozdisallowselectionprint=""]), /* exclude PDF.js */
+	html:not([mozdisallowselectionprint=""])>body
+	{ background: black; }
+
+	html:not([mozdisallowselectionprint=""])>body>*
+	{ filter: var(--filter-invert); }
+
+	html>body>img:not(#foo), /* avoid inverting images and frames */
+	html>body>video:not(#foo),
+	html>body>iframe:not(#foo)
+	{ filter: unset; }
+
+}
+
+
+@-moz-document
+	regexp(level3)
+{
+	/**
+	 * invert level 3 (body>*>*)
+	 */
+
+	html:not([mozdisallowselectionprint=""]), /* exclude PDF.js */
+	html:not([mozdisallowselectionprint=""])>body,
+	html:not([mozdisallowselectionprint=""])>body>*
+	{ background: black; }
+
+	html:not([mozdisallowselectionprint=""])>body>*>*
+	{ filter: var(--filter-invert); }
+
+}
+
+
+@-moz-document
+	regexp(level4)
+{
+	/**
+	 * invert level 4 (body>*>*>*)
+	 */
+
+	html:not([mozdisallowselectionprint=""]), /* exclude PDF.js */
+	html:not([mozdisallowselectionprint=""])>body,
+	html:not([mozdisallowselectionprint=""])>body>*,
+	html:not([mozdisallowselectionprint=""])>body>*>*
+	{ background: black; }
+
+	html:not([mozdisallowselectionprint=""])>body>*>*>*
+	{ filter: var(--filter-invert); }
+
+}

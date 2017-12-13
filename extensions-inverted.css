@@ -1,0 +1,44 @@
+/** ==UserStyle==
+ * @name Extensions Inverted
+ * @author Niklas Gollenstede
+ * @license CC-BY-SA-4.0 or MIT
+ * @description
+ *     This style inverts a number of Firefox extension pages.
+ *     Currently CRX-Viewer, uBlock, uMatrix and some general stuff.
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *
+ */
+
+
+@-moz-document
+	regexp("moz-extension://[\w-]+/(crxviewer).html\\b.*"), /* crxviewer  */
+	regexp("moz-extension://[\w-]+/(dashboard|logger-ui|1p-filters|3p-filters|advanced-settings|asset-viewer|background|cloud-ui|dashboard|document-blocked|dyna-rules|epicker|logger-ui|whitelist).html\\b.*"), /* uBlock + uMatrix */
+	regexp("moz-extension://[\w-]+/(about|settings).html\\b.*") /* general  */
+{
+
+	:root {
+		/* the filter value that is used to turn the pages or their main element dark */
+		--filter-invert: invert(1) hue-rotate(180deg) saturate(1.666667) brightness(1.5);
+		/* reversed filter to revert individual elements like imaged back to their original */
+		--filter-revert: brightness(0.666667) saturate(0.6) hue-rotate(180deg) invert(1); /* revert each filter in reverse order */
+	}
+
+	html:not([mozdisallowselectionprint=""]), /* exclude PDF.js */
+	html:not([mozdisallowselectionprint=""])>body
+	{ background: black; }
+
+	html:not([mozdisallowselectionprint=""])>body>*
+	{ filter: var(--filter-invert); }
+
+	img:not(:-moz-full-screen),
+	video:not(:-moz-full-screen),
+	iframe:not(:-moz-full-screen)
+	{ filter: var(--filter-revert); }
+
+	html>body>img:not(#foo), /* avoid inverting images and frames */
+	html>body>video:not(#foo),
+	html>body>iframe:not(#foo)
+	{ filter: unset; }
+
+}
