@@ -77,6 +77,10 @@
     { margin-top: 1px; }
     window[uidensity=compact]
     { --tab-min-height: 31px; }
+    
+    #TabsToolbar {
+        margin-bottom: 0px;
+    }
 
     tab[pending] {
         opacity: 0.6;
@@ -88,9 +92,12 @@
     tab[selected] .tab-background {
         border-style: solid;
         border-width: 0 1px;
-        border-image: linear-gradient(to bottom, #C75600 3px, #777 3px, #777 90%, transparent 90%) 1 100%;
+        border-image: linear-gradient(to bottom, #C75600 3px, #777 3px, #777 100%, transparent 100%) 1 100%;
     }
 
+    tab:not([pinned]) {
+        transition: none;
+    }
     tab[selected]:not([pinned]) {
         min-width: 200px;
     }
@@ -98,22 +105,18 @@
     tab[pinned] .tab-content {
         padding: 0 2px 0 10px;
     }
-    tab[pinned]:not([selected]) .tab-background {
-        border-image: linear-gradient(to bottom, #7777 90%, transparent 90%) 1 100%;
-        border-right: 1px solid;
-        border-left: 1px solid;
+    tab[pinned][busy] .tab-content {
+        padding: 0 9px 0 10px;
     }
     tab[pinned]::before { /*left border */
         display: none;
     }
 
     .tab-line
-    { height: 1.7px; }
+    { height: 2px; }
 
     .tab-bottom-line
-    { transform: translateY(-2px); }
-    tab[selected] .tab-bottom-line
-    { transform: translateY(-1px); }
+    { transform: translateY(-.5px); }
 
     .tab-icon-image {
         padding: 5px;
@@ -149,6 +152,7 @@
     .mail-toolbox {
         border-top: 1px solid #777;
         margin-top: -1px;
+        box-shadow: none;
     }
 
     .searchbar-textbox,

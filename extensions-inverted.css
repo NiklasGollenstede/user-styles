@@ -13,7 +13,7 @@
 
 @-moz-document
 	regexp("moz-extension://[\w-]+/(crxviewer).html\\b.*"), /* crxviewer  */
-	regexp("moz-extension://[\w-]+/(dashboard|logger-ui|1p-filters|3p-filters|advanced-settings|asset-viewer|background|cloud-ui|dashboard|document-blocked|dyna-rules|epicker|logger-ui|whitelist).html\\b.*"), /* uBlock + uMatrix */
+	regexp("moz-extension://[\w-]+/(1p-filters|3p-filters|advanced-settings|asset-viewer|background|cloud-ui|dashboard|document-blocked|dyna-rules|epicker|hosts-files|logger-ui|user-rules|whitelist).html\\b.*"), /* uBlock + uMatrix */
 	regexp("moz-extension://[\w-]+/(about|settings).html\\b.*") /* general  */
 {
 
