@@ -15,8 +15,11 @@
 	body { background: black !important; } /* prevent flashes */
 	:root a:link { color: #07199c; } /* make normal links a bit bluer */
 
+	/* invert the pages main element(s) */
+	/* Googles page structure is pretty diverse, and just inverting the `html` or `body` usually doesn't work */
 	#main>*, #searchform, /* main search */
 	#maia-main, /* google.com/contact */
+	.main-content, /* google.com/webmasters */
 	#root, /* flights */
 	.main-header,
 	#gs_top, /* scholar */
@@ -30,6 +33,11 @@
 		filter: var(--filter-invert);
 	}
 
+	/* technical question: why is it necessary to set a black background here, but white everywhere else? */
+	#top_of_page /* developer.google.com */
+	{ background: black; }
+
+	/* uninvert images, media elements and child frames */
 	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, .p6n-vulcan-layout-main, #top_of_page, #volume-main) img,
 	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, .p6n-vulcan-layout-main, #top_of_page, #volume-main) video,
 	:-moz-any(#main, #searchform, #root, .main-header, #gs_top, main, .p6n-vulcan-layout-main, #top_of_page, #volume-main) canvas,
@@ -43,10 +51,8 @@
 	{
 		filter: var(--filter-revert);
 	}
-
+	/* don't uninvert twice */
 	.irc_bg img
-	{
-		filter: unset;
-	}
+	{ filter: unset; }
 
 }

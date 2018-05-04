@@ -1,28 +1,34 @@
-/**
+/** ==UserStyle==
  * @name Raw Text Dark
  * @stylish-id 119667
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Turns the backround of raw text and html opened in Firefox dark, and the text itself white.
+ *     Turns the background of plain text opened in Firefox dark, and the text itself white.
  *
- *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/user-styles
+ *
+ * @option    name          wrap
+ *            title         Wrap text
+ *            description   Break long lines instead of scrolling horizontally.
+ *            type          bool
+ *            on            pre-wrap
  */
-
-@namespace url(http://www.w3.org/1999/xhtml); /* i really want this to be global */
 
 @-moz-document
     regexp("^moz-extension://(?!.*[.](html?|gif|jpe?g|a?png|svg)(:?$|[?#])).*$"),
-    regexp("^https?://(?!(?:tools|www)[.]ietf[.]org).*[.](?:css|js|txt)$"),
-    regexp("^file://.*[.](?:css|js|txt)$"),
-    regexp( "^ftp://.*[.](?:css|js|txt|json)$"), /* Firefox doesn't recognize JSON over FTP */
-    regexp("^data:(?!text/x?html)[\\w/-]+[;,].*$")
+    regexp("^https?://(?!(?:tools|www)[.]ietf[.]org).*[.](?:css|jsm?|txt)$"),
+    regexp("^file://.*[.](?:css|jsm?|txt)$"),
+    regexp("^resource://.*[.](?:css|jsm?|txt|json)$"),
+    regexp( "^ftp://.*[.](?:css|jsm?|txt|json)$"), /* Firefox doesn't recognize JSON over FTP */
+    regexp("^data:(?!text/x?html)[\\w/-]+[;,].*$"),
+    url-prefix("https://raw.githubusercontent.com/") /* doesn't seem to work */
 {
     :root:not([class])>body:not([class])>pre:only-child /* .txt files */
     {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) saturate(200%) brightness(125%);
         background-color: #E6E9EC; /* inspector body color filtered */
-        font-size: 16px;
+        font-size: 16px; line-height: 1.2;
         position: fixed;
         overflow: scroll;
         top: 0px;
@@ -32,6 +38,7 @@
         padding: 15px;
         tab-size: 4;
         -moz-tab-size: 4;
+        white-space: /*[[!wrap]]*/pre/*[[/wrap]]*/;
     }
 }
 
@@ -53,5 +60,6 @@
         padding: 10px 50px;
         tab-size: 4;
         -moz-tab-size: 4;
+        white-space: /*[[!wrap]]*/pre/*[[/wrap]]*/;
     }
 }

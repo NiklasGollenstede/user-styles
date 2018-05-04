@@ -9,7 +9,7 @@
  *     but it also means that it will un-darken any about:-pages that are already dark (due to other user styles, add-ons, system themes, ...).
  *     Requests to add additional add-on about:-pages are generally welcome.
  *
- *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/user-styles
  *
  *     It should affect every build-in about:-page that isn't already dark.
  *     The CSS is clearly structured and documented, read that for details on what happens to which page.
@@ -189,7 +189,7 @@
     { filter: unset; background-color: black; }
 
     #header,
-    #search-view, #list-view, legacy-view, #updates-view, /* all view types except #detail-view */
+    #search-view, #list-view, #legacy-view, #updates-view, /* all view types except #detail-view */
     #detail-view .detail-view-container>*>*>:not(#detail-grid), #detail-grid #detail-rows>:not(#addon-options-prompts-stack) /* bascically everything except #addon-options (the inversion of that <browser> makes it entirely black) */
     { filter: var(--filter-invert); }
 

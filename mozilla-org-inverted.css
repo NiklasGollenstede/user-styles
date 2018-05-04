@@ -7,7 +7,7 @@
  *     Simple dark 'skin' for Mozilla pages.
  *     Mainly focuses on addond.mozilla.org and developer.mozilla.org, but handles other Mozilla pages as well.
  *
- *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/user-styles
  */
 
 @namespace url(http://www.w3.org/1999/xhtml);
@@ -37,11 +37,12 @@
     img,
     video,
     canvas,
-    iframe/* :not(.live-sample-frame) */,
+    iframe:not([style*="background-color: transparent"]):not([style*="background: transparent"]),
     [style*="background-image"],
     [style*="background:url"],
     [style*="background: url"]
     {
+        background: white;
         filter: var(--filter-revert);
     }
 
@@ -53,6 +54,7 @@
 
     img[src$=".png"]:not(:hover):not(.avatar), img[src$=".svg"]:not(foo)
     {
+        background: unset;
         filter: unset;
     }
 
@@ -91,4 +93,13 @@
 {
     img.avatar:not(foo):not(bar):not(baz)
     { filter: var(--filter-revert); }
+}
+
+@-moz-document /* fix blank black page issue */
+    domain("bugzilla.mozilla.org")
+{
+    html { filter: unset; }
+    body { filter: var(--filter-invert); }
+    body { background: #f9fcff; }
+
 }

@@ -10,7 +10,7 @@
  *     That means that black text on black background is unacceptable, but not-so-important pages may stay unchanged.
  *     I only test this on the German version of Amazon.
  *
- *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/user-styles
  */
 
 @namespace url(http://www.w3.org/1999/xhtml);
@@ -19,7 +19,7 @@
 { /* use for screenshot */ }
 
 @-moz-document
-    regexp("^https?://www[.]amazon[.][a-z]{2,3}([.][a-z]{2})?(/.*)?")
+    regexp("^https?://www[.]amazon[.][a-z]{2,3}([.][a-z]{2})?(?!/gp/video)(/.*)?")
 {
     /* black background */
     #a-page,

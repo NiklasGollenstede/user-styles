@@ -5,17 +5,17 @@
  * @description
  *     With the reStyle Firefox extension, this style can be used to easily turn all web pages dark.
  *
- *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/user-styles
  *
  * @include   name          level1
- *            default       owasp.org
  *            title         Invert `html´
  *            description   Invert the &lt;html&gt; element.
+ *            default       owasp.org
  *
  * @include   name          level2
- *            default       letsencrypt.org w3.org
  *            title         Invert `body>*´
  *            description   Invert all children of the &lt;body&gt; element.
+ *            default       letsencrypt.org w3.org
  *
  * @include   name          level3
  *            title         Invert `body>*>*´
@@ -44,10 +44,13 @@
 	video:not(:-moz-full-screen),
 	iframe:not(:-moz-full-screen),
 	.gm-style, /* Google Maps */
-	.emoji, .img,
+	.emoji, .img, .thumb, .image-bg,
 	pre.language-css,
 	a.mw-wiki-logo /* media wiki */
 	{ filter: var(--filter-revert); }
+
+	html>iframe:not(:-moz-full-screen)
+	{ filter: unset; }
 
 }
 
@@ -67,6 +70,9 @@
 
 	html:only-child>body:last-child>img:only-child:not(#foo) /* image view */
 	{ top: 50vh; }
+
+	html>iframe:not(:-moz-full-screen)
+	{ filter: var(--filter-revert); }
 
 }
 
