@@ -24,6 +24,68 @@
  * @include   name          level4
  *            title         Invert `body>*>*>*´
  *            description   Invert all grandgrandchildren of the &lt;body&gt; element.
+ *
+ * @include   name          pdfJs
+ *            title         Invert PDFs
+ *            description   Inverts all PDF pages of Firefox' PDF reader. Can not exclude images.
+ *
+ *
+ * @option    name          filter-invert
+ *            title         Invert filter
+ *            description   The CSS filter value to use to invert the page content.<br>
+ *                         |See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">
+ *                         |the documentation on MDN</a> for possible values.
+ *            type          css-value
+ *
+ * @option    name          filter-revert
+ *            title         Revert filter
+ *            description   Inverse filter used to preserve the original colors of images etc.<br>
+ *                         |This should revert each filter function in the invert filter in reverse order.
+ *            type          css-value
+ *
+ * @option    name          revert-default
+ *            title         Default un-invert
+ *            description   Display &lt;img&gt;, &lt;video&gt; and &lt;iframe&gt;
+ *                         |elements with their original colors.
+ *            type          bool
+ *            off           not:not(not)
+ *
+ * @option    name          revert
+ *            title         Elements to un-invert
+ *            type          css-selector-multi
+ *            description   Elements that, in addition to &lt;img&gt;, &lt;video&gt;
+ *                         |and &lt;iframe&gt;, are to be displayed un-inverted,
+ *                         |that is, with their original colors.
+ *
+ * @option    name          unset
+ *            title         Elements to keep inverted
+ *            type          css-selector-multi
+ *            description   &lt;img&gt;, &lt;video&gt; or &lt;iframe&gt; elements,
+ *                         |or elements matched by the above selector,
+ *                         |that should be kept inverted.
+ *
+ * @option    name          c-white
+ *            title         Elements with white text
+ *            type          css-selector-multi
+ *            description   Elements whose text color will be forced to white.
+ * @option    name          c-black
+ *            title         Elements with black text
+ *            type          css-selector-multi
+ *            description   Elements whose text color will be forced to black.
+ *
+ * @option    name          bg-white
+ *            title         Elements with white background
+ *            type          css-selector-multi
+ *            description   Elements whose background color will be forced to white.
+ * @option    name          bg-black
+ *            title         Elements with black background
+ *            type          css-selector-multi
+ *            description   Elements whose background color will be forced to black.
+ */
+
+/**
+ * Implementation notes:
+ *  - :not([mozdisallowselectionprint=""]) excludes PDF.js
  */
 
 
@@ -33,24 +95,44 @@
 
 	:root {
 		/* the filter value that is used to turn the pages or their main element dark */
-		--filter-invert: invert(1) hue-rotate(180deg) saturate(1.666667) brightness(1.5);
+		--filter-invert: /*[[!filter-invert]]*/invert(1) hue-rotate(180deg) saturate(1.666667) brightness(1.5)/*[[/filter-invert]]*/;
 		/* reversed filter to revert individual elements like imaged back to their original */
-		--filter-revert: brightness(0.666667) saturate(0.6) hue-rotate(180deg) invert(1); /* revert each filter in reverse order */
+		--filter-revert: /*[[!filter-revert]]*/brightness(0.666667) saturate(0.6) hue-rotate(180deg) invert(1)/*[[/filter-revert]]*/;
 	}
 
 	/* content elements that should be displayed uninverted */
 	/* since the inversion should cover the entire content, these can be applied across all levels */
-	img:not(:-moz-full-screen),
-	video:not(:-moz-full-screen),
-	iframe:not(:-moz-full-screen),
-	.gm-style, /* Google Maps */
-	.emoji, .img, .thumb, .image-bg,
-	pre.language-css,
-	a.mw-wiki-logo /* media wiki */
-	{ filter: var(--filter-revert); }
 
-	html>iframe:not(:-moz-full-screen)
+	/*[[!revert-default]]*/img:not(:-moz-full-screen),
+	video:not(:-moz-full-screen),
+	iframe:not(:-moz-full-screen)/*[[/revert-default]]*/
+	{ filter: var(--filter-revert); } /* these have no children that would need to be excluded */
+
+	/*[[!revert]]*/.gm-style, /* Google Maps */
+.img, [role=img], .thumb, .icon, .image-bg, .emoji,
+pre.language-css,
+a.mw-wiki-logo /* media wiki *//*[[/revert]]*/
+	{ filter: var(--filter-revert); } /* must exclude children of these from further filters, esp. with (custom) class selectors  */
+
+	:-moz-any(/*[[!revert]]*/.gm-style, /* Google Maps */
+.img, [role=img], .thumb, .icon, .image-bg, .emoji,
+pre.language-css,
+a.mw-wiki-logo /* media wiki *//*[[/revert]]*/)
+	:not(#qpdb) /* any id for high priority */
+	{ filter: unset; } /* this is probably expensive, but necessary (s.o.) */
+
+	/*[[!unset]]*/img[src$=".svg"]/*[[/unset]]*/
 	{ filter: unset; }
+
+	/*[[!c-white]]*/<none>/*[[/c-white]]*/
+	{ color: white; }
+	/*[[!c-black]]*/<none>/*[[/c-black]]*/
+	{ color: black; }
+
+	/*[[!bg-white]]*/#overlay:empty, .overlay:empty, iframe[src^="https://disqus.com/"]/*[[/bg-white]]*/
+	{ background: white; }
+	/*[[!bg-black]]*/<none>/*[[/bg-black]]*/
+	{ background: black; }
 
 }
 
@@ -62,17 +144,17 @@
 	 * invert level 1 (html)
 	 */
 
-	html:not([mozdisallowselectionprint=""]) /* exclude PDF.js */
-	{ background: black; }
-
+	/* invert the target */
 	html:not([mozdisallowselectionprint=""])
 	{ filter: var(--filter-invert); }
 
-	html:only-child>body:last-child>img:only-child:not(#foo) /* image view */
-	{ top: 50vh; }
+	/* ensure a black background */
+	html:not([mozdisallowselectionprint=""])
+	{ background: black; }
 
-	html>iframe:not(:-moz-full-screen)
-	{ filter: var(--filter-revert); }
+	/* fix the image-only view */
+	html:only-child>body:last-child>img:only-child:not(#foo) /* image view */
+	{ top: 50vh; } /* the inversion of the :root messes with the positioning of the centered image */
 
 }
 
@@ -84,14 +166,20 @@
 	 * invert level 2 (body>*)
 	 */
 
-	html:not([mozdisallowselectionprint=""]), /* exclude PDF.js */
-	html:not([mozdisallowselectionprint=""])>body
-	{ background: black; }
-
+	/* invert the target */
 	html:not([mozdisallowselectionprint=""])>body>*
 	{ filter: var(--filter-invert); }
 
-	html>body>img:not(#foo), /* avoid inverting images and frames */
+	/* ensure a black background */
+	html:not([mozdisallowselectionprint=""]),
+	html:not([mozdisallowselectionprint=""])>body
+	{ background: black; }
+
+	/* keep elements whose parents aren't inverted unchanged */
+	html>img:not(#foo),
+	html>video:not(#foo),
+	html>iframe:not(#foo),
+	html>body>img:not(#foo),
 	html>body>video:not(#foo),
 	html>body>iframe:not(#foo)
 	{ filter: unset; }
@@ -106,13 +194,30 @@
 	 * invert level 3 (body>*>*)
 	 */
 
-	html:not([mozdisallowselectionprint=""]), /* exclude PDF.js */
+	/* invert the target */
+	html:not([mozdisallowselectionprint=""])>body>*>*
+	{ filter: var(--filter-invert); }
+
+	/* ensure a black background */
+	html:not([mozdisallowselectionprint=""]),
 	html:not([mozdisallowselectionprint=""])>body,
 	html:not([mozdisallowselectionprint=""])>body>*
 	{ background: black; }
 
-	html:not([mozdisallowselectionprint=""])>body>*>*
-	{ filter: var(--filter-invert); }
+	html>iframe:not(:-moz-full-screen)
+	{ filter: unset; }
+
+	/* keep elements whose parents aren't inverted unchanged */
+	html>img:not(#foo),
+	html>video:not(#foo),
+	html>iframe:not(#foo),
+	html>body>img:not(#foo),
+	html>body>video:not(#foo),
+	html>body>iframe:not(#foo)
+	html>body> * >img:not(#foo),
+	html>body> * >video:not(#foo),
+	html>body> * >iframe:not(#foo)
+	{ filter: unset; }
 
 }
 
@@ -124,13 +229,50 @@
 	 * invert level 4 (body>*>*>*)
 	 */
 
-	html:not([mozdisallowselectionprint=""]), /* exclude PDF.js */
+	/* invert the target */
+	html:not([mozdisallowselectionprint=""])>body>*>*>*
+	{ filter: var(--filter-invert); }
+
+	/* ensure a black background */
+	html:not([mozdisallowselectionprint=""]),
 	html:not([mozdisallowselectionprint=""])>body,
 	html:not([mozdisallowselectionprint=""])>body>*,
 	html:not([mozdisallowselectionprint=""])>body>*>*
 	{ background: black; }
 
-	html:not([mozdisallowselectionprint=""])>body>*>*>*
+	/* keep elements whose parents aren't inverted unchanged */
+	html>img:not(#foo),
+	html>video:not(#foo),
+	html>iframe:not(#foo),
+	html>body>img:not(#foo),
+	html>body>video:not(#foo),
+	html>body>iframe:not(#foo)
+	html>body> * >img:not(#foo),
+	html>body> * >video:not(#foo),
+	html>body> * >iframe:not(#foo)
+	html>body> * > * >img:not(#foo),
+	html>body> * > * >video:not(#foo),
+	html>body> * > * >iframe:not(#foo)
+	{ filter: unset; }
+
+}
+
+
+@-moz-document
+	regexp(pdfJs/*as:content*/)
+{
+	/**
+	 * invert PDF.js
+	 */
+
+	:root {
+		/* the filter value that is used to turn the pages or their main element dark */
+		--filter-invert: /*[[!filter-invert]]*/invert(1) hue-rotate(180deg) saturate(1.666667) brightness(1.5)/*[[/filter-invert]]*/;
+	}
+
+	/* invert the target */
+	html:root[mozdisallowselectionprint=""]>body[tabindex="1"][class=""]>div#outerContainer
+	canvas
 	{ filter: var(--filter-invert); }
 
 }

@@ -5,21 +5,23 @@
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     Slight rework of the dark Developer Edition theme of Firefox.
- *     Also works in normal Firefox and even Thunderbird.
+ *     Requires Firefox' dark theme, preferably with compact density.
+ *     Also works in Thunderbird.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/*
- * context menu
- */
 @-moz-document
     url-prefix(chrome://),
     url-prefix(about:),
     url-prefix(resource://)
 {
+    /*
+     * context menu
+     */
+
     menupopup {
         filter: invert(100%) hue-rotate(180deg);
         padding: 1px;
@@ -31,12 +33,13 @@
 }
 
 
-/**
- * desktop notifications (windows)
- */
 @-moz-document
     url(chrome://global/content/alerts/alert.xul)
 {
+    /**
+     * desktop notifications (windows)
+     */
+
     #alertBox>:not(image), image
     { filter: invert(100%) hue-rotate(180deg); }
     toolbarbutton image
@@ -48,159 +51,142 @@
 }
 
 
-/**
- * main windows
- */
 @-moz-document
     url(chrome://messenger/content/messenger.xul),
     url(chrome://browser/content/browser.xul)
 {
+    /**
+     * main windows
+     */
 
     /*
      * vars
      */
 
     :root {
-        --tab-line-color: #C75600;
-        --chrome-secondary-background-color: #39424D;
-        --chrome-color: white;
-    }
+        /* general */
+        --chrome-color: /*[[!text-color]]*/white/*[[/text-color]]*/;
+        --chrome-secondary-background-color: /*[[!background-color]]*/#39424D/*[[/background-color]]*/;
+        --lwt-text-color: var(--chrome-color);
+        --tab-line-color: /*[[!tab-line]]*/#C75600/*[[/tab-line]]*/;
+        --tab-line-color: white;
+
+        /* panels */
+        --arrowpanel-color: var(--chrome-color);
+        --arrowpanel-background: /*[[!panel-prim-bg]]*/#171B1F/*[[/panel-prim-bg]]*/;
+        --arrowpanel-dimmed: /*[[!panel-sec-bg]]*/#1D2328/*[[/panel-sec-bg]]*/;
+
+        /* url and search bar */
+        --lwt-toolbar-field-background-color: var(--arrowpanel-dimmed);
+        --lwt-toolbar-field-border-color: var(--arrowpanel-dimmed);
+        --toolbar-field-focus-border-color: /*[[!urlbar-highlight]]*/#955/*[[/urlbar-highlight]]*/;
+        --autocomplete-popup-color: var(--chrome-color);
+        --autocomplete-popup-background: var(--arrowpanel-background);
+
+        /* custom vars */
+        --ded-tab-border-color: #777;
+        --ded-inacitve-tab-bg: #7773;
+        --ded-min-tab-width: 200px;
+    } /* no literal colors from here on */
 
 
     /*
      * tabs
      */
 
-    window[sizemode=maximized] #navigator-toolbox
-    { margin-top: 0px; }
-    window #navigator-toolbox
-    { margin-top: 1px; }
-    window[uidensity=compact]
-    { --tab-min-height: 31px; }
-    
-    #TabsToolbar {
-        margin-bottom: 0px;
+    tab:not([selected]) {
+        background: var(--ded-inacitve-tab-bg);
     }
-
-    tab[pending] {
-        opacity: 0.6;
+    #tabbrowser-tabs {
+        --tab-line-color: inherit;
     }
-    tab:not([pending]):not([selected]) .tab-background {
-        background: #7773;
-    }
-
     tab[selected] .tab-background {
         border-style: solid;
         border-width: 0 1px;
-        border-image: linear-gradient(to bottom, #C75600 3px, #777 3px, #777 100%, transparent 100%) 1 100%;
+        border-image: linear-gradient(to bottom,
+            var(--identity-tab-color, var(--tab-line-color)) 3px,
+            var(--ded-tab-border-color) 3px
+        ) 1 100%;
+    }
+    tab[selected]::after /* border between tabs */
+    { visibility: hidden; }
+
+    /* dim not-loaded tabs */
+    tab[pending]>* { /* apply to children to avoid reducing the opacity of the ::after element botder */
+        /*[[!pending-tab-style]]*/opacity: 0.6; /* gray out by 40% */
+background: black;/*[[!pending-tab-style]]*/
     }
 
-    tab:not([pinned]) {
-        transition: none;
-    }
-    tab[selected]:not([pinned]) {
-        min-width: 200px;
-    }
+    /* increase width of non-pinned selected tabs */
+    tab:not([pinned])
+    { /* transition: none; */ } /* must not disable transition (firefox removes the [movingtab] attribute at its end) */
+    tab[selected]:not([pinned])
+    { min-width: var(--ded-min-tab-width); }
 
-    tab[pinned] .tab-content {
-        padding: 0 2px 0 10px;
-    }
-    tab[pinned][busy] .tab-content {
-        padding: 0 9px 0 10px;
-    }
-    tab[pinned]::before { /*left border */
-        display: none;
-    }
-
-    .tab-line
-    { height: 2px; }
-
-    .tab-bottom-line
-    { transform: translateY(-.5px); }
-
-    .tab-icon-image {
-        padding: 5px;
-        margin-right: 2px;
-        margin-left: -5px;
-        width: 26px;
-        height: 26px;
-        background: radial-gradient(white 20%, transparent 75%);
-    }
-
+    /* make the close button a little larger, esp. for touch devices */
     .tab-close-button {
-        height: 24px;
-        width: 28px;
-        margin: -2px -10px 0 0;
-    }
-    tab:not([selected]) .tab-close-button {
-        display: none;
+        height: 24px; width: 24px;
+        margin: -0px -6px 0 0;
     }
 
-    #TabsToolbar[movingtab] {
-        margin-bottom: -16px;
+    /* put a spotlicht under the favicons, which are mostly designed for light backgrounds */
+    tab .tab-icon-image {
+        background: radial-gradient(white 20%, transparent 75%);
+        padding: 5px;
+        width: 26px; height: 26px;
+        margin-right: -5px; margin-left: -5px;
     }
+    tab:not([pinned]) .tab-icon-image
+    { margin-right: 2px; }
+
+    tab .tab-line
+    { background-color: var(--identity-tab-color, var(--tab-line-color)); }
+    tab:not([selected]):hover .tab-line
+    { opacity: 0.675; }
 
 
     /*
      * navbar
      */
 
+    /* insert gray border between tabs and navbar */
     #nav-bar-customization-target {
         margin-top: -1px;
     }
     #nav-bar,
     .mail-toolbox {
-        border-top: 1px solid #777;
+        border-top: 1px solid var(--ded-tab-border-color);
         margin-top: -1px;
         box-shadow: none;
     }
-
-    .searchbar-textbox,
-    #urlbar,
-    #searchInput {
-        border: 1px solid #1D2328 !important;
-        background-color: #1D2328 !important;
-        color: white;
+    #TabsToolbar[movingtab] + #nav-bar {
+        margin-top: -16px; /* [movingtab] adds 15px padding to the #TabsToolbar */
     }
-    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target .searchbar-textbox[focused],
-    #browser-panel>#navigator-toolbox>#nav-bar>#nav-bar-customization-target #urlbar[focused]
-    { border: 1px solid #955 !important; }
 
     /* move reload button into url-bar (must be placed just right of the url-bar) */
-	#urlbar-container {
-        margin-right: -30px;
+/*[[!reload-left]]*/
+    #urlbar-container {
+        margin-right: -26px;
     }
-	#urlbar-container .urlbar-textbox-container {
-        margin-right: 27px;
+    #urlbar-container .urlbar-textbox-container {
+        margin-right: 26px;
     }
-	#urlbar-container + toolbaritem {
+    #urlbar-container + toolbaritem {
         transform: translateX(-6px);
     }
     #urlbar-container + toolbaritem image {
-        border-radius: 0;
+        padding: 4px;
+        border-radius: 0 2px 2px 0;
+        width: calc(2 * var(--toolbarbutton-inner-padding) + 12px);
+        height: calc(2 * var(--toolbarbutton-inner-padding) + 12px);
     }
-
-    /* pretty sure this is gone */
-    /* #urlbar #notification-popup-box  {
-        background: #171B1F !important;
-    } */
-
-    #PopupAutoComplete,
-    #PopupSearchAutoComplete,
-    #PopupAutoCompleteRichResult,
-    #PopupGlodaAutocomplete {
-        filter: invert(100%) hue-rotate(180deg);
-        background-color: white;
+    #urlbar-container + toolbaritem image:hover { /* this doesn't work ... */
+        background-color: hsla(0,0%,70%,.2); /* hard coded value in firefox' default style */
     }
+/*[[/reload-left]]*/
 
-    #PopupAutoComplete image,
-    #PopupSearchAutoComplete image,
-    #PopupAutoCompleteRichResult image,
-    #PopupGlodaAutocomplete image {
-        filter: invert(100%) hue-rotate(180deg);
-    }
-
-    #navigator-toolbox::after { display: none; } /* bottom border */
+    /* remove border below UI */
+    #navigator-toolbox::after { display: none; }
 
 
     /*
@@ -208,13 +194,13 @@
      */
 
     #sidebar-splitter {
-        border-color: #39424D; /* inspector body color filtered */
+        border-color: var(--chrome-secondary-background-color);
     }
     #sidebar-header {
-        color: white;
-        background-color: #39424D; /* inspector body color filtered */
+        color: var(--chrome-color);
+        background-color: var(--chrome-secondary-background-color);
         margin: -1px 0;
-        padding: 2px 8px 1px 8px;
+        padding: 1px 2px 2px 3px;
     }
     #sidebar-switcher-target {
         padding: 0 4px;
@@ -225,56 +211,19 @@
      * panels
      */
 
-    /* .popup-notification-panel, */
-    #customization-lwtheme-menu,
-    #widget-overflow,
-    #PanelUI-popup,
-    #downloadsPanel,
-    #identity-popup,
-    #notification-popup,
-    #appMenu-notification-popup,
-    #sidebarMenu-popup,
-    #customization-panelWrapper
-    { filter: invert(100%) hue-rotate(180deg); }
-
-    #PanelUI-multiView,
-    #PanelUI-multiView panelview,
-    #identity-popup-multiView,
-    #BMB_bookmarksPopup .panel-arrowcontent,
-    #downloadsPanel .panel-arrowcontent,
-    #appMenu-notification-popup .panel-arrowcontent,
-    #sidebarMenu-popup .panel-arrowcontent,
-    #customization-panelWrapper .panel-arrowcontent
-    { background-color: #E6E9EC; /* inspector body color filtered */ }
-
-    #customization-content-container
-    { background: black; }
-
-    #widget-overflow image,
-    #downloadsPanel .downloadTypeIcon,
-    #PanelUI-popup toolbarbutton[id$="-browser-action"] .toolbarbutton-icon
-    { filter: invert(100%) hue-rotate(180deg); }
-
     #PopupSearchAutoComplete .search-panel-current-engine
     { display: none; }
-
-
-    tooltip,
-    statuspanel[type="overLink"],
-    menupopup {
-        filter: invert(100%) hue-rotate(180deg);
-        padding: 1px;
-    }
 
 
     /*
      * plugin notification
      */
 
-    notification[value="plugin-hidden"],
+    /* notification[value="plugin-hidden"], */ /* what exactly is this? */
     #fullscreen-warning
     { display: none; }
 
+    /* displlay banner notifications hovering over the top of the page, instead of pushing it down */
     .notificationbox-stack
     { position: fixed; }
 
@@ -283,39 +232,40 @@
      * content
      */
 
+    /* prevent white flashes before content browser is initialized */
     tabbrowser#content,
     browser[type="content"]:not([transparent])
     { background: black; }
+
+    tooltip, /* title attribute hover text */
+    #statuspanel[type="overLink"] /* url href preview at window bottom */
+    { filter: invert(100%) hue-rotate(180deg); }
 
 
     /*
      * tab modal dialogs
      */
 
-    tabmodalprompt>*  {
-        position: fixed;
-        left: 10px;
-        right: 10px;
-        top: 80px;
-        bottom: 10px;
-    }
-    tabmodalprompt .mainContainer {
-        background-color: transparent;
-        position: relative;
-        width: 100%;
-        height: 100%;
-        color: black;
-        border: none;
-        z-index: 100;
-    }
-    /* main text */
-    tabmodalprompt .topContainer>*>*>:nth-child(2) {
-        background-color: rgba(230, 233, 236, .93);
-        padding: 5px 10px 5px 10px;
-    }
+    /* make it dark and cover the whole page */
     tabmodalprompt {
         filter: invert(100%) hue-rotate(180deg);
+        background-color: transparent;
+        display: block; position: relative;
+    }
+    tabmodalprompt>spacer
+    { display: none; }
+    tabmodalprompt>hbox {
+        display: block;
+        width: 100%; height: 100%;
+    }
+    tabmodalprompt .mainContainer {
+        width: 100%; height: 100%;
         background-color: rgba(198, 197, 206, .85);
+        border: none;
+    }
+    tabmodalprompt .infoBody {
+        background-color: rgba(230, 233, 236, .93);
+        padding: 5px 10px 5px 10px;
     }
 
 }
@@ -323,6 +273,7 @@
 @-moz-document
     url(chrome://messenger/content/messenger.xul)
 {
+    /* TODO: add fixes for Thunderbird 60 */
 
     .mail-toolbox toolbarbutton {
         color: white !important;
