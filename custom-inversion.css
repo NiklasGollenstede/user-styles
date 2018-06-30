@@ -1,86 +1,94 @@
 /** ==UserStyle==
- * @name Custom Inversion
- * @author Niklas Gollenstede
- * @license CC-BY-SA-4.0 or MIT
+ * @name         Custom Inversion
+ * @author       Niklas Gollenstede
+ * @license      CC-BY-SA-4.0 or MIT
  * @description
  *     With the reStyle Firefox extension, this style can be used to easily turn all web pages dark.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/user-styles
  *
- * @include   name          level1
- *            title         Invert `html´
- *            description   Invert the &lt;html&gt; element.
- *            default       owasp.org
+ * @include
  *
- * @include   name          level2
- *            title         Invert `body>*´
- *            description   Invert all children of the &lt;body&gt; element.
- *            default       letsencrypt.org w3.org
+ *   - name:          level1
+ *     title:         Invert `html´
+ *     description:   Invert the &lt;html&gt; element.
+ *     default:       owasp.org
  *
- * @include   name          level3
- *            title         Invert `body>*>*´
- *            description   Invert all grandchildren of the &lt;body&gt; element.
+ *   - name:          level2
+ *     title:         Invert `body>*´
+ *     description:   Invert all children of the &lt;body&gt; element.
+ *     default:       letsencrypt.org w3.org
  *
- * @include   name          level4
- *            title         Invert `body>*>*>*´
- *            description   Invert all grandgrandchildren of the &lt;body&gt; element.
+ *   - name:          level3
+ *     title:         Invert `body>*>*´
+ *     description:   Invert all grandchildren of the &lt;body&gt; element.
  *
- * @include   name          pdfJs
- *            title         Invert PDFs
- *            description   Inverts all PDF pages of Firefox' PDF reader. Can not exclude images.
+ *   - name:          level4
+ *     title:         Invert `body>*>*>*´
+ *     description:   Invert all grandgrandchildren of the &lt;body&gt; element.
  *
+ *   - name:          pdfJs
+ *     title:         Invert PDFs
+ *     description:   Inverts all PDF pages of Firefox' PDF reader. Can not exclude images.
  *
- * @option    name          filter-invert
- *            title         Invert filter
- *            description   The CSS filter value to use to invert the page content.<br>
- *                         |See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">
- *                         |the documentation on MDN</a> for possible values.
- *            type          css-value
+ * @options
  *
- * @option    name          filter-revert
- *            title         Revert filter
- *            description   Inverse filter used to preserve the original colors of images etc.<br>
- *                         |This should revert each filter function in the invert filter in reverse order.
- *            type          css-value
+ *   - name:          filter-invert
+ *     title:         Invert filter
+ *     description: |
+ *       The CSS filter value to use to invert the page content.<br>
+ *       See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">
+ *       the documentation on MDN</a> for possible values.
+ *     type:          css-value
  *
- * @option    name          revert-default
- *            title         Default un-invert
- *            description   Display &lt;img&gt;, &lt;video&gt; and &lt;iframe&gt;
- *                         |elements with their original colors.
- *            type          bool
- *            off           not:not(not)
+ *   - name:          filter-revert
+ *     title:         Revert filter
+ *     description: |
+ *       Inverse filter used to preserve the original colors of images etc.<br>
+ *       This should revert each filter function in the invert filter in reverse order.
+ *     type:          css-value
  *
- * @option    name          revert
- *            title         Elements to un-invert
- *            type          css-selector-multi
- *            description   Elements that, in addition to &lt;img&gt;, &lt;video&gt;
- *                         |and &lt;iframe&gt;, are to be displayed un-inverted,
- *                         |that is, with their original colors.
+ *   - name:          revert-default
+ *     title:         Default un-invert
+ *     description: |
+ *       Display &lt;img&gt;, &lt;video&gt; and &lt;iframe&gt;
+ *       elements with their original colors.
+ *     type:          bool
+ *     off:           not:not(not)
  *
- * @option    name          unset
- *            title         Elements to keep inverted
- *            type          css-selector-multi
- *            description   &lt;img&gt;, &lt;video&gt; or &lt;iframe&gt; elements,
- *                         |or elements matched by the above selector,
- *                         |that should be kept inverted.
+ *   - name:          revert
+ *     title:         Elements to un-invert
+ *     type:          css-selector-multi
+ *     description: |
+ *       Elements that, in addition to &lt;img&gt;, &lt;video&gt;
+ *       and &lt;iframe&gt;, are to be displayed un-inverted,
+ *       that is, with their original colors.
  *
- * @option    name          c-white
- *            title         Elements with white text
- *            type          css-selector-multi
- *            description   Elements whose text color will be forced to white.
- * @option    name          c-black
- *            title         Elements with black text
- *            type          css-selector-multi
- *            description   Elements whose text color will be forced to black.
+ *   - name:          unset
+ *     title:         Elements to keep inverted
+ *     type:          css-selector-multi
+ *     description: |
+ *       &lt;img&gt;, &lt;video&gt; or &lt;iframe&gt; elements,
+ *       or elements matched by the above selector,
+ *       that should be kept inverted.
  *
- * @option    name          bg-white
- *            title         Elements with white background
- *            type          css-selector-multi
- *            description   Elements whose background color will be forced to white.
- * @option    name          bg-black
- *            title         Elements with black background
- *            type          css-selector-multi
- *            description   Elements whose background color will be forced to black.
+ *   - name:          c-white
+ *     title:         Elements with white text
+ *     type:          css-selector-multi
+ *     description:   Elements whose text color will be forced to white.
+ *   - name:          c-black
+ *     title:         Elements with black text
+ *     type:          css-selector-multi
+ *     description:   Elements whose text color will be forced to black.
+ *
+ *   - name:          bg-white
+ *     title:         Elements with white background
+ *     type:          css-selector-multi
+ *     description:   Elements whose background color will be forced to white.
+ *   - name:          bg-black
+ *     title:         Elements with black background
+ *     type:          css-selector-multi
+ *     description:   Elements whose background color will be forced to black.
  */
 
 /**

@@ -40,13 +40,14 @@
      * desktop notifications (windows)
      */
 
-    #alertBox>:not(image), image
-    { filter: invert(100%) hue-rotate(180deg); }
-    toolbarbutton image
-    { filter: unset; }
-
     #alertBox {
+        color: white;
         background-color: #121518; /* inspector body color */
+    }
+    
+    image {
+        /* TODO: make this optional */
+        !background: radial-gradient(white 20%, transparent 73%);
     }
 }
 
@@ -118,8 +119,11 @@ background: black;/*[[!pending-tab-style]]*/
     }
 
     /* increase width of non-pinned selected tabs */
-    tab:not([pinned])
-    { /* transition: none; */ } /* must not disable transition (firefox removes the [movingtab] attribute at its end) */
+    tab:not([pinned]) {
+        /* transition: none; */ /* must not disable transition (firefox removes the [movingtab] attribute at its end) */
+        !transition-timing-function: linear, linear;
+        !transition-duration: .1s, .1s;
+    }
     tab[selected]:not([pinned])
     { min-width: var(--ded-min-tab-width); }
 
