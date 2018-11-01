@@ -1,29 +1,23 @@
-/**
+/** ==UserStyle==
  * @name Dialogs Dark
- * @stylish-id 119665
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
- *     Turns all build-in and some add-on Firefox and Thunderbird dialog windows dark.
+ *     Turns all/most Firefox and Thunderbird dialog windows dark.
  *     Background colors are inspired by the Developer Edition theme.
  *     The style uses inversion filters, so some icons are inverted (those in theechildren).
  *
- *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ * @namespace    https://github.com/NiklasGollenstede/user-styles
+ * @homepageURL  https://github.com/NiklasGollenstede/user-styles
+ * @supportURL   https://github.com/NiklasGollenstede/user-styles/issues
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-@namespace html url(http://www.w3.org/1999/xhtml);
 
 @-moz-document
     /* settings */
-    url(chrome://browser/content/aboutDialog.xul), url(chrome://messenger/content/aboutDialog.xul),
-    url(chrome://browser/content/preferences/connection.xul), url(chrome://messenger/content/preferences/connection.xul),
-    url(chrome://browser/content/preferences/cookies.xul), url(chrome://messenger/content/preferences/cookies.xul),
-    url(chrome://browser/content/preferences/fonts.xul), url(chrome://messenger/content/preferences/fonts.xul),
-    url(chrome://browser/content/preferences/languages.xul), url(chrome://messenger/content/preferences/languages.xul),
-    url(chrome://browser/content/preferences/preferences.xul), url(chrome://messenger/content/preferences/preferences.xul),
-    url(chrome://browser/content/preferences/permissions.xul), url(chrome://messenger/content/preferences/permissions.xul),
-    url(chrome://browser/content/preferences/sanitize.xul), url(chrome://messenger/content/preferences/sanitize.xul),
+    /*url(chrome://browser/content/aboutDialog.xul),*/ url(chrome://messenger/content/aboutDialog.xul),
+    url-prefix(chrome://browser/content/preferences/), url-prefix(chrome://messenger/content/preferences/),
     url(chrome://mozapps/content/update/history.xul),
     url(chrome://passwordmgr/content/passwordManager.xul),
     url(chrome://pippki/content/certManager.xul),
@@ -40,54 +34,30 @@
     url(chrome://messenger/content/subscribe.xul),
     url(chrome://messenger-smime/content/msgCompSecurityInfo.xul),
     /* TODO: all popups from CreateMessage -> Insert menu */
+    /*url(chrome://passwordmgr/content/passwordManagerExceptions.xul),*/ /* TODO: still in TB?; */
 
     /* common */
-    url(chrome://global/content/commonDialog.xul),
+    url(chrome://global/content/commonDialog.xul), /* confirm dialogs (obsolete with dark theme from ~FF61) */
     url(chrome://global/content/printPageSetup.xul),
-    url(chrome://mozapps/content/downloads/unknownContentType.xul),
-    url(chrome://passwordmgr/content/passwordManagerExceptions.xul),
+    url(chrome://mozapps/content/downloads/unknownContentType.xul), /* save or open dialog (obsolete with dark theme from ~FF61) */
 
     /* firefox */
-    url(chrome://browser/content/pageinfo/pageInfo.xul), url(chrome://messenger/content/pageinfo/pageInfo.xul),
-    url(chrome://browser/content/places/places.xul), url(chrome://messenger/content/places/places.xul),
-    url(chrome://browser/content/places/updates.xul), url(chrome://messenger/content/places/updates.xul),
-    url(chrome://browser/content/preferences/aboutPermissions.xul), url(chrome://messenger/content/preferences/aboutPermissions.xul),
+    url(chrome://browser/content/pageinfo/pageInfo.xul), url(chrome://messenger/content/pageinfo/pageInfo.xul), /* page info window (harder to reach, but it is still in FF63) */
+    url(chrome://browser/content/places/places.xul), url(chrome://messenger/content/places/places.xul), /* library */
+    url(chrome://browser/content/sanitize.xul), url(chrome://messenger/content/sanitize.xul), /* library */
 
-    /* addons */
-    url(chrome://bprivacy/content/bprivacyopt.xul),
-    url(chrome://cookiemonster/content/options.xul),
-    url-prefix("chrome://dta/content/dta/"),
-    url(chrome://dta/content/preferences/prefs.xul),
-    url(chrome://greasemonkey/content/options.xul),
-    url(chrome://greasemonkey/content/newscript.xul),
-    url(chrome://greasemonkey/content/scriptprefs.xul),
-    url(chrome://lastpass/content/changepw.xul),
-    url(chrome://lastpass/content/creategrp.xul),
-    url(chrome://lastpass/content/home2.xul),
-    url(chrome://lastpass/content/login.xul),
-    url-prefix("chrome://lastpass/content/popupfilltab.xul"),
-    url(chrome://lastpass/content/siteinfo.xul),
-    url(chrome://treestyletab/content/config.xul),
-    url(chrome://stylish/content/install.xul)
+    url()
 {
 
-    dialog,
-    image,
-    *|img,
-    menupopup,
-    page,
-    prefwindow,
-    window,
-    #aboutDialog #leftBox
+    :root
     {
         filter: invert(100%) hue-rotate(180deg);
+        background-color: #14171A; /* inspector body color unfiltered */
     }
     /* TODO: uninvert treechildren s icons */
 
-    menuitem hbox.menu-iconic-left /* places menu icons */
-    {
-        filter: unset;
-    }
+    #iconContainer
+    { filter: invert(100%) hue-rotate(180deg); }
 
     #topBar, /* pageInfo */
     #placesToolbar,
@@ -97,47 +67,18 @@
         background-image: unset;
     }
 
-    #mainDeck, /* pageInfo */
-    #placesView,
-    #commonDialog,
-    treechildren,
-    groupbox caption,
-    #devicemanager,
-    #certmanager,
-    #ConnectionsDialog,
-    #unknownContentType, /* svae/open */
-    #bpPrefsWinID,
-    #cookiemonster-prefs,
-    #greasemonkey-options-dialog,
-    #greasemonkey-script-preferences,
-    #greasemonkey,
-    #treestyletab-config,
-    #clientBox, /* stylish */
-    #genericAbout>.dialog-button-box, /* stylish */
-    #LPEditSite4, #LPCreateGrp, /* LastPass */
-    #sendProgress
-    {
-        background-color: #E6E9EC; /* inspector body color filtered */
-    }
-
-
     #CookiesDialog>*,
     #PermissionsDialog>*,
     #SanitizeDialog>*,
     #SignonViewerDialog>*,
     #SignonViewerExceptionDialog>*
     {
-        background-color: #E6E9EC;
-    }
-
-    #permissions-page
-    {
-        background-color: #14171A; /* inspector body color unfiltered */
+        background-color: transparent;
     }
 }
 
 @-moz-document
     url-prefix(about:)
 {
-    /* let stylish list this style for all about pages */
+    /* just so this is listed as a style for about pages (which it is because some of the dialogs are displayed there) */
 }

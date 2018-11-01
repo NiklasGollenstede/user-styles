@@ -1,18 +1,17 @@
 /** ==UserStyle==
  * @name about:-pages Dark
- * @stylish-id 107168
  * @author Niklas Gollenstede
  * @license CC-BY-SA-4.0 or MIT
  * @description
- *     Color theme, turns all the standard and some add-on about:-pages dark.
- *     This works mostly with inversion filters, so it should not be affected by changes of those pages that much,
+ *     Addition to Firefox Quantum's default dark color theme, turns all about:-pages (truly) dark.
+ *     This works mostly with inversion filters, so it should not be affected by future changes to those pages too much,
  *     but it also means that it will un-darken any about:-pages that are already dark (due to other user styles, add-ons, system themes, ...).
- *     Requests to add additional add-on about:-pages are generally welcome.
  *
- *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/user-styles
- *
- *     It should affect every build-in about:-page that isn't already dark.
  *     The CSS is clearly structured and documented, read that for details on what happens to which page.
+ *
+ * @namespace    https://github.com/NiklasGollenstede/user-styles
+ * @homepageURL  https://github.com/NiklasGollenstede/user-styles
+ * @supportURL   https://github.com/NiklasGollenstede/user-styles/issues
  */
 
 /* set vars */
@@ -40,16 +39,12 @@
  * about:certerror?...       : generic,
  * about:checkerboard        : generic,
  * about:config?...          : generic,
- * about:configmania#...     : vertical-tabs, // from add-on
  * about:crashes             : generic,
  * about:credits             : // redirects to "https://www.mozilla.org/credits/" (see below)
  * about:debugging           : vertical-tabs,
  * about:devtools-toolbox    : // not useful (probably embedded somewhere ?)
  * about:downloads           : generic,
- * about:findbartweak        : vertical-tabs, // form add-on
  * about:healthreport        : // only contains an iframe from "https://fhr.cdn.mozilla.net/en-US/v4/"
- * about:home                : specific,
- * about:lastpassvault       : generic,
  * about:license             : generic,
  * about:logo                : // just an image
  * about:memory              : generic,
@@ -62,6 +57,7 @@
  * about:preferences#...     : vertical-tabs,
  * about:privatebrowsing     : // already dark
  * about:profiles            : generic,
+ * about:restartrequired     : generic,
  * about:rights              : generic,
  * about:robots              : generic,
  * about:serviceworkers      : generic,
@@ -96,7 +92,6 @@
     url-prefix(about:config),
            url(about:crashes),
            url(about:downloads),
-           url(about:lastpassvault),
            url(about:license),
            url(about:memory),
     url-prefix(about:neterror),
@@ -104,6 +99,7 @@
            url(about:plugins),
            url(about:profiles),
            url(about:permissions),
+           url(about:restartrequired),
            url(about:rights),
            url(about:robots),
            url(about:serviceworkers),
@@ -130,20 +126,19 @@
 @-moz-document
     url-prefix(about:confmania),
     url-prefix(about:debugging),
-    url-prefix(about:findbartweak),
     url-prefix(about:networking),
     url-prefix(about:preferences),
     url-prefix(about:tabgroups),
     url-prefix(about:addons)
 {
     #nav-header,
-    .navigation, #categories {
+    .navigation, #category-box, #categories {
         background-color: #424f5a;
         border-radius: 0;
     }
 
     #categories .category,
-    .navigation .help-button {
+    .sidebar-footer-button {
         transition: background .5s;
         color: #eee;
         padding-inline-start: 15px; /* compensate the 4px border */
@@ -152,11 +147,8 @@
         background: inherit;
     }
 
-    .navigation .help-button>*
-    { margin: 0; }
-
     #categories .category:hover,
-    #categories .help-button:hover
+    #categories .sidebar-footer-button:hover
     { background: #9994; }
 
     #categories .category[selected], /*xul*/
@@ -179,6 +171,11 @@
     .main-content image, #dialogBox image, .main-content img, #dialogBox img, /* images in inverted areas */
     #dialogFrame /* modal dialog contents, contains another document */
     { filter: var(--filter-revert); }
+
+    .dialogBox
+    { background-color: #14171A; }
+    .dialogTitleBar
+    { background-color: #131213; color: lightgrey; }
 }
 
 /* specific: mostly the same as vertical-tabs, but excludes the inline add-on options frames */
@@ -189,7 +186,7 @@
     { filter: unset; background-color: black; }
 
     #header,
-    #search-view, #list-view, #legacy-view, #updates-view, /* all view types except #detail-view */
+    #headered-views-content>:not(#detail-view), /* all view types except #detail-view */
     #detail-view .detail-view-container>*>*>:not(#detail-grid), #detail-grid #detail-rows>:not(#addon-options-prompts-stack) /* bascically everything except #addon-options (the inversion of that <browser> makes it entirely black) */
     { filter: var(--filter-invert); }
 
@@ -201,6 +198,8 @@
 
     #addon-options
     { background: white; }
+    .card.addon-detail
+    { background: black; }
 }
 
 /* specific: only apply to empty about:blank documents */
@@ -211,73 +210,13 @@
     { background-color: black; }
 }
 
-/* specific: invert a lot for items */
-@-moz-document
-    url(about:home)
-{
-    :root { background-color: black; } /* enforce bg-color */
-
-    html,
-    #searchText,
-    #searchSubmit,
-    #searchSuggestionTable
-    { filter: var(--filter-invert); }
-
-    body,
-    #searchText,
-    #searchSubmit,
-    #searchSuggestionTable img
-    { filter: var(--filter-revert); }
-}
-
-/* specific: custom styles, no inversion */
+/* specific: already dark, no inversion */
 @-moz-document
     url(about:newtab)
 {
-    #newtab-scrollbox>#newtab-vertical-margin,
     body
     {
-        background-color: #333;
-    }
-    #newtab-scrollbox>#newtab-vertical-margin>#newtab-margin-bottom
-    {
-        background-color: inherit;
-    }
-
-    .newtab-site
-    {
-        box-shadow: none;
-    }
-
-    .newtab-site:hover,
-    .newtab-cell:not([ignorehover])>.newtab-site:hover
-    {
-        box-shadow: 0px 0px 10px rgb(20, 50, 130);
-        box-shadow: 0px 0px 10px rgb(20, 50, 130);
-        border-color: rgb(20, 50, 130);
-    }
-    .newtab-cell:hover
-    {
-        box-shadow: 0px 0px 10px rgb(20, 50, 130);
-        box-shadow: 0px 0px 10px rgb(20, 50, 130);
-    }
-    .newtab-cell .newtab-site .newtab-link:hover
-    {
-        border-color: black;
-    }
-
-    div.newtab-cell>div.newtab-site>a.newtab-link>span.newtab-title
-    {
-        font-weight: bold;
-        color: #fff;
-        text-shadow: 0px 0px 5px #000;
-        background-color: rgba(0,0,0, .5);
-        background-image: none;
-    }
-
-    .newtab-thumbnail
-    {
-        opacity: 1;
+        --newtab-background-color: #14171A;
     }
 }
 

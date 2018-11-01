@@ -12,20 +12,15 @@
  */
 
 @-moz-document
-	url(chrome://browser/content/bookmarks/bookmarksPanel.xul), /* <= FF61 */
-	url(chrome://browser/content/places/bookmarksSidebar.xul), /*  >= FF61 */
-	url(chrome://browser/content/history/history-panel.xul), /* <= FF61 */
-	url(chrome://browser/content/places/historySidebar.xul), /* >= FF61 */
+	url(chrome://browser/content/places/bookmarksSidebar.xul),
+	url(chrome://browser/content/places/historySidebar.xul),
 	url(chrome://browser/content/syncedtabs/sidebar.xhtml)
 {
-	image, *|img,
-	body, page {
-		filter: invert(100%) hue-rotate(180deg);
-	}
-	/* TODO: uninvert treechildren s icons */
 
-	body, page {
-		background-color: #E6E9EC; /* inspector header color filtered */
-		background-image: unset;
+	page {
+		--newtab-background-color: #14171A; /* inspector header color */
+		--newtab-text-primary-color: #F9F9FA;
+		--lwt-sidebar-background-color: #14171A;
+		--lwt-sidebar-text-color: #F9F9FA;
 	}
 }

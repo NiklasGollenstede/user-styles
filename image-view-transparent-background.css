@@ -10,10 +10,11 @@
  */
 
 @-moz-document
-    regexp(      "^moz-extension://.*[.](?:gif|jpe?g|a?png|svg)(?:$|[?#])"),
-    regexp("^(?:https?|file|ftp)://.*[.](?:gif|jpe?g|a?png|svg)(?:$|[?#])"),
-    regexp("^data:image/.*$")
-{
+    regexp(      "^moz-extension://.*[.](?:gif|jpe?g|a?png|svg)(?:$|[?#])"/*as:content*/),
+    regexp("^(?:https?|file|ftp)://.*[.](?:gif|jpe?g|a?png|svg)(?:$|[?#])"/*as:web*/),
+    regexp("^data:image/.*$"/*as:content*/)
+{ @media only screen and (min-width: 600px) { /* exclude subdocuments, esp. SVGs */
+
 	:root:not([class])>body:not([class])>img.transparent:only-child, /* e.g. PNG */
 	svg:root:only-child /* SVG */
 	{
@@ -29,4 +30,5 @@
 		position: absolute; margin: auto;
 		top: 0; right: 0; bottom: 0; left: 0;
 	}
-}
+
+} }
