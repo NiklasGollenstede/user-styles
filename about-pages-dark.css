@@ -124,7 +124,6 @@
 
 /* vertical-tabs: invert the content area, leave tab-bar as is */
 @-moz-document
-    url-prefix(about:confmania),
     url-prefix(about:debugging),
     url-prefix(about:networking),
     url-prefix(about:preferences),

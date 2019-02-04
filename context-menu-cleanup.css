@@ -31,12 +31,17 @@
     #context-selectall,
 
     #context-sendlink,
+    #context-savelinktopocket,
+    #context-sendlinktodevice,
     #context-bookmarkpage,
     #context-savepage,
+    
+    #context-searchselect,
 
     #context-viewsource,
     #context-viewpartialsource-selection,
     #context-viewinfo,
+    #context-inspect-a11y,
 
     #dtaCtxSepFront-direct,
     .dta-menuitem.dta-turbo

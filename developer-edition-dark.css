@@ -6,7 +6,7 @@
  * @description
  *     Slight rework of the dark Developer Edition theme of Firefox.
  *     Requires Firefox' dark theme, preferably with compact density.
- *     Also works in Thunderbird.
+ *     Also works in Thunderbird (before version 60).
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
@@ -44,7 +44,7 @@
         color: white;
         background-color: #121518; /* inspector body color */
     }
-    
+
     image {
         /* TODO: make this optional */
         !background: radial-gradient(white 20%, transparent 73%);
@@ -113,7 +113,7 @@
     { visibility: hidden; }
 
     /* dim not-loaded tabs */
-    tab[pending]>* { /* apply to children to avoid reducing the opacity of the ::after element botder */
+    tab[pending]>* { /* apply to children to avoid reducing the opacity of the ::after element border */
         /*[[!pending-tab-style]]*/opacity: 0.6; /* gray out by 40% */
 background: black;/*[[!pending-tab-style]]*/
     }
@@ -160,8 +160,9 @@ background: black;/*[[!pending-tab-style]]*/
     #nav-bar,
     .mail-toolbox {
         border-top: 1px solid var(--ded-tab-border-color);
-        margin-top: -1px;
         box-shadow: none;
+        /* margin-top: -1px; */ /* modifying margin-top messes with a [movingtab] hack, so instead translate: */
+        transform: translateY(-1px); margin-bottom: -1px;
     }
     #TabsToolbar[movingtab] + #nav-bar {
         margin-top: -16px; /* [movingtab] adds 15px padding to the #TabsToolbar */
@@ -172,8 +173,8 @@ background: black;/*[[!pending-tab-style]]*/
     #urlbar-container {
         margin-right: -26px;
     }
-    #urlbar-container .urlbar-textbox-container {
-        margin-right: 26px;
+    #urlbar-container #page-action-buttons {
+        margin-right: 25px;
     }
     #urlbar-container + toolbaritem {
         transform: translateX(-6px);
@@ -184,7 +185,7 @@ background: black;/*[[!pending-tab-style]]*/
         width: calc(2 * var(--toolbarbutton-inner-padding) + 12px);
         height: calc(2 * var(--toolbarbutton-inner-padding) + 12px);
     }
-    #urlbar-container + toolbaritem image:hover { /* this doesn't work ... */
+    #urlbar-container + toolbaritem:hover image {
         background-color: hsla(0,0%,70%,.2); /* hard coded value in firefox' default style */
     }
 /*[[/reload-left]]*/

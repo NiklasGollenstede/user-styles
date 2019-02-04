@@ -23,7 +23,7 @@
     regexp("^file://.*[.](?:css|jsm?|txt)$"/*as:content*/),
     regexp("^ftp://.*[.](?:css|jsm?|txt|json)$"/*as:content*/), /* Firefox doesn't recognize JSON over FTP */
     regexp("^data:(?!text/x?html)[\\w/-]+[;,].*$"/*as:content*/),
-    url-prefix("https://raw.githubusercontent.com/"/*as:content*/) /* doesn't seem to work */
+    url-prefix("https://raw.githubusercontent.com/"/*as:content*/)
 {
     html:not([class])>body:not([class])>pre:only-child /* plain text */
     {
