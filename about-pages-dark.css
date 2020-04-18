@@ -3,9 +3,7 @@
  * @author Niklas Gollenstede
  * @license CC-BY-SA-4.0 or MIT
  * @description
- *     Addition to Firefox Quantum's default dark color theme, turns all about:-pages (truly) dark.
- *     This works mostly with inversion filters, so it should not be affected by future changes to those pages too much,
- *     but it also means that it will un-darken any about:-pages that are already dark (due to other user styles, add-ons, system themes, ...).
+ *     In addition to Firefox Quantum's default dark color theme, turns all (remaining) about:-pages (truly) dark.
  *
  *     The CSS is clearly structured and documented, read that for details on what happens to which page.
  *
@@ -22,6 +20,48 @@
 { :root {
     --filter-invert: invert(1) hue-rotate(180deg) saturate(1.666) brightness(1.5); /* the filter value that is used to turn the pages or their main element dark */
     --filter-revert: brightness(0.666) saturate(.6) hue-rotate(180deg) invert(1); /* reversed filter to revert individual elements like imaged back to their original, revert each filter in reverse order */
+
+    /* Most of these are the default values: */
+
+    --in-content-page-background: #14171A; /*changed*/
+    --in-content-page-color: rgb(249, 249, 250);
+    --in-content-text-color: var(--in-content-page-color);
+    --in-content-deemphasized-text: var(--grey-40);
+    --in-content-box-background: #252c33; /*changed*/
+    --in-content-box-background-hover: rgba(249,249,250,0.15);
+    --in-content-box-background-active: rgba(249,249,250,0.2);
+    --in-content-box-background-odd: rgba(249,249,250,0.05);
+    --in-content-box-info-background: rgba(249,249,250,0.15);
+
+    --in-content-border-color: rgba(249,249,250,0.2);
+    --in-content-border-hover: rgba(249,249,250,0.3);
+    --in-content-box-border-color: rgba(249,249,250,0.2);
+
+    --in-content-button-background: rgba(249,249,250,0.1);
+    --in-content-button-background-hover: rgba(249,249,250,0.15);
+    --in-content-button-background-active: rgba(249,249,250,0.2);
+
+    --in-content-category-background-hover: rgba(249,249,250,0.1);
+    --in-content-category-background-active: rgba(249,249,250,0.15);
+    --in-content-category-background-selected-hover: rgba(249,249,250,0.15);
+    --in-content-category-background-selected-active: rgba(249,249,250,0.2);
+
+    --in-content-table-background: #252c33; /*changed*/
+    --in-content-table-border-dark-color: rgba(249,249,250,0.2);
+    --in-content-table-header-background: #002b57;
+    --in-content-dialog-header-background: rgba(249,249,250,0.05);
+
+    --in-content-category-text-selected: var(--blue-40);
+    --in-content-category-text-selected-active: var(--blue-50);
+    --in-content-link-color: var(--blue-40);
+    --in-content-link-color-hover: var(--blue-50);
+    --in-content-link-color-active: var(--blue-60);
+
+    --in-content-tab-color: var(--in-content-page-color);
+
+    --card-outline-color: var(--grey-60);
+
+    scrollbar-color: rgba(249,249,250,.4) rgba(20,20,25,.3);
 } }
 
 /**
@@ -29,50 +69,44 @@
  * about:-pages, most of these are linked on 'about:about':
  *
  * ftp://                    : generic,
- * about:                    : generic,
- * about:about               : generic,
- * about:accounts            : generic,
- * about:addons              : vertical-tabs, specific,
+ * about:about               : // already dark
+ * about:addons              : // already dark
  * about:blank               : specific,
  * about:buildconfig         : generic,
  * about:cache               : generic,
- * about:certerror?...       : generic,
+ * about:certerror?...       : // already dark
  * about:checkerboard        : generic,
- * about:config?...          : generic,
- * about:crashes             : generic,
+ * about:config?...          : // already dark
+ * about:crashes             : // already dark
  * about:credits             : // redirects to "https://www.mozilla.org/credits/" (see below)
  * about:debugging           : vertical-tabs,
  * about:devtools-toolbox    : // not useful (probably embedded somewhere ?)
- * about:downloads           : generic,
+ * about:downloads           : // already dark
  * about:healthreport        : // only contains an iframe from "https://fhr.cdn.mozilla.net/en-US/v4/"
- * about:license             : generic,
+ * about:license             : // already dark
  * about:logo                : // just an image
  * about:memory              : generic,
  * about:mozilla             : // is deep red anyway
- * about:neterror?...        : generic,
- * about:networking          : vertical-tabs,
+ * about:neterror?...        : // already dark
+ * about:networking          : // already dark (?)
  * about:newtab              : specific,
- * about:performance         : generic,
+ * about:performance         : // already dark
  * about:plugins             : generic,
- * about:preferences#...     : vertical-tabs,
+ * about:preferences#...     : // already dark
  * about:privatebrowsing     : // already dark
  * about:profiles            : generic,
- * about:restartrequired     : generic,
- * about:rights              : generic,
- * about:robots              : generic,
+ * about:restartrequired     : // already dark
+ * about:rights              : // already dark
+ * about:robots              : // already dark
  * about:serviceworkers      : generic,
- * about:sessionrestore      : generic, specific,
- * about:sessionstore        : generic, // from add-on
- * about:support             : generic,
- * about:studies             : generic,
+ * about:sessionrestore      : specific,
+ * about:support             : // already dark
+ * about:studies             : // already dark
  * about:sync-log            : generic,
- * about:sync-progress       : // has been removed
- * about:sync-tabs           : // has been removed
- * about:tabcrashed?...      : generic,
- * about:tabgroups#...       : vertical-tabs, // from add-on
- * about:telemetry           : generic,
+ * about:tabcrashed?...      : // already dark
+ * about:telemetry           : // already dark
  * about:webrtc              : generic,
- * about:welcomeback         : generic,
+ * about:welcomeback         : // already dark
  *
  * Related pages:
  *
@@ -82,37 +116,15 @@
 /* generic: invert :root, un-invert images */
 @-moz-document
            regexp("^ftp://.*/"),
-           url(about:),
-           url(about:about),
-           url(about:accounts),
            url(about:buildconfig),
            url(about:cache),
-    url-prefix(about:certerror),
            url(about:checkerboard),
-    url-prefix(about:config),
-           url(about:crashes),
-           url(about:downloads),
-           url(about:license),
+    url-prefix(about:debugging),
            url(about:memory),
-    url-prefix(about:neterror),
-           url(about:performance),
            url(about:plugins),
-           url(about:profiles),
-           url(about:permissions),
-           url(about:restartrequired),
-           url(about:rights),
-           url(about:robots),
            url(about:serviceworkers),
-           url(about:sessionrestore),
-           url(about:sessionstore),
-    url-prefix(about:studies),
-           url(about:support),
            url(about:sync-log),
-           url(about:sync-tabs),
-    url-prefix(about:tabcrashed),
-           url(about:telemetry),
            url(about:webrtc),
-           url(about:welcomeback),
            url(https://www.mozilla.org/credits/)
 {
     :root
@@ -120,85 +132,6 @@
 
     img, image /* image in html and xul */
     { filter: var(--filter-revert); }
-}
-
-/* vertical-tabs: invert the content area, leave tab-bar as is */
-@-moz-document
-    url-prefix(about:debugging),
-    url-prefix(about:networking),
-    url-prefix(about:preferences),
-    url-prefix(about:tabgroups),
-    url-prefix(about:addons)
-{
-    #nav-header,
-    .navigation, #category-box, #categories {
-        background-color: #424f5a;
-        border-radius: 0;
-    }
-
-    #categories .category,
-    .sidebar-footer-button {
-        transition: background .5s;
-        color: #eee;
-        padding-inline-start: 15px; /* compensate the 4px border */
-        border-radius: 0;
-        margin: 0;
-        background: inherit;
-    }
-
-    #categories .category:hover,
-    #categories .sidebar-footer-button:hover
-    { background: #9994; }
-
-    #categories .category[selected], /*xul*/
-    #categories .category.selected { /*html*/
-        background-color: rgb(52, 63, 72);
-        color: var(--in-content-category-text-selected);
-        padding-inline-start: 11px; /* compensate the 4px border */
-        border-inline-start: solid 4px var(--in-content-border-highlight);
-    }
-
-    #categories .category[selected]:hover,
-    #categories .category.selected:hover
-    { background-color: #1A2533; }
-
-    .main-content, /* content area */
-    #main-footer, /* ??? */
-    #dialogBox /* modal dialogs frame */
-    { filter: var(--filter-invert); background-color: white; }
-
-    .main-content image, #dialogBox image, .main-content img, #dialogBox img, /* images in inverted areas */
-    #dialogFrame /* modal dialog contents, contains another document */
-    { filter: var(--filter-revert); }
-
-    .dialogBox
-    { background-color: #14171A; }
-    .dialogTitleBar
-    { background-color: #131213; color: lightgrey; }
-}
-
-/* specific: mostly the same as vertical-tabs, but excludes the inline add-on options frames */
-@-moz-document
-    url-prefix(about:addons)
-{
-    .main-content /* content area */
-    { filter: unset; background-color: black; }
-
-    #header,
-    #headered-views-content>:not(#detail-view), /* all view types except #detail-view */
-    #detail-view .detail-view-container>*>*>:not(#detail-grid), #detail-grid #detail-rows>:not(#addon-options-prompts-stack) /* bascically everything except #addon-options (the inversion of that <browser> makes it entirely black) */
-    { filter: var(--filter-invert); }
-
-    #detail-view .detail-view-container>*>*>image:not(#detail-grid)
-    { filter: unset; }
-
-    .main-content image, .main-content img /* images in inverted areas */
-    { filter: var(--filter-revert); }
-
-    #addon-options
-    { background: white; }
-    .card.addon-detail
-    { background: black; }
 }
 
 /* specific: only apply to empty about:blank documents */

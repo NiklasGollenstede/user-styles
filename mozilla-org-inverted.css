@@ -16,7 +16,7 @@
     domain("firefox.com"),
     regexp("^https?://(?!metrics)[^/]*\\.mozilla\\.com(/.*)?$"),
     domain("mozilla.net"),
-    regexp("^https?://(?!www|air|services\\.addons)[^/]*\\.mozilla\\.org(/.*)?$"), /* keep |hacks ? */
+    regexp("^https?://(?!www|air|services\\.addons|bugzilla)[^/]*\\.mozilla\\.org(/.*)?$"), /* keep |hacks ? */
     domain("addons.mozilla.org"), /* explicitly list this to include this block privileged chrome style */
     domain("kb.mozillazine.org")
 {

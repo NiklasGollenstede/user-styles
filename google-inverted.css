@@ -55,4 +55,6 @@
 	.irc_bg img
 	{ filter: unset; }
 
+	/* the filtering somehow hides the privacy consent modal, which also prevents scrolling */
+	.nsc { overflow: initial; }
 }

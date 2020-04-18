@@ -54,6 +54,7 @@
 
 @-moz-document
     url(chrome://messenger/content/messenger.xul),
+    url(chrome://browser/content/browser.xhtml),
     url(chrome://browser/content/browser.xul)
 {
     /**
@@ -95,13 +96,13 @@
      * tabs
      */
 
-    tab:not([selected]) {
+    .tabbrowser-tab:not([selected]) {
         background: var(--ded-inacitve-tab-bg);
     }
     #tabbrowser-tabs {
         --tab-line-color: inherit;
     }
-    tab[selected] .tab-background {
+    .tabbrowser-tab[selected] .tab-background {
         border-style: solid;
         border-width: 0 1px;
         border-image: linear-gradient(to bottom,
@@ -109,22 +110,22 @@
             var(--ded-tab-border-color) 3px
         ) 1 100%;
     }
-    tab[selected]::after /* border between tabs */
+    .tabbrowser-tab[selected]::after /* border between tabs */
     { visibility: hidden; }
 
     /* dim not-loaded tabs */
-    tab[pending]>* { /* apply to children to avoid reducing the opacity of the ::after element border */
+    .tabbrowser-tab[pending]>* { /* apply to children to avoid reducing the opacity of the ::after element border */
         /*[[!pending-tab-style]]*/opacity: 0.6; /* gray out by 40% */
 background: black;/*[[!pending-tab-style]]*/
     }
 
     /* increase width of non-pinned selected tabs */
-    tab:not([pinned]) {
+    .tabbrowser-tab:not([pinned]) {
         /* transition: none; */ /* must not disable transition (firefox removes the [movingtab] attribute at its end) */
         !transition-timing-function: linear, linear;
         !transition-duration: .1s, .1s;
     }
-    tab[selected]:not([pinned])
+    .tabbrowser-tab[selected]:not([pinned])
     { min-width: var(--ded-min-tab-width); }
 
     /* make the close button a little larger, esp. for touch devices */
@@ -134,18 +135,18 @@ background: black;/*[[!pending-tab-style]]*/
     }
 
     /* put a spotlicht under the favicons, which are mostly designed for light backgrounds */
-    tab .tab-icon-image {
+    .tabbrowser-tab .tab-icon-image {
         background: radial-gradient(white 20%, transparent 75%);
         padding: 5px;
         width: 26px; height: 26px;
         margin-right: -5px; margin-left: -5px;
     }
-    tab:not([pinned]) .tab-icon-image
+    .tabbrowser-tab:not([pinned]) .tab-icon-image
     { margin-right: 2px; }
 
-    tab .tab-line
+    .tabbrowser-tab .tab-line
     { background-color: var(--identity-tab-color, var(--tab-line-color)); }
-    tab:not([selected]):hover .tab-line
+    .tabbrowser-tab:not([selected]):hover .tab-line
     { opacity: 0.675; }
 
 

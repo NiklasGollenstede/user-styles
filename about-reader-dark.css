@@ -39,4 +39,9 @@
     {
         display: none !important;
     }
+
+    .narrating
+    {
+        background-color: black !important;
+    }
 }
