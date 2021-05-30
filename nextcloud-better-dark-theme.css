@@ -1,0 +1,42 @@
+/** ==UserStyle==
+ * @name Complement for NextCloud's dark theme
+ * @author Niklas Gollenstede
+ * @license MIT
+ * @description
+ *     Fixes some issues with NextCloud's dark theme.
+ */
+
+ /*
+  * To apply your style rules only to some pages or browser UI areas,
+  * list them below and place your style rules between the curly braces.
+  * See: https://developer.mozilla.org/en-US/docs/Web/CSS/@document
+  */
+@-moz-document
+	domain("work.smartecotec.com")
+{
+	:root {
+		--color-main-text: white;
+		--color-text-maxcontrast: #92e4ff;
+		--color-text-light: #eee;
+		--color-text-lighter: #ddd;
+		--color-main-background: #060606;
+	}
+	.notification-icon {
+		filter: invert(1) hue-rotate(180deg);
+	}
+	.oc-dialog-dim {
+		background-color: #555;
+		opacity: 0.4;
+	}
+
+	.modified.live-relative-timestamp {
+		color: white;
+	}
+
+	body#body-login {
+		background-image: url('https://source.unsplash.com/collection/1053828/3440x1440');
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+}

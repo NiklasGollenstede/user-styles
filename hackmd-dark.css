@@ -1,0 +1,276 @@
+/** ==UserStyle==
+ * @name hackMD.io Dark Theme
+ * @author Niklas Gollenstede
+ * @license CC-BY-SA-4.0
+ * @description
+ *     Dark theme for the [hackMD](https://hackmd.io/) collaborative online markdown editor.
+ *     This only targets the main edit and rendered view; the settings and the file list etc. are unchanged.
+ *
+ *     This started as a copy of <https://github.com/titangene/hackmd-dark-theme/blob/b0b5924c9d4f1b08dfa9607a6574432745ca795c/custom.css>.
+ *     The [linked site](https://userstyles.org/styles/147272/hackmd-dark-theme) lists "CC BY-SA" as the original license.
+ *
+ * @namespace    https://github.com/NiklasGollenstede/user-styles
+ * @homepageURL  https://github.com/NiklasGollenstede/user-styles
+ * @supportURL   https://github.com/NiklasGollenstede/user-styles/issues
+ */
+
+@-moz-document
+	domain(hackmd.io),
+	domain(codimd.smartecotec.com),
+	domain(codimd.gollos.top),
+	domain(codimd.gollenstede.net)
+{
+	:root {
+		scrollbar-color: #8fa1b2 black; /* same as FF devtools */
+		--doc-bgc: #14171a;
+		--doc-txc: white;
+		--link-txc: #9cf;
+		--filter-invert: invert(1) hue-rotate(180deg) saturate(1.66667) brightness(1.5); /* invert to preserve text colors, e.g. in code */
+	}
+
+	/**
+	 * Unfortunately, the edit/view view is not identifiable by a particular URL-prefix or class on the body or anything like that.
+	 * (EDIT: Actually, the URL having exactly one path segment might be the correct identifier ...)
+	 *
+	 * Currently, styles are applied to this structure (and its children):
+	 * body
+	 *     >nav.navbar
+	 *     .ui-content
+	 *         .ui-edit-area
+	 *         .ui-view-area
+	 *             #doc
+	 *             #ui-toc-affix
+	 * Thus, every selector should start with one of the above, to avoid styling other pages.
+	 */
+
+	/* fix double scroll bar in "edit" and "both" view */
+	.ui-content { margin-bottom: -6px; }
+
+	body:not(.night)>nav.navbar, body:not(.night)>nav.navbar img { /* use `body>` to only target the edit page */
+		filter: invert(1) hue-rotate(180deg);
+	}
+
+	body.night>nav.navbar, body.night>nav.navbar img {
+		background-color: var(--doc-bgc);
+	}
+
+	.ui-resizable-handle { /* e.g. between editor and preview */
+		background-color: #303030;
+		border: none; box-shadow: none;
+	}
+
+	body>.ui-content,
+	.ui-view-area,
+	.ui-view-area #doc
+	{ background: var(--doc-bgc); }
+
+	body:not(.night) .ui-view-area #ui-toc-affix { filter: var(--filter-invert); }
+
+	#doc { color: var(--doc-txc); }
+
+	#doc a { color: var(--link-txc); }
+
+	#doc :not(pre)>code:not([data-gist-id]), /* inline code */
+	#doc pre { /* code blocks */
+		filter: var(--filter-invert);
+		background-color: white; color: black; fill: black;
+		border: 1px solid #0006; border-radius: .25em;
+	}
+	#doc :not(pre)>code[data-gist-id] { /* gists */
+		filter: var(--filter-invert);
+	}
+	#doc :not(pre)>code { padding: .03em .2em; }
+	#doc :not(pre)>code::before, #doc :not(pre)>code::after { display: none; }
+	body.night #doc pre tspan { fill: black; }
+	body.night #doc pre.flow-chart path { stroke: black; }
+	body.night #doc pre.flow-chart rect { stroke: black; }
+	body.night #doc pre.graphviz .graph > polygon { fill: white; }
+	body.night #doc .abc path { fill: black; }
+
+
+	/* task lists */
+	#doc .task-list-item-checkbox { /* = input[type=checkbox] */
+		appearance: none; -webkit-appearance: none;
+		position: relative; top: .08em;
+		cursor: pointer;
+		width: 1em; height: 1em;
+	}
+	#doc .task-list-item-checkbox::after, #doc .task-list-item-checkbox::before {
+		content: ""; position: absolute;
+		left: 0; top: 0;
+		width: 100%; height: 100%;
+	}
+	#doc .task-list-item-checkbox::before {
+		background: #fff2;
+	}
+	#doc .task-list-item-checkbox::after {
+		transition: all 0.1s ease-in-out;
+		border: 2px solid #F44336;
+	}
+	#doc .task-list-item-checkbox:checked::after {
+		transform: rotate(-48deg);
+		height: 9px; border-color: #00E676;
+		border-top-style: none; border-right-style: none;
+	}
+
+	#doc tr {
+		background-color: inherit;
+	}
+	#doc tr:nth-child(2n) {
+		background-color: #7771;
+	}
+
+	#doc blockquote { color: inherit; }
+
+/* TODO: continue to remove unnecessary stuff and prefix everything else with `#doc ` */
+
+	/*--------------- book mode ---------------*/
+	#summary, .toolbar {
+		background: #1e1e1e !important;
+	}
+	.toolbar i {
+		color: #fff;
+	}
+	.summary h1, .summary h2, .summary h3 .summary hr {
+		color: #ddd;
+		border-color: #777 !important;
+	}
+	.summary .nav > li > a {
+		color: #7bf;
+	}
+	.summary .nav-pills > li.active > a,
+	.summary .nav-pills > li.active > a:focus,
+	.summary .nav-pills > li.active > a:hover {
+		color: #ff9100;
+	}
+
+	/*--------------- editor ---------------*/
+	.cm-m-markdown {
+		color: #ddd;
+	}
+	.cm-s-one-dark .cm-header,
+	.cm-m-xml.cm-attribute {
+		color: #ffa653;
+	}
+	.cm-s-one-dark .cm-string,
+	.cm-s-one-dark .cm-variable-2 {
+		color: #7bf;
+	}
+	.cm-m-markdown.cm-variable-3 {
+		color: #ff7e7e;
+	}
+	.cm-s-one-dark .cm-link {
+		color: #b0ee83;
+	}
+	.cm-s-one-dark .CodeMirror-linenumber {
+		color: #666;
+	}
+	.cm-strong {
+		color: #f4511e;
+	}
+	.cm-s-one-dark .cm-comment {
+		color: #888;
+	}
+	.cm-matchhighlight {
+		color: #ffea00;
+	}
+	.dropdown-menu.CodeMirror-other-cursor {
+		border: 2px solid #4d4d4d;
+		background-color: #202020;
+	}
+	.dropdown-menu.CodeMirror-other-cursor li a {
+		color: #ececec;
+	}
+
+	/*--------------- code mirror ---------------*/
+	.modal-content {
+		background: #1f2226;
+	}
+	.modal-header {
+		border-bottom: 1px solid #46484f;
+	}
+	.modal-footer {
+		border-top: 1px solid #46484f;
+	}
+	a.list-group-item {
+		background: #1f2226;
+		color: #ddd;
+		border: 1px solid #46484f;
+	}
+	a.list-group-item .list-group-item-heading {
+		color: #ddd;
+	}
+	a.list-group-item:focus,
+	a.list-group-item:hover {
+		background: #434651;
+		color: #ddd;
+	}
+	button.close {
+		color: #ddd;
+		opacity: .5;
+	}
+	.CodeMirror {
+		background: #1f2226;
+	}
+	.CodeMirror-gutters {
+		background: #1f2226;
+		border-right: 1px solid rgba(204, 217, 255, 0.1);
+	}
+	.cm-s-default .cm-comment {
+		color: #888;
+	}
+	.cm-s-default .cm-quote {
+		color: #ddd;
+	}
+	.cm-s-default .cm-header {
+		color: #ffa653;
+	}
+	.cm-s-default .cm-link {
+		color: #b0ee83;
+	}
+	.cm-s-default .cm-string,
+	.cm-s-default .cm-variable-2 {
+		color: #7bf;
+	}
+	.cm-s-default .cm-def {
+		color: #c678dd;
+	}
+	.cm-s-default .cm-number,
+	.cm-s-default .cm-attribute,
+	.cm-s-default .cm-qualifier,
+	.cm-s-default .cm-plus,
+	.cm-s-default .cm-atom {
+		color: #eda35e;
+	}
+	.cm-s-default .cm-property,
+	.cm-s-default .cm-variable,
+	.cm-s-default .cm-variable-3,
+	.cm-s-default .cm-operator,
+	.cm-s-default .cm-bracket {
+		color: #f76e79;
+	}
+	.cm-s-default .cm-keyword,
+	.cm-s-default .cm-builtin,
+	.cm-s-default .cm-tag {
+		color: #98c379;
+	}
+	.modal-title {
+		color: #ccc;
+	}
+	.modal-body {
+		color: #ccc !important;
+	}
+	div[contenteditable]:empty:not(:focus):before {
+		color: #aaa;
+	}
+	.CodeMirror pre {
+		color: #ddd;
+	}
+	.CodeMirror-lines span[style^="background-color: rgba(230, 255, 230, 0.7); text-decoration: underline;"] {
+		background-color: #288c27 !important;
+	}
+	.CodeMirror-lines span[style^="background-color: rgba(255, 230, 230, 0.7); text-decoration: line-through;"] {
+		background-color: #a52721 !important;
+	}
+
+}

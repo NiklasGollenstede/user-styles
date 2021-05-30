@@ -1,0 +1,31 @@
+/** ==UserStyle==
+ * @name Custom Video Zoom
+ * @author Niklas Gollenstede
+ * @license MIT
+ * @description
+ *     Let's you set an adjustable zoom level for videos (`<video>`-tags) on any website.
+ *     -.-
+ *
+ * include:
+ *   sites:
+ *     title:        Zoomed Sites
+ *     description:  Sites on which to adjust the zoom level (when active).
+ *     type:         domain
+ *     default:      [ www.netflix.com ]
+ *
+ * @options
+ *   - name:   zoom
+ *     title:  Zoom in %
+ *     type:   number
+ *     min:    100
+ *     max:    200
+ */
+
+@-moz-document
+	regexp(sites)
+{
+	video {
+        transform: scale(calc(/*[[!zoom]]*/120/*[[/zoom]]*/ / 100));
+        transform-origin: center center;
+	}
+}

@@ -5,33 +5,12 @@
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     Slight rework of the dark Developer Edition theme of Firefox.
- *     Requires Firefox' dark theme, preferably with compact density.
- *     Also works in Thunderbird (before version 60).
+ *     Requires Firefox' dark theme, or Firefox with a dark system theme.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
  */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
-@-moz-document
-    url-prefix(chrome://),
-    url-prefix(about:),
-    url-prefix(resource://)
-{
-    /*
-     * context menu
-     */
-
-    menupopup {
-        filter: invert(100%) hue-rotate(180deg);
-        padding: 1px;
-    }
-    menu .menu-iconic-left,
-    menuitem .menu-iconic-left {
-        filter: invert(100%) hue-rotate(180deg);
-    }
-}
-
 
 @-moz-document
     url(chrome://global/content/alerts/alert.xul)
@@ -47,7 +26,7 @@
 
     image {
         /* TODO: make this optional */
-        !background: radial-gradient(white 20%, transparent 73%);
+        background: radial-gradient(white 20%, transparent 73%);
     }
 }
 
@@ -91,27 +70,55 @@
         --ded-min-tab-width: 200px;
     } /* no literal colors from here on */
 
+    :root {
+        /* reverse some "proton" stuff */
+        --tab-min-height: 24px; /* +8px */
+        --tab-border-radius: 0px;
+        --tab-shadow-max-size: 0px;
+        --proton-tab-block-margin: 0px;
+        --inline-tab-padding: 10px;
+    }
 
     /*
      * tabs
      */
 
+    #TabsToolbar {
+        background: black;
+    }
+
     .tabbrowser-tab:not([selected]) {
         background: var(--ded-inacitve-tab-bg);
     }
-    #tabbrowser-tabs {
-        --tab-line-color: inherit;
-    }
+
     .tabbrowser-tab[selected] .tab-background {
         border-style: solid;
-        border-width: 0 1px;
-        border-image: linear-gradient(to bottom,
-            var(--identity-tab-color, var(--tab-line-color)) 3px,
-            var(--ded-tab-border-color) 3px
-        ) 1 100%;
+        border-width: 3px 1px 0 1px;
+        border-color: var(--ded-tab-border-color);
+        border-top-color: var(--identity-tab-color, var(--tab-line-color));
     }
-    .tabbrowser-tab[selected]::after /* border between tabs */
-    { visibility: hidden; }
+    .tabbrowser-tab:not([selected]):hover  .tab-background {
+        border-top: 3px solid var(--identity-tab-color, var(--tab-line-color));
+    }
+
+    .tabbrowser-tab {
+        padding-inline: 0;
+    }
+    .tabbrowser-tab {
+        min-height: calc(var(--tab-min-height) + 8px);
+    }
+    .tab-secondary-label {
+        display: none;
+    }
+    .tab-icon-image, .tab-icon-overlay {
+        opacity: 1;
+    }
+    .tab-icon-overlay {
+        background: radial-gradient(black 20%, transparent 75%);
+        fill-opacity: 1;
+        position: relative;
+        left: -6px;
+    }
 
     /* dim not-loaded tabs */
     .tabbrowser-tab[pending]>* { /* apply to children to avoid reducing the opacity of the ::after element border */
@@ -122,17 +129,11 @@ background: black;/*[[!pending-tab-style]]*/
     /* increase width of non-pinned selected tabs */
     .tabbrowser-tab:not([pinned]) {
         /* transition: none; */ /* must not disable transition (firefox removes the [movingtab] attribute at its end) */
-        !transition-timing-function: linear, linear;
-        !transition-duration: .1s, .1s;
+        /* transition-timing-function: linear, linear; */
+        /* transition-duration: .1s, .1s; */
     }
     .tabbrowser-tab[selected]:not([pinned])
     { min-width: var(--ded-min-tab-width); }
-
-    /* make the close button a little larger, esp. for touch devices */
-    .tab-close-button {
-        height: 24px; width: 24px;
-        margin: -0px -6px 0 0;
-    }
 
     /* put a spotlicht under the favicons, which are mostly designed for light backgrounds */
     .tabbrowser-tab .tab-icon-image {
@@ -158,15 +159,32 @@ background: black;/*[[!pending-tab-style]]*/
     #nav-bar-customization-target {
         margin-top: -1px;
     }
-    #nav-bar,
-    .mail-toolbox {
+    #nav-bar {
         border-top: 1px solid var(--ded-tab-border-color);
         box-shadow: none;
         /* margin-top: -1px; */ /* modifying margin-top messes with a [movingtab] hack, so instead translate: */
         transform: translateY(-1px); margin-bottom: -1px;
+        z-index: 1;
     }
     #TabsToolbar[movingtab] + #nav-bar {
         margin-top: -16px; /* [movingtab] adds 15px padding to the #TabsToolbar */
+    }
+
+    /* oultine of search result box */
+    #urlbar[open] #urlbar-background {
+        border: 2px solid  var(--toolbar-field-focus-border-color);
+    }
+    #urlbar-container, #search-container {
+        margin-block: 1px;
+    }
+
+    /* decrease overall height */
+    #urlbar-container {
+        --urlbar-container-height: 33px;
+    }
+    #urlbar {
+        --urlbar-height: 32px;
+        --urlbar-toolbar-height: 33.8px;
     }
 
     /* move reload button into url-bar (must be placed just right of the url-bar) */
@@ -191,34 +209,18 @@ background: black;/*[[!pending-tab-style]]*/
     }
 /*[[/reload-left]]*/
 
-    /* remove border below UI */
-    #navigator-toolbox::after { display: none; }
-
 
     /*
      * sidebar
      */
 
-    #sidebar-splitter {
-        border-color: var(--chrome-secondary-background-color);
-    }
     #sidebar-header {
-        color: var(--chrome-color);
-        background-color: var(--chrome-secondary-background-color);
         margin: -1px 0;
         padding: 1px 2px 2px 3px;
     }
     #sidebar-switcher-target {
         padding: 0 4px;
     }
-
-
-    /*
-     * panels
-     */
-
-    #PopupSearchAutoComplete .search-panel-current-engine
-    { display: none; }
 
 
     /*
@@ -242,93 +244,6 @@ background: black;/*[[!pending-tab-style]]*/
     tabbrowser#content,
     browser[type="content"]:not([transparent])
     { background: black; }
-
-    tooltip, /* title attribute hover text */
-    #statuspanel[type="overLink"] /* url href preview at window bottom */
-    { filter: invert(100%) hue-rotate(180deg); }
-
-
-    /*
-     * tab modal dialogs
-     */
-
-    /* make it dark and cover the whole page */
-    tabmodalprompt {
-        filter: invert(100%) hue-rotate(180deg);
-        background-color: transparent;
-        display: block; position: relative;
-    }
-    tabmodalprompt>spacer
-    { display: none; }
-    tabmodalprompt>hbox {
-        display: block;
-        width: 100%; height: 100%;
-    }
-    tabmodalprompt .mainContainer {
-        width: 100%; height: 100%;
-        background-color: rgba(198, 197, 206, .85);
-        border: none;
-    }
-    tabmodalprompt .infoBody {
-        background-color: rgba(230, 233, 236, .93);
-        padding: 5px 10px 5px 10px;
-    }
-
-}
-
-@-moz-document
-    url(chrome://messenger/content/messenger.xul)
-{
-    /* TODO: add fixes for Thunderbird 60 */
-
-    .mail-toolbox toolbarbutton {
-        color: white !important;
-    }
-    .mail-toolbox toolbarbutton image {
-        filter: brightness(200%) saturate(200%) hue-rotate(0deg);
-    }
-
-    tab .tab-content {
-        background-color: #1C2126;
-    }
-    tab[selected] .tab-content {
-        background-image: linear-gradient(180deg, #C75600 4px, #39424D 4px);
-    }
-    #main-window[sizemode="normal"] tab[selected] .tab-content {
-        background-image: linear-gradient(180deg, #C75600 2px, #39424D 2px);
-    }
-    tab:not([selected]):hover .tab-content {
-        background-color: #111518;
-    }
-
-    tab:not([selected]) {
-        margin-bottom: 2px;
-    }
-    tab[selected] {
-        margin-bottom: 1px;
-    }
-    tab[selected] .tab-content {
-        padding-bottom: 1px;
-        margin-left: -1px;
-    }
-
-    #tabbar-toolbar {
-        padding-right: 5px;
-        margin-right: -10px;
-    }
-
-    .mail-toolbox {
-        border-top-width: 0px !important;
-    }
-
-    #msgNotificationBar {
-        position: fixed;
-        bottom: 20px;
-    }
-
-    #msgNotificationBar .notificationbox-stack {
-        position: relative;
-    }
 
 }
 

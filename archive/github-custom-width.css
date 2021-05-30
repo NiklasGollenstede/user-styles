@@ -1,24 +1,47 @@
-/**
+/** ==UserStyle==
  * @name GitHub custom width
  * @stylish-id 113930
  * @author Niklas Gollenstede
  * @licence CC-BY-SA-4.0 or MIT
  * @description
  *     Makes GitHubs main column wider, to use more of large screens.
- *     This uses css 'calc' rules, so that is works at any width. Especially on smaller screens, it defaults to the standard width.
+ *     This uses css 'calc' rules, so that is works at any width. On smaller screens it simply defaults to the standard width.
  *     You can also choose the max-width.
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/stylish
+ *
+ *
+ * @options
+ *   min-width:
+ *     title:         Content `min-width`
+ *     type:          number
+ *     suffix:        px
+ *   max-width:
+ *     title:         Content `max-width`
+ *     type:          number
+ *     suffix:        px
  */
 
 @-moz-document
     regexp("^https://(\w+\.)?github\.com(\/.*?)*$")
 {
     .container {
-        width: calc(80%);
-        min-width: 980px;
-        max-width: 1380px;
+        min-width: /*[[!min-width]]*/980px/*[[/min-width]]*/;
+        max-width: /*[[!max-width]]*/1380px/*[[/max-width]]*/;
+        width: calc(90%);
     }
+    body {
+        min-width: auto;
+    }
+    .js-header-wrapper {
+        overflow: hidden;
+    }
+    .Header {
+        min-width: 1000px;
+    }
+    @media (max-width: 1000px) { .HeaderMenu .mt-0 {
+        display: none;
+    } }
     .repository-with-sidebar .repository-content {
         width: calc(100% - 60px);
     }
@@ -30,9 +53,6 @@
     }
     .org-main {
         width: calc(100% - 280px);
-    }
-    .news {
-        width: calc(100% - 360px);
     }
     .timeline-new-comment {
         max-width: unset;
